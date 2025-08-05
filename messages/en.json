@@ -1,6 +1,19 @@
 {
+  "Common": {
+    "github": "GitHub",
+    "google": "Google"
+  },
+  "SignIn": {
+    "title": "Welcome!",
+    "body": "Log in or create your account and let's get started",
+    "orContinueWith": "OR CONTINUE WITH",
+    "emailLabel": "Email",
+    "emailPlaceholder": "john@example.com",
+    "continueButton": "Continue"
+  },
   "Home": {
     "title": "Kochaaaam Darsooonkaaaaa!!!",
-    "buttonTitle": "bardzo"
+    "buttonTitle": "bardzo",
+    "loginButton": "Log in"
   }
 }
