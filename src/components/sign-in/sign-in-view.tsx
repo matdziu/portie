@@ -21,12 +21,12 @@ export default function SignInView() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
-      <Card className="w-full md:w-[500px]">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">
+      <Card className="w-full md:w-[400px]">
+        <CardHeader className="w-full flex flex-col justify-center items-center">
+          <CardTitle className="w-full flex flex-col justify-center items-center text-center text-2xl">
             {screenTranslations("title")}
           </CardTitle>
-          <CardDescription className="text-center">
+          <CardDescription className="w-full justify-center text-center">
             {screenTranslations("body")}
           </CardDescription>
         </CardHeader>
