@@ -10,7 +10,8 @@
     "orContinueWith": "OR CONTINUE WITH",
     "emailLabel": "Email",
     "emailPlaceholder": "john@example.com",
-    "continueButton": "Continue"
+    "continueButton": "Continue",
+    "invalidEmailError": "This email is invalid"
   },
   "VerifyEmail": {
     "title": "Check your email",

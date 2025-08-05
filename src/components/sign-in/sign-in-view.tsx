@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -12,19 +11,23 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
+import SignInViewProps from "./models/sign-in-view-props";
 
-export default function SignInView() {
+export default function SignInView({ formSchema, onSubmit }: SignInViewProps) {
   const screenTranslations = useTranslations("SignIn");
   const commonTranslations = useTranslations("Common");
-
-  const formSchema = z.object({
-    email: z.email(),
-  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -32,10 +35,6 @@ export default function SignInView() {
       email: "",
     },
   });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
@@ -70,21 +69,34 @@ export default function SignInView() {
             </div>
           </div>
           <div className="flex flex-col gap-3">
-            <Label htmlFor="email-create-account">
-              {screenTranslations("emailLabel")}
-            </Label>
-            <Input
-              id="email-create-account"
-              type="email"
-              placeholder={screenTranslations("emailPlaceholder")}
-            />
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
+              >
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{screenTranslations("emailLabel")}</FormLabel>
+                      <FormControl className="mt-2">
+                        <Input
+                          placeholder={screenTranslations("emailPlaceholder")}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" variant="default" className="w-full mt-2">
+                  {screenTranslations("continueButton")}
+                </Button>
+              </form>
+            </Form>
           </div>
         </CardContent>
-        <CardFooter>
-          <Button variant="default" className="w-full">
-            {screenTranslations("continueButton")}
-          </Button>
-        </CardFooter>
       </Card>
     </div>
   );
