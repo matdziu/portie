@@ -1,7 +1,10 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import z from "zod";
 import GithubLogoSvg from "../svg/github-logo-svg";
 import GoogleLogoSvg from "../svg/google-logo-svg";
 import { Button } from "../ui/button";
@@ -18,6 +21,21 @@ import { Input } from "../ui/input";
 export default function SignInView() {
   const screenTranslations = useTranslations("SignIn");
   const commonTranslations = useTranslations("Common");
+
+  const formSchema = z.object({
+    email: z.email(),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
