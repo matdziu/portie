@@ -1,12 +1,10 @@
-import { ZodEmail, ZodObject } from "zod";
+import { ZodType } from "zod";
 
 export default interface SignInViewProps {
-  formSchema: SignInFormSchema;
-  onSubmit: (values: SignInFormResult) => void;
+  formSchema: ZodType<SignInFormSchema, SignInFormSchema>;
+  onSubmit: (values: SignInFormSchema) => void;
 }
 
-export type SignInFormSchema = ZodObject<{ email: ZodEmail }>;
-
-export type SignInFormResult = {
+export type SignInFormSchema = {
   email: string;
 };
