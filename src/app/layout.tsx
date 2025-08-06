@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { Raleway } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={`${raleway.variable} antialiased`}>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <Toaster />
       </body>
     </html>
   );

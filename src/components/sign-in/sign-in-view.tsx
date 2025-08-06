@@ -24,6 +24,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import SignInViewProps from "./models/sign-in-view-props";
+import { errorToast, successToast } from "@/lib/toast-utils";
 
 export default function SignInView({ formSchema, onSubmit }: SignInViewProps) {
   const screenTranslations = useTranslations("SignIn");
@@ -35,6 +36,8 @@ export default function SignInView({ formSchema, onSubmit }: SignInViewProps) {
       email: "",
     },
   });
+
+  successToast("this is a success");
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
