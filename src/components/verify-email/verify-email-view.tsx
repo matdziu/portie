@@ -1,6 +1,9 @@
 "use client";
 
+import { errorToast } from "@/lib/toast-utils";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -9,12 +12,12 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import Link from "next/link";
-import { useTranslations } from "next-intl";
 
 export default function VerifyEmailView() {
   const screenTranslations = useTranslations("VerifyEmail");
   const commonTranslations = useTranslations("Common");
+
+  errorToast("This is an error :(");
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
@@ -38,7 +41,9 @@ export default function VerifyEmailView() {
           <div></div>
         </CardContent>
         <CardFooter className="w-full flex items-center justify-center">
-          <Link className="hover:underline" href={"/"}>{commonTranslations("portieLink")}</Link>
+          <Link className="hover:underline" href={"/"}>
+            {commonTranslations("portieLink")}
+          </Link>
         </CardFooter>
       </Card>
     </div>

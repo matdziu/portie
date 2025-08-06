@@ -1,5 +1,6 @@
 "use client";
 
+import { successToast } from "@/lib/toast-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -24,7 +25,6 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import SignInViewProps from "./models/sign-in-view-props";
-import { errorToast, successToast } from "@/lib/toast-utils";
 
 export default function SignInView({ formSchema, onSubmit }: SignInViewProps) {
   const screenTranslations = useTranslations("SignIn");
@@ -37,7 +37,7 @@ export default function SignInView({ formSchema, onSubmit }: SignInViewProps) {
     },
   });
 
-  successToast("this is a success");
+  successToast("This is a success!");
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
