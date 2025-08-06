@@ -1,6 +1,5 @@
 "use client";
 
-import { errorToast } from "@/lib/toast-utils";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,8 +15,6 @@ import {
 export default function VerifyEmailView() {
   const screenTranslations = useTranslations("VerifyEmail");
   const commonTranslations = useTranslations("Common");
-
-  errorToast("This is an error :(");
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">

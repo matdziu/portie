@@ -1,6 +1,5 @@
 "use client";
 
-import { successToast } from "@/lib/toast-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -36,8 +35,6 @@ export default function SignInView({ formSchema, onSubmit }: SignInViewProps) {
       email: "",
     },
   });
-
-  successToast("This is a success!");
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
