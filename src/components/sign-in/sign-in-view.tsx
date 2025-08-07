@@ -1,9 +1,12 @@
 "use client";
 
+import { errorToast, successToast } from "@/lib/toast-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import DefaultSpinnerView from "../default-spinner/default-spinner-view";
 import GithubLogoSvg from "../svg/github-logo-svg";
 import GoogleLogoSvg from "../svg/google-logo-svg";
 import { Button } from "../ui/button";
@@ -23,11 +26,29 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import SignInViewProps from "./models/sign-in-view-props";
+import { SignInViewProps } from "./models/sign-in-view-props";
 
-export default function SignInView({ formSchema, onSubmit }: SignInViewProps) {
+export default function SignInView({
+  formSchema,
+  onSubmit,
+  progress,
+  success,
+  error,
+}: SignInViewProps) {
   const screenTranslations = useTranslations("SignIn");
   const commonTranslations = useTranslations("Common");
+
+  useEffect(() => {
+    if (success) {
+      successToast(screenTranslations("successToastText"));
+    }
+  }, [success, screenTranslations]);
+
+  useEffect(() => {
+    if (error) {
+      errorToast(screenTranslations("errorToastText"));
+    }
+  }, [error, screenTranslations]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,6 +59,7 @@ export default function SignInView({ formSchema, onSubmit }: SignInViewProps) {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
+      {progress && <DefaultSpinnerView />}
       <Card className="w-full md:w-[400px]">
         <CardHeader className="w-full flex flex-col justify-center items-center">
           <CardTitle className="w-full flex flex-col justify-center items-center text-center text-2xl">

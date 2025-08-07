@@ -11,7 +11,9 @@
     "emailLabel": "Email",
     "emailPlaceholder": "john@example.com",
     "continueButton": "Continue",
-    "invalidEmailError": "This email is invalid"
+    "invalidEmailError": "This email is invalid",
+    "successToastText": "Login successful",
+    "errorToastText": "Something went wrong"
   },
   "VerifyEmail": {
     "title": "Check your email",

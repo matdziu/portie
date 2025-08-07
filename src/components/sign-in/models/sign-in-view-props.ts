@@ -1,8 +1,11 @@
 import { ZodType } from "zod";
 
-export default interface SignInViewProps {
+export interface SignInViewProps {
   formSchema: ZodType<SignInFormSchema, SignInFormSchema>;
-  onSubmit: (values: SignInFormSchema) => void;
+  onSubmit: (formData: SignInFormSchema) => void;
+  progress: boolean;
+  success: boolean;
+  error: boolean;
 }
 
 export type SignInFormSchema = {

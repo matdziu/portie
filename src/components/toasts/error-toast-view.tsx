@@ -1,5 +1,5 @@
 import { AlertCircleIcon } from "lucide-react";
-import ToastViewProps from "./models/toast-view-props";
+import { ToastViewProps } from "./models/toast-view-props";
 
 export default function ErrorToastView({ title }: ToastViewProps) {
   return (

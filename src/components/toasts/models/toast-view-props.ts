@@ -1,3 +1,3 @@
-export default interface ToastViewProps {
+export interface ToastViewProps {
   title: string;
 }
