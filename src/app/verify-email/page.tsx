@@ -1,5 +1,5 @@
 import VerifyEmailServerWrapper from "@/components/verify-email/verify-email-server-wrapper";
 
-export default function VerifyEmailPage() {
+export default async function VerifyEmailPage() {
   return <VerifyEmailServerWrapper />;
 }
