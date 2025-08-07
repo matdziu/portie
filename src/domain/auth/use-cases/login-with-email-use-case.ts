@@ -12,7 +12,6 @@ export default async function loginWithEmailUseCase({
     email: email,
     options: {
       shouldCreateUser: true,
-      emailRedirectTo: "https://example.com/welcome",
     },
   });
 
