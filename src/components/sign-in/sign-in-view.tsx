@@ -1,8 +1,9 @@
 "use client";
 
-import { errorToast, successToast } from "@/lib/toast-utils";
+import { errorToast } from "@/lib/toast-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -37,12 +38,13 @@ export default function SignInView({
 }: SignInViewProps) {
   const screenTranslations = useTranslations("SignIn");
   const commonTranslations = useTranslations("Common");
+  const router = useRouter();
 
   useEffect(() => {
     if (success) {
-      successToast(screenTranslations("successToastText"));
+      router.push("/verify-email");
     }
-  }, [success, screenTranslations]);
+  }, [success, router]);
 
   useEffect(() => {
     if (error) {
