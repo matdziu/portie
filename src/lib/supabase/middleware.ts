@@ -39,11 +39,20 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith("/sign-in") &&
-    !request.nextUrl.pathname.startsWith("/auth")
-  ) {
+  function isPublicRoute(pathname: string): boolean {
+    const exactPublicRoutes = ["/"];
+    const startsWithPublicRoutes = ["/p", "/sign-in", "/verify-email", "/auth"];
+
+    const isExactMatch = exactPublicRoutes.includes(pathname);
+
+    const isStartsWithMatch = startsWithPublicRoutes.some((route) =>
+      pathname.startsWith(route)
+    );
+
+    return isExactMatch || isStartsWithMatch;
+  }
+
+  if (!user && !isPublicRoute(request.nextUrl.pathname)) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
     url.pathname = "/sign-in";
