@@ -22,6 +22,7 @@
   "Home": {
     "title": "Kochaaaam Darsooonkaaaaa!!!",
     "buttonTitle": "bardzo",
-    "loginButton": "Log in"
+    "loginButton": "Log in",
+    "goToDashboardButton": "Go to dashboard"
   }
 }

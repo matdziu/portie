@@ -1,7 +1,9 @@
 "use client";
 
+import { useIsLoggedIn } from "@/hooks/use-is-logged-in";
 import HomeView from "./home-view";
 
 export default function HomeViewController() {
-  return <HomeView />;
+  const { isLoggedIn } = useIsLoggedIn();
+  return <HomeView isLoggedIn={isLoggedIn} />;
 }
