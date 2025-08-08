@@ -4,7 +4,14 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const { session } = await getUserSessionUseCase();
-    return NextResponse.json(session);
+
+    if (!session) {
+      return NextResponse.json(null);
+    }
+
+    const { refresh_token, ...safeSession } = session;
+
+    return NextResponse.json(safeSession);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
