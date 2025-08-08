@@ -3,8 +3,8 @@ import { IsLoggedInResult } from "../entities/is-logged-in-result";
 import getAuthUserUseCase from "./get-auth-user-use-case";
 
 export default async function isLoggedInUseCase(): Promise<IsLoggedInResult> {
-  const authUserResult = await getAuthUserUseCase();
-  if (authUserResult.authUser) {
+  const { authUser } = await getAuthUserUseCase();
+  if (authUser) {
     return {
       isLoggedIn: true,
     };

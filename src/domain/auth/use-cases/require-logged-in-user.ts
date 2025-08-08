@@ -3,10 +3,10 @@ import "server-only";
 import getAuthUserUseCase from "./get-auth-user-use-case";
 
 export default async function requireLoggedInUser(): Promise<User> {
-  const authUserResult = await getAuthUserUseCase();
-  if (!authUserResult.authUser) {
+  const { authUser } = await getAuthUserUseCase();
+  if (!authUser) {
     throw Error("Unauthorized");
   } else {
-    return authUserResult.authUser;
+    return authUser;
   }
 }
