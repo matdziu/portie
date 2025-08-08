@@ -1,6 +1,7 @@
 "use client";
 
-import getUserSessionAction from "@/server-actions/auth/get-user-session-action";
+import { typedFetch } from "@/lib/typed-fetch";
+import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 export const useIsLoggedIn = () => {
@@ -9,9 +10,15 @@ export const useIsLoggedIn = () => {
 
   useEffect(() => {
     async function checkUserSession() {
-      const { session } = await getUserSessionAction();
-      setIsLoggedIn(!!session);
-      setIsCheckingUserSession(false);
+      try {
+        const session = await typedFetch<Session>("/auth/user-session");
+        setIsLoggedIn(!!session);
+      } catch (error) {
+        console.error("Failed to fetch user session:", error);
+        setIsLoggedIn(false);
+      } finally {
+        setIsCheckingUserSession(false);
+      }
     }
 
     checkUserSession();
