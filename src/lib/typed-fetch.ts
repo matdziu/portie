@@ -1,15 +1,15 @@
-import { z } from "zod";
+import { ZodType } from "zod";
 
 export async function typedFetch<T>(
   url: string,
-  schema: z.ZodType<T>
+  schema: ZodType<T>
 ): Promise<T>;
 
 export async function typedFetch<T>(url: string): Promise<T>;
 
 export async function typedFetch<T>(
   url: string,
-  schema?: z.ZodType<T>
+  schema?: ZodType<T>
 ): Promise<T> {
   const response = await fetch(url);
 
