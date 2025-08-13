@@ -20,6 +20,6 @@ export default async function loginWithGithubUseCase(): Promise<LoginWithGithubR
       error: true,
     };
   } else {
-    redirect(data.url);
+    redirect(data.url ?? "/sign-in");
   }
 }
