@@ -2,6 +2,7 @@
 
 import loginWithEmailAction from "@/server-actions/auth/login-with-email-action";
 import loginWithGithubAction from "@/server-actions/auth/login-with-github-action";
+import loginWithGoogleAction from "@/server-actions/auth/login-with-google-action";
 import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
 import z from "zod";
@@ -15,12 +16,19 @@ export default function SignInViewController() {
   const [loginWithEmailResult, loginWithEmailSubmit, loginWithEmailIsPending] =
     useActionState(handleLoginWithEmailAction, loginWithEmailInitialState);
 
-  const loginWithGithubInitialState = { success: false, error: false };
+  const loginWithGithubInitialState = { error: false };
   const [
     loginWithGithubResult,
     loginWithGithubSubmit,
     loginWithGithubIsPending,
   ] = useActionState(handleLoginWithGithubAction, loginWithGithubInitialState);
+
+  const loginWithGoogleInitialState = { error: false };
+  const [
+    loginWithGoogleResult,
+    loginWithGoogleSubmit,
+    loginWithGoogleIsPending,
+  ] = useActionState(handleLoginWithGoogleAction, loginWithGoogleInitialState);
 
   const formSchema = z.object({
     email: z.email({ error: screenTranslations("invalidEmailError") }),
@@ -39,14 +47,22 @@ export default function SignInViewController() {
           loginWithGithubSubmit();
         })
       }
-      onGmailLoginSubmit={() =>
+      onGoogleLoginSubmit={() =>
         startTransition(() => {
-          // logging with Gmail
+          loginWithGoogleSubmit();
         })
       }
-      progress={loginWithEmailIsPending || loginWithGithubIsPending}
+      progress={
+        loginWithEmailIsPending ||
+        loginWithGithubIsPending ||
+        loginWithGoogleIsPending
+      }
       emailSubmitSuccess={loginWithEmailResult.success}
-      error={loginWithEmailResult.error || loginWithGithubResult.error}
+      error={
+        loginWithEmailResult.error ||
+        loginWithGithubResult.error ||
+        loginWithGoogleResult.error
+      }
     />
   );
 }
@@ -58,6 +74,10 @@ async function handleLoginWithEmailAction(
   return await loginWithEmailAction(formData);
 }
 
-async function handleLoginWithGithubAction(previousState: unknown) {
+async function handleLoginWithGithubAction() {
   return await loginWithGithubAction();
+}
+
+async function handleLoginWithGoogleAction() {
+  return await loginWithGoogleAction();
 }

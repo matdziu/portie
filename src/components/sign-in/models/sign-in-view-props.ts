@@ -4,7 +4,7 @@ export interface SignInViewProps {
   formSchema: ZodType<SignInFormSchema, SignInFormSchema>;
   onEmailSubmit: (formData: SignInFormSchema) => void;
   onGithubLoginSubmit: () => void;
-  onGmailLoginSubmit: () => void;
+  onGoogleLoginSubmit: () => void;
   progress: boolean;
   emailSubmitSuccess: boolean;
   error: boolean;

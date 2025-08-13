@@ -33,7 +33,7 @@ export default function SignInView({
   formSchema,
   onEmailSubmit,
   onGithubLoginSubmit,
-  onGmailLoginSubmit,
+  onGoogleLoginSubmit,
   progress,
   emailSubmitSuccess,
   error,
@@ -79,7 +79,7 @@ export default function SignInView({
               <GithubLogoSvg fill="currentColor" />
               {commonTranslations("github")}
             </Button>
-            <Button variant="outline" onCanPlay={onGmailLoginSubmit}>
+            <Button variant="outline" onClick={onGoogleLoginSubmit}>
               <GoogleLogoSvg fill="currentColor" />
               {commonTranslations("google")}
             </Button>
