@@ -35,7 +35,7 @@ export default function SignInView({
   onGithubLoginSubmit,
   onGmailLoginSubmit,
   progress,
-  success,
+  emailSubmitSuccess,
   error,
 }: SignInViewProps) {
   const screenTranslations = useTranslations("SignIn");
@@ -43,10 +43,10 @@ export default function SignInView({
   const router = useRouter();
 
   useEffect(() => {
-    if (success) {
+    if (emailSubmitSuccess) {
       router.push("/verify-email");
     }
-  }, [success, router]);
+  }, [emailSubmitSuccess, router]);
 
   useEffect(() => {
     if (error) {

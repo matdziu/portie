@@ -45,7 +45,7 @@ export default function SignInViewController() {
         })
       }
       progress={loginWithEmailIsPending || loginWithGithubIsPending}
-      success={loginWithEmailResult.success || loginWithGithubResult.success}
+      emailSubmitSuccess={loginWithEmailResult.success}
       error={loginWithEmailResult.error || loginWithGithubResult.error}
     />
   );

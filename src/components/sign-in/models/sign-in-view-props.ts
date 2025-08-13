@@ -6,7 +6,7 @@ export interface SignInViewProps {
   onGithubLoginSubmit: () => void;
   onGmailLoginSubmit: () => void;
   progress: boolean;
-  success: boolean;
+  emailSubmitSuccess: boolean;
   error: boolean;
 }
 
