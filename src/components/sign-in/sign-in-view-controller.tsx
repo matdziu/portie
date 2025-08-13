@@ -60,8 +60,8 @@ export default function SignInViewController() {
       emailSubmitSuccess={loginWithEmailResult.success}
       error={
         loginWithEmailResult.error ||
-        loginWithGithubResult.error ||
-        loginWithGoogleResult.error
+        (loginWithGithubResult?.error ?? false) ||
+        (loginWithGoogleResult?.error ?? false)
       }
     />
   );
