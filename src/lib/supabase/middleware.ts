@@ -40,8 +40,8 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   function isPublicRoute(pathname: string): boolean {
-    const exactPublicRoutes = ["/"];
-    const startsWithPublicRoutes = ["/p", "/sign-in", "/verify-email", "/auth"];
+    const exactPublicRoutes = ["/", "/sign-in", "/verify-email", "/privacy-policy", "/terms-of-service"];
+    const startsWithPublicRoutes = ["/p/", "/auth/"];
 
     const isExactMatch = exactPublicRoutes.includes(pathname);
 
