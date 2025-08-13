@@ -31,7 +31,9 @@ import { SignInViewProps } from "./models/sign-in-view-props";
 
 export default function SignInView({
   formSchema,
-  onSubmit,
+  onEmailSubmit,
+  onGithubLoginSubmit,
+  onGmailLoginSubmit,
   progress,
   success,
   error,
@@ -73,11 +75,11 @@ export default function SignInView({
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
-            <Button variant="outline">
+            <Button variant="outline" onClick={onGithubLoginSubmit}>
               <GithubLogoSvg fill="currentColor" />
               {commonTranslations("github")}
             </Button>
-            <Button variant="outline">
+            <Button variant="outline" onCanPlay={onGmailLoginSubmit}>
               <GoogleLogoSvg fill="currentColor" />
               {commonTranslations("google")}
             </Button>
@@ -95,7 +97,7 @@ export default function SignInView({
           <div className="flex flex-col gap-3">
             <Form {...form}>
               <form
-                onSubmit={form.handleSubmit(onSubmit)}
+                onSubmit={form.handleSubmit(onEmailSubmit)}
                 className="space-y-8"
               >
                 <FormField

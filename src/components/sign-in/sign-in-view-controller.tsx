@@ -1,6 +1,7 @@
 "use client";
 
 import loginWithEmailAction from "@/server-actions/auth/login-with-email-action";
+import loginWithGithubAction from "@/server-actions/auth/login-with-github-action";
 import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
 import z from "zod";
@@ -14,6 +15,13 @@ export default function SignInViewController() {
   const [loginWithEmailResult, loginWithEmailSubmit, loginWithEmailIsPending] =
     useActionState(handleLoginWithEmailAction, loginWithEmailInitialState);
 
+  const loginWithGithubInitialState = { success: false, error: false };
+  const [
+    loginWithGithubResult,
+    loginWithGithubSubmit,
+    loginWithGithubIsPending,
+  ] = useActionState(handleLoginWithGithubAction, loginWithGithubInitialState);
+
   const formSchema = z.object({
     email: z.email({ error: screenTranslations("invalidEmailError") }),
   });
@@ -21,14 +29,24 @@ export default function SignInViewController() {
   return (
     <SignInView
       formSchema={formSchema}
-      onSubmit={(formData) =>
+      onEmailSubmit={(formData) =>
         startTransition(() => {
           loginWithEmailSubmit(formData);
         })
       }
-      progress={loginWithEmailIsPending}
-      success={loginWithEmailResult.success}
-      error={loginWithEmailResult.error}
+      onGithubLoginSubmit={() =>
+        startTransition(() => {
+          loginWithGithubSubmit();
+        })
+      }
+      onGmailLoginSubmit={() =>
+        startTransition(() => {
+          // logging with Gmail
+        })
+      }
+      progress={loginWithEmailIsPending || loginWithGithubIsPending}
+      success={loginWithEmailResult.success || loginWithGithubResult.success}
+      error={loginWithEmailResult.error || loginWithGithubResult.error}
     />
   );
 }
@@ -38,4 +56,8 @@ async function handleLoginWithEmailAction(
   formData: SignInFormSchema
 ) {
   return await loginWithEmailAction(formData);
+}
+
+async function handleLoginWithGithubAction(previousState: unknown) {
+  return await loginWithGithubAction();
 }
