@@ -26,6 +26,12 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
           <Link href="/sign-in">{screenTranslations("loginButton")}</Link>
         </Button>
       )}
+      <Link href="/privacy-policy">
+        {screenTranslations("privacyPolicyLink")}
+      </Link>
+      <Link href="/terms-of-service">
+        {screenTranslations("termsOfServiceLink")}
+      </Link>
     </div>
   );
 }
