@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function UserInfoCardView() {
   return (
-    <div className="flex flex-col w-full items-start justify-start ps-8 pt-16 pb-4 pe-0">
+    <div className="flex flex-col w-full items-start justify-start ps-4 pt-8 pb-4 pe-0">
       <div className="flex flex-row md:flex-col">
         <div className="w-25 h-25 md:w-38 md:h-38 flex-shrink-0">
           <Image
