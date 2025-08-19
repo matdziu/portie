@@ -64,7 +64,7 @@ export default function SignInView({
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
       {progress && <DefaultSpinnerView />}
-      <Card className="w-full md:w-[400px]">
+      <Card className="w-full md:w-96">
         <CardHeader className="w-full flex flex-col justify-center items-center">
           <CardTitle className="w-full flex flex-col justify-center items-center text-center text-2xl">
             {screenTranslations("title")}

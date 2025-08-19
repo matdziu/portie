@@ -18,7 +18,7 @@ export default function NotFoundView() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
-      <Card className="w-full md:w-[400px]">
+      <Card className="w-full md:w-96">
         <CardHeader className="flex flex-col justify-center">
           <CardTitle className="w-full flex flex-col justify-center items-center text-center text-2xl">
             <Image
