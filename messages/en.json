@@ -26,5 +26,9 @@
     "goToDashboardButton": "Go to dashboard",
     "privacyPolicyLink": "Privacy policy",
     "termsOfServiceLink": "Terms of service"
+  },
+  "NotFound": {
+    "title": "404",
+    "body": "We couldn't find this page :("
   }
 }
