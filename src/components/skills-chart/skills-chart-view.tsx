@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import {
   Bar,
@@ -10,7 +11,10 @@ import {
 } from "recharts";
 import SkillsChartViewProps from "./models/skills-chart-view-props";
 
-export default function SkillsChartView({ data }: SkillsChartViewProps) {
+export default function SkillsChartView({
+  data,
+  clickable,
+}: SkillsChartViewProps) {
   const barSize = 15;
   const barGap = 15;
   const containerHeight = data.length * (barSize + barGap);
@@ -69,7 +73,9 @@ export default function SkillsChartView({ data }: SkillsChartViewProps) {
           layout="vertical"
           barGap={barGap}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-          className="cursor-pointer"
+          className={cn({
+            "cursor-pointer": clickable,
+          })}
         >
           {/* Used for intercepting clicks and showing a pointer cursor */}
           <Rectangle
@@ -78,7 +84,9 @@ export default function SkillsChartView({ data }: SkillsChartViewProps) {
             width={containerWidth}
             height={containerHeight}
             fill="transparent"
-            className="cursor-pointer"
+            className={cn({
+              "cursor-pointer": clickable,
+            })}
           />
           <XAxis type="number" domain={[0, 100]} hide />
           <YAxis
@@ -87,13 +95,17 @@ export default function SkillsChartView({ data }: SkillsChartViewProps) {
             tickLine={false}
             axisLine={false}
             width={yAxisWidth}
-            className="cursor-pointer"
+            className={cn({
+              "cursor-pointer": clickable,
+            })}
             tick={<SkillAxisTick />}
           />
           <Bar
             dataKey="value"
             fill="var(--primary)"
-            className="cursor-pointer"
+            className={cn({
+              "cursor-pointer": clickable,
+            })}
             barSize={barSize}
             radius={[0, 10, 10, 0]}
           />

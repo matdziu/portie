@@ -29,8 +29,6 @@ export default function UserPageView() {
             { skillName: "Java", value: 80 },
             { skillName: "Booo", value: 80 },
           ]}
-          topLinkUrl="https://www.google.com/"
-          bottomLinkUrl="https://www.x.com/"
         />
         <ProjectInfoCardView
           name="Boardly"

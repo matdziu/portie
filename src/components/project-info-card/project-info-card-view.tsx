@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import SkillsChartView from "../skills-chart/skills-chart-view";
 import ProjectInfoCardViewProps from "./models/project-info-card-view-props";
@@ -17,7 +18,10 @@ export default function ProjectInfoCardView({
         href={topLinkUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-col rounded-sm transition-all hover:bg-gray-700 hover:scale-102 ps-4 pe-4 pt-4 pb-2"
+        className={cn("flex flex-col ps-4 pe-4 pt-4 pb-2", {
+          "rounded-sm transition-all hover:bg-gray-700 hover:scale-102":
+            topLinkUrl,
+        })}
       >
         <div className="flex items-center gap-3">
           <div className="flex justify-center items-center w-10 h-10 flex-shrink-0">
@@ -43,9 +47,12 @@ export default function ProjectInfoCardView({
         href={bottomLinkUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-full rounded-sm transition-all hover:bg-gray-700 hover:scale-102 ps-4 pe-4 pb-2 pt-1"
+        className={cn("w-full ps-4 pe-4 pb-2 pt-1", {
+          "rounded-sm transition-all hover:bg-gray-700 hover:scale-102":
+            bottomLinkUrl,
+        })}
       >
-        <SkillsChartView data={skillData} />
+        <SkillsChartView data={skillData} clickable={!!bottomLinkUrl} />
       </a>
     </div>
   );
