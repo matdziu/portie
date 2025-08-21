@@ -29,6 +29,8 @@ export default function UserPageView() {
             { skillName: "Java", value: 80 },
             { skillName: "Booo", value: 80 },
           ]}
+          topLinkUrl="https://www.google.com/"
+          bottomLinkUrl="https://www.x.com/"
         />
         <ProjectInfoCardView
           name="Boardly"
@@ -41,6 +43,8 @@ export default function UserPageView() {
             { skillName: "Tailwind", value: 50 },
             { skillName: "Komunikacja", value: 50 },
           ]}
+          topLinkUrl="https://www.google.com/"
+          bottomLinkUrl="https://www.x.com/"
         />
         <ProjectInfoCardView
           name="Boardly"
@@ -53,6 +57,8 @@ export default function UserPageView() {
             { skillName: "Tailwind", value: 50 },
             { skillName: "Komunikacja", value: 50 },
           ]}
+          topLinkUrl="https://www.google.com/"
+          bottomLinkUrl="https://www.x.com/"
         />
         <div className="flex w-full pt-8 pb-8 items-center justify-center md:hidden">
           <UserLinksView />

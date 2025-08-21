@@ -5,5 +5,7 @@ export default interface ProjectInfoCardViewProps {
   description: string;
   label: string;
   imageUrl: string;
+  topLinkUrl: string;
+  bottomLinkUrl: string;
   skillData: SkillData[];
 }

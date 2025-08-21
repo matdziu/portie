@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   Bar,
   BarChart,
+  Rectangle,
   ResponsiveContainer,
   Text,
   XAxis,
@@ -15,6 +16,7 @@ export default function SkillsChartView({ data }: SkillsChartViewProps) {
   const containerHeight = data.length * (barSize + barGap);
 
   const [yAxisWidth, setYAxisWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
   const hiddenTextRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -57,13 +59,27 @@ export default function SkillsChartView({ data }: SkillsChartViewProps) {
         }
       </span>
 
-      <ResponsiveContainer width="100%" height={containerHeight}>
+      <ResponsiveContainer
+        width="100%"
+        height={containerHeight}
+        onResize={(width) => setContainerWidth(width)}
+      >
         <BarChart
           data={data}
           layout="vertical"
           barGap={barGap}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+          className="cursor-pointer"
         >
+          {/* Used for intercepting clicks and showing a pointer cursor */}
+          <Rectangle
+            x={0}
+            y={0}
+            width={containerWidth}
+            height={containerHeight}
+            fill="transparent"
+            className="cursor-pointer"
+          />
           <XAxis type="number" domain={[0, 100]} hide />
           <YAxis
             dataKey="skillName"
@@ -71,11 +87,13 @@ export default function SkillsChartView({ data }: SkillsChartViewProps) {
             tickLine={false}
             axisLine={false}
             width={yAxisWidth}
+            className="cursor-pointer"
             tick={<SkillAxisTick />}
           />
           <Bar
             dataKey="value"
             fill="var(--primary)"
+            className="cursor-pointer"
             barSize={barSize}
             radius={[0, 10, 10, 0]}
           />
