@@ -1,5 +1,6 @@
 "use client";
 
+import BuiltWithPortieButtonView from "../built-with-portie-button/built-with-portie-button-view";
 import ProjectInfoCardView from "../project-info-card/project-info-card-view";
 import UserInfoCardView from "../user-info-card/user-info-card-view";
 import UserLinksView from "../user-links/user-links-view";
@@ -7,7 +8,7 @@ import UserLinksView from "../user-links/user-links-view";
 export default function UserPageView() {
   return (
     <div className="flex flex-col md:flex-row w-full h-screen">
-      <div className="w-full md:w-1/4 md:overflow-y-scroll no-scrollbar px-4 md:px-8 pt-11 pb-8">
+      <div className="w-full md:w-1/4 md:overflow-y-scroll no-scrollbar px-4 md:px-8 pt-11 pb-16">
         <UserInfoCardView />
         <div className="mt-8 mb-4 hidden md:flex items-start">
           <UserLinksView />
@@ -58,9 +59,12 @@ export default function UserPageView() {
           topLinkUrl="https://www.google.com/"
           bottomLinkUrl="https://www.x.com/"
         />
-        <div className="flex w-full pt-8 pb-8 items-center justify-center md:hidden">
+        <div className="flex w-full pt-8 pb-20 items-center justify-center md:hidden">
           <UserLinksView />
         </div>
+      </div>
+      <div className="fixed bottom-6 left-6 z-50">
+        <BuiltWithPortieButtonView />
       </div>
     </div>
   );

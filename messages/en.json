@@ -30,5 +30,8 @@
   "NotFound": {
     "title": "404",
     "body": "We couldn't find this page :("
+  },
+  "BuiltWithPortie": {
+    "title": "Built with Portie"
   }
 }
