@@ -20,18 +20,39 @@ export default function UserPageView() {
           description="Android app used by 3000+ users to find people to play board games together."
           label="side project"
           imageUrl="https://play-lh.googleusercontent.com/RLRI2HQ6Gc4ISGPrnoa3WBgVZ6gWxBpBFUcHrTC6QtWZUEIgvYBV0WSdJWtyjMThfaU=w240-h480-rw"
+          skillData={[
+            { skillName: "Android", value: 100 },
+            { skillName: "Jetpack Compose", value: 50 },
+            { skillName: "Firebase", value: 50 },
+            { skillName: "Scrum", value: 80 },
+            { skillName: "Kotlin", value: 80 },
+            { skillName: "Java", value: 80 },
+            { skillName: "Booo", value: 80 },
+          ]}
         />
         <ProjectInfoCardView
           name="Boardly"
           description="Android app used by 3000+ users to find people to play board games together."
           label="side project"
           imageUrl="https://play-lh.googleusercontent.com/RLRI2HQ6Gc4ISGPrnoa3WBgVZ6gWxBpBFUcHrTC6QtWZUEIgvYBV0WSdJWtyjMThfaU=w240-h480-rw"
+          skillData={[
+            { skillName: "NextJS", value: 100 },
+            { skillName: "Typescript", value: 50 },
+            { skillName: "Tailwind", value: 50 },
+            { skillName: "Komunikacja", value: 50 },
+          ]}
         />
         <ProjectInfoCardView
           name="Boardly"
           description="Android app used by 3000+ users to find people to play board games together."
           label="side project"
           imageUrl="https://play-lh.googleusercontent.com/RLRI2HQ6Gc4ISGPrnoa3WBgVZ6gWxBpBFUcHrTC6QtWZUEIgvYBV0WSdJWtyjMThfaU=w240-h480-rw"
+          skillData={[
+            { skillName: "NextJS", value: 100 },
+            { skillName: "Typescript", value: 50 },
+            { skillName: "Tailwind", value: 50 },
+            { skillName: "Komunikacja", value: 50 },
+          ]}
         />
         <div className="flex w-full pt-8 pb-8 items-center justify-center md:hidden">
           <UserLinksView />

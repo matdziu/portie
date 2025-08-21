@@ -126,6 +126,10 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
+  .recharts-wrapper * {
+    outline: none;
+  }
 }
 
 @layer utilities {
