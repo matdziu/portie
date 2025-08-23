@@ -39,7 +39,7 @@ export default function SkillsChartView({
     });
 
     const parsedFontSize = parseFloat(fontSize);
-    const yAxisCorrection = isNaN(parsedFontSize) ? 50.0 : parsedFontSize;
+    const yAxisCorrection = isNaN(parsedFontSize) ? 50.0 : (1.5 * parsedFontSize);
     setYAxisWidth(maxWidth + yAxisCorrection);
   }, [data]);
 
