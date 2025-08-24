@@ -59,6 +59,30 @@ export default function UserPageView() {
           topLinkUrl="https://www.google.com/"
           bottomLinkUrl="https://www.x.com/"
         />
+         <ProjectInfoCardView
+          name="Boardly"
+          description="Android app used by 3000+ users to find people to play board games together."
+          label="side project"
+          imageUrl="https://play-lh.googleusercontent.com/RLRI2HQ6Gc4ISGPrnoa3WBgVZ6gWxBpBFUcHrTC6QtWZUEIgvYBV0WSdJWtyjMThfaU=w240-h480-rw"
+          skillData={[
+            { skillName: "A", value: 100 },
+            { skillName: "B", value: 10 },
+          ]}
+          topLinkUrl="https://www.google.com/"
+          bottomLinkUrl="https://www.x.com/"
+        />
+          <ProjectInfoCardView
+          name="Boardly"
+          description="Android app used by 3000+ users to find people to play board games together."
+          label="side project"
+          imageUrl="https://play-lh.googleusercontent.com/RLRI2HQ6Gc4ISGPrnoa3WBgVZ6gWxBpBFUcHrTC6QtWZUEIgvYBV0WSdJWtyjMThfaU=w240-h480-rw"
+          skillData={[
+            { skillName: "Konstantynopolitańczykiewiczówna", value: 100 },
+            { skillName: "B", value: 10 },
+          ]}
+          topLinkUrl="https://www.google.com/"
+          bottomLinkUrl="https://www.x.com/"
+        />
         <div className="flex w-full pt-8 pb-20 items-center justify-center md:hidden">
           <UserLinksView />
         </div>
