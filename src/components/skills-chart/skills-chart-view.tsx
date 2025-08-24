@@ -24,23 +24,31 @@ export default function SkillsChartView({
   const hiddenTextRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!hiddenTextRef.current) return;
-    const computedStyle = window.getComputedStyle(hiddenTextRef.current);
-    const fontFamily = computedStyle.getPropertyValue("font-family");
-    const fontSize = computedStyle.getPropertyValue("font-size");
-    const font = `${fontSize} ${fontFamily}`;
+    async function calculateWidth() {
+      await document.fonts.ready;
 
-    let maxWidth = 0;
-    data.forEach((item) => {
-      const textWidth = measureTextWidth(item.skillName, font);
-      if (textWidth > maxWidth) {
-        maxWidth = textWidth;
-      }
-    });
+      if (!hiddenTextRef.current) return;
+      const computedStyle = window.getComputedStyle(hiddenTextRef.current);
+      const fontFamily = computedStyle.getPropertyValue("font-family");
+      const fontSize = computedStyle.getPropertyValue("font-size");
+      const font = `${fontSize} ${fontFamily}`;
 
-    const parsedFontSize = parseFloat(fontSize);
-    const yAxisCorrection = isNaN(parsedFontSize) ? 50.0 : (1.5 * parsedFontSize);
-    setYAxisWidth(maxWidth + yAxisCorrection);
+      let maxWidth = 0;
+      data.forEach((item) => {
+        const textWidth = measureTextWidth(item.skillName, font);
+        if (textWidth > maxWidth) {
+          maxWidth = textWidth;
+        }
+      });
+
+      const parsedFontSize = parseFloat(fontSize);
+      const yAxisCorrection = isNaN(parsedFontSize)
+        ? 50.0
+        : 1.5 * parsedFontSize;
+      setYAxisWidth(maxWidth + yAxisCorrection);
+    }
+
+    calculateWidth();
   }, [data]);
 
   return (
