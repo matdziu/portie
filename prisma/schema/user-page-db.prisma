@@ -1,0 +1,18 @@
+model UserPageDb {
+    id                  String  @id @default(uuid())
+    pageName            String  @unique
+    fullName            String
+    location            String
+    position            String
+    description         String?
+    personalWebsiteLink String?
+    githubLink          String?
+    linkedInLink        String?
+    mediumLink          String?
+    twitterLink         String?
+    youtubeLink         String?
+    instagramLink       String?
+
+    userId String @unique
+    user   UserDb   @relation(fields: [userId], references: [id])
+}

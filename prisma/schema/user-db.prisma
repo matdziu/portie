@@ -1,0 +1,6 @@
+model UserDb {
+    id    String @id
+    email String @unique
+
+    userPage UserPageDb?
+}

@@ -1,3 +1,5 @@
+import createUserDbUseCase from "@/domain/auth/use-cases/create-user-db-use-case";
+import getAuthUserUseCase from "@/domain/auth/use-cases/get-auth-user-use-case";
 import { createSupabaseClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
@@ -15,6 +17,14 @@ export async function GET(request: Request) {
     const supabase = await createSupabaseClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
+      const { authUser } = await getAuthUserUseCase();
+
+      if (authUser) {
+        await createUserDbUseCase({
+          userId: authUser.id,
+          email: authUser.email ?? "",
+        });
+      }
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";
       if (isLocalEnv) {
