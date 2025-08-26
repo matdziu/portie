@@ -37,7 +37,7 @@
   "ManageContent": {
     "title": "Manage page content",
     "pageNameLabel": "Page name",
-    "pageNamePlaceholder": "short word that we'll append to the page link e.g. https://portie.me/p/your-page-name",
+    "pageNamePlaceholder": "short word to append to the URL (portie.me/p/page-name)",
     "fullNameLabel": "Your name",
     "fullNamePlaceholder": "e.g. John Smith",
     "locationLabel": "Your Location",
