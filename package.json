@@ -7,7 +7,7 @@
     "build": "npm run migrate-db && next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate --no-engine",
+    "postinstall": "prisma generate",
     "migrate-db": "npx tsx scripts/migrate-schema.ts"
   },
   "dependencies": {
