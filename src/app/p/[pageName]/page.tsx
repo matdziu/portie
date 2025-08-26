@@ -3,8 +3,8 @@ import UserPageServerWrapper from "@/components/user-page/user-page-server-wrapp
 export default async function UserPage({
   params,
 }: {
-  params: Promise<{ username: string }>;
+  params: Promise<{ pageName: string }>;
 }) {
-  const { username } = await params;
-  return <UserPageServerWrapper username={username} />;
+  const { pageName } = await params;
+  return <UserPageServerWrapper pageName={pageName} />;
 }

@@ -33,5 +33,25 @@
   },
   "BuiltWithPortie": {
     "title": "Built with Portie"
+  },
+  "ManageContent": {
+    "title": "Manage page content",
+    "pageNameLabel": "Page name",
+    "pageNamePlaceholder": "short word that we'll append to the page link e.g. https://portie.me/p/your-page-name",
+    "fullNameLabel": "Your name",
+    "fullNamePlaceholder": "e.g. John Smith",
+    "locationLabel": "Your Location",
+    "locationPlaceholder": "e.g. New York",
+    "positionLabel": "Your position",
+    "positionPlaceholder": "e.g. software engineer",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "this is optional",
+    "pageNameRequiredError": "Page name is required",
+    "fullNameRequiredError": "Your name is required",
+    "locationRequiredError": "Your location is required",
+    "positionRequiredError": "Your current position is required",
+    "saveButton": "Save and go live!",
+    "successToastText": "Your page is live!",
+    "errorToastText": "Something went wrong"
   }
 }

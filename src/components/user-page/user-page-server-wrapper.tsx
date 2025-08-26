@@ -3,7 +3,7 @@ import { UserPageServerWrapperProps } from "./models/user-page-server-wrapper-pr
 import UserPageViewController from "./user-page-view-controller";
 
 export default function UserPageServerWrapper({
-  username,
+  pageName,
 }: UserPageServerWrapperProps) {
   return <UserPageViewController />;
 }

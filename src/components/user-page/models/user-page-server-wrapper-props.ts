@@ -1,3 +1,3 @@
 export interface UserPageServerWrapperProps {
-  username: string;
+  pageName: string;
 }
