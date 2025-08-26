@@ -62,7 +62,7 @@ export default function ManageContentView({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onPageContentSubmit)}
-          className="flex flex-col gap-8 p-6 my-8 w-full md:w-2xl"
+          className="flex flex-col gap-8 p-6 my-4 w-full md:w-2xl"
         >
           <h1 className="text-center font-extrabold text-2xl">
             {screenTranslations("title")}
