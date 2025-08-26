@@ -8,7 +8,7 @@ export default function DefaultSpinnerView({
   return (
     <div
       className={cn(
-        "absolute w-full h-full inset-0 flex items-center justify-center z-50",
+        "fixed w-full h-full inset-0 flex items-center justify-center z-50",
         {
           "pointer-events-none": !isBlocking,
         }

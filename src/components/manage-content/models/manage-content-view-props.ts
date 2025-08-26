@@ -15,4 +15,11 @@ export type PageContentFormSchema = {
   location: string;
   position: string;
   description?: string;
+  personalWebsiteLink?: string;
+  githubLink?: string;
+  linkedInLink?: string;
+  mediumLink?: string;
+  twitterLink?: string;
+  youtubeLink?: string;
+  instagramLink?: string;
 };

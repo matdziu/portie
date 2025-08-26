@@ -40,7 +40,7 @@
     "pageNamePlaceholder": "short word to append to the URL (portie.me/p/page-name)",
     "fullNameLabel": "Your name",
     "fullNamePlaceholder": "e.g. John Smith",
-    "locationLabel": "Your Location",
+    "locationLabel": "Your location",
     "locationPlaceholder": "e.g. New York",
     "positionLabel": "Your position",
     "positionPlaceholder": "e.g. software engineer",
@@ -52,6 +52,21 @@
     "positionRequiredError": "Your current position is required",
     "saveButton": "Save and go live!",
     "successToastText": "Your page is live!",
-    "errorToastText": "Something went wrong"
+    "errorToastText": "Something went wrong",
+    "wrongLinkError": "This link is incorrect. Paste full link from the browser.",
+    "personalWebsiteLinkLabel": "Personal website",
+    "personalWebsiteLinkPlaceholder": "this is optional",
+    "githubLinkLabel": "Github",
+    "githubLinkPlaceholder": "this is optional",
+    "linkedInLinkLabel": "LinkedIn",
+    "linkedInLinkPlaceholder": "this is optional",
+    "twitterLinkLabel": "Twitter / X",
+    "twitterLinkPlaceholder": "this is optional",
+    "mediumLinkLabel": "Medium",
+    "mediumLinkPlaceholder": "this is optional",
+    "youtubeLinkLabel": "Youtube",
+    "youtubeLinkPlaceholder": "this is optional",
+    "instagramLinkLabel": "Instagram",
+    "instagramLinkPlaceholder": "this is optional"
   }
 }

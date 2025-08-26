@@ -18,8 +18,8 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { ManageContentViewProps } from "./models/manage-content-view-props";
 import { Textarea } from "../ui/textarea";
+import { ManageContentViewProps } from "./models/manage-content-view-props";
 
 export default function ManageContentView({
   formSchema,
@@ -52,7 +52,14 @@ export default function ManageContentView({
       fullName: "",
       location: "",
       position: "",
-      description: undefined,
+      description: "",
+      personalWebsiteLink: "",
+      githubLink: "",
+      linkedInLink: "",
+      mediumLink: "",
+      twitterLink: "",
+      youtubeLink: "",
+      instagramLink: "",
     },
   });
 
@@ -141,6 +148,125 @@ export default function ManageContentView({
                 <FormControl className="mt-2">
                   <Textarea
                     placeholder={screenTranslations("descriptionPlaceholder")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="mx-5 h-[4px] bg-primary rounded-full" />
+          <FormField
+            control={form.control}
+            name="personalWebsiteLink"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  {screenTranslations("personalWebsiteLinkLabel")}
+                </FormLabel>
+                <FormControl className="mt-2">
+                  <Input
+                    placeholder={screenTranslations(
+                      "personalWebsiteLinkPlaceholder"
+                    )}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="githubLink"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{screenTranslations("githubLinkLabel")}</FormLabel>
+                <FormControl className="mt-2">
+                  <Input
+                    placeholder={screenTranslations("githubLinkPlaceholder")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="linkedInLink"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{screenTranslations("linkedInLinkLabel")}</FormLabel>
+                <FormControl className="mt-2">
+                  <Input
+                    placeholder={screenTranslations("linkedInLinkPlaceholder")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="twitterLink"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{screenTranslations("twitterLinkLabel")}</FormLabel>
+                <FormControl className="mt-2">
+                  <Input
+                    placeholder={screenTranslations("twitterLinkPlaceholder")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="mediumLink"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{screenTranslations("mediumLinkLabel")}</FormLabel>
+                <FormControl className="mt-2">
+                  <Input
+                    placeholder={screenTranslations("mediumLinkPlaceholder")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="youtubeLink"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{screenTranslations("youtubeLinkLabel")}</FormLabel>
+                <FormControl className="mt-2">
+                  <Input
+                    placeholder={screenTranslations("youtubeLinkPlaceholder")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="instagramLink"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  {screenTranslations("instagramLinkLabel")}
+                </FormLabel>
+                <FormControl className="mt-2">
+                  <Input
+                    placeholder={screenTranslations("instagramLinkPlaceholder")}
                     {...field}
                   />
                 </FormControl>

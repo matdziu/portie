@@ -15,27 +15,62 @@ export default function ManageContentViewController() {
       .string()
       .trim()
       .min(1, {
-        message: screenTranslations("pageNameRequiredError"),
+        error: screenTranslations("pageNameRequiredError"),
       }),
     fullName: z
       .string()
       .trim()
       .min(1, {
-        message: screenTranslations("fullNameRequiredError"),
+        error: screenTranslations("fullNameRequiredError"),
       }),
     location: z
       .string()
       .trim()
       .min(1, {
-        message: screenTranslations("locationRequiredError"),
+        error: screenTranslations("locationRequiredError"),
       }),
     position: z
       .string()
       .trim()
       .min(1, {
-        message: screenTranslations("positionRequiredError"),
+        error: screenTranslations("positionRequiredError"),
       }),
     description: z.string().trim().optional(),
+    personalWebsiteLink: z
+      .url({ message: screenTranslations("wrongLinkError") })
+      .trim()
+      .or(z.literal(""))
+      .optional(),
+    githubLink: z
+      .url({ message: screenTranslations("wrongLinkError") })
+      .trim()
+      .or(z.literal(""))
+      .optional(),
+    linkedInLink: z
+      .url({ message: screenTranslations("wrongLinkError") })
+      .trim()
+      .or(z.literal(""))
+      .optional(),
+    mediumLink: z
+      .url({ message: screenTranslations("wrongLinkError") })
+      .trim()
+      .or(z.literal(""))
+      .optional(),
+    twitterLink: z
+      .url({ message: screenTranslations("wrongLinkError") })
+      .trim()
+      .or(z.literal(""))
+      .optional(),
+    youtubeLink: z
+      .url({ message: screenTranslations("wrongLinkError") })
+      .trim()
+      .or(z.literal(""))
+      .optional(),
+    instagramLink: z
+      .url({ message: screenTranslations("wrongLinkError") })
+      .trim()
+      .or(z.literal(""))
+      .optional(),
   });
 
   const savePageContentInitialState = {
