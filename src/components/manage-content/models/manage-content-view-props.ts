@@ -1,6 +1,8 @@
+import { UserPageWithRelatedData } from "@/domain/manage-content/entities/user-page-with-related-data";
 import { ZodType } from "zod";
 
 export interface ManageContentViewProps {
+  pageWithRelatedData?: UserPageWithRelatedData;
   formSchema: ZodType<PageContentFormSchema, PageContentFormSchema>;
   onPageContentSubmit: (formData: PageContentFormSchema) => void;
   progress: boolean;

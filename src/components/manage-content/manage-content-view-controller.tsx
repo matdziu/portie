@@ -6,9 +6,12 @@ import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
 import z from "zod";
 import ManageContentView from "./manage-content-view";
+import { ManageContentViewControllerProps } from "./models/manage-content-view-controller-props";
 import { PageContentFormSchema } from "./models/manage-content-view-props";
 
-export default function ManageContentViewController() {
+export default function ManageContentViewController({
+  pageWithRelatedData,
+}: ManageContentViewControllerProps) {
   const screenTranslations = useTranslations("ManageContent");
 
   const projectSkills = z.object({
@@ -159,6 +162,7 @@ export default function ManageContentViewController() {
 
   return (
     <ManageContentView
+      pageWithRelatedData={pageWithRelatedData}
       formSchema={formSchema}
       onPageContentSubmit={(formData) =>
         startTransition(() => {
@@ -166,7 +170,7 @@ export default function ManageContentViewController() {
         })
       }
       progress={createPageContentIsPending}
-      error={!!createPageContentResult.error}
+      error={createPageContentResult.error != undefined}
       errorText={getCreatePageContentErrorText(createPageContentResult.error)}
       success={createPageContentResult.success}
       afterSuccessRedirectUrl={`/p/${createPageContentResult.pageName}`}

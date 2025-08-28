@@ -26,6 +26,7 @@ import {
 } from "./models/manage-content-view-props";
 
 export default function ManageContentView({
+  pageWithRelatedData,
   formSchema,
   onPageContentSubmit,
   progress,
@@ -38,36 +39,48 @@ export default function ManageContentView({
   const router = useRouter();
 
   useEffect(() => {
-    if (success) {
+    if (success && !progress) {
       successToast(screenTranslations("successToastText"));
       router.push(afterSuccessRedirectUrl);
     }
-  }, [success, afterSuccessRedirectUrl, router, screenTranslations]);
+  }, [success, progress, afterSuccessRedirectUrl, router, screenTranslations]);
 
   useEffect(() => {
-    if (error) {
+    if (error && !progress) {
       const errorToastMessage =
         errorText ?? screenTranslations("genericErrorText");
       errorToast(errorToastMessage);
     }
-  }, [error, errorText, screenTranslations]);
+  }, [error, progress, errorText, screenTranslations]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      pageName: "",
-      fullName: "",
-      location: "",
-      position: "",
-      description: "",
-      personalWebsiteLink: "",
-      githubLink: "",
-      linkedInLink: "",
-      mediumLink: "",
-      twitterLink: "",
-      youtubeLink: "",
-      instagramLink: "",
-      projects: [],
+      pageName: pageWithRelatedData?.pageName,
+      fullName: pageWithRelatedData?.fullName,
+      location: pageWithRelatedData?.location,
+      position: pageWithRelatedData?.position,
+      description: pageWithRelatedData?.description ?? undefined,
+      personalWebsiteLink:
+        pageWithRelatedData?.personalWebsiteLink ?? undefined,
+      githubLink: pageWithRelatedData?.githubLink ?? undefined,
+      linkedInLink: pageWithRelatedData?.linkedInLink ?? undefined,
+      mediumLink: pageWithRelatedData?.mediumLink ?? undefined,
+      twitterLink: pageWithRelatedData?.twitterLink ?? undefined,
+      youtubeLink: pageWithRelatedData?.youtubeLink ?? undefined,
+      instagramLink: pageWithRelatedData?.instagramLink ?? undefined,
+      projects: pageWithRelatedData?.projects.map((project) => ({
+        projectName: project.name,
+        projectDescription: project.description ?? undefined,
+        label: project.label ?? undefined,
+        topLink: project.topLink ?? undefined,
+        bottomLink: project.bottomLink ?? undefined,
+        displayOrder: project.displayOrder,
+        skills: project.skills.map((skill) => ({
+          skillName: skill.name,
+          skillValue: skill.value,
+        })),
+      })),
     },
   });
 

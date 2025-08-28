@@ -1,5 +1,5 @@
 import ManageContentServerWrapper from "@/components/manage-content/manage-content-server-wrapper";
 
-export default function ManageContentPage() {
+export default async function ManageContentPage() {
   return <ManageContentServerWrapper />;
 }

@@ -43,16 +43,16 @@ export default function SignInView({
   const router = useRouter();
 
   useEffect(() => {
-    if (emailSubmitSuccess) {
+    if (emailSubmitSuccess && !progress) {
       router.push("/verify-email");
     }
-  }, [emailSubmitSuccess, router]);
+  }, [emailSubmitSuccess, progress, router]);
 
   useEffect(() => {
-    if (error) {
+    if (error && !progress) {
       errorToast(screenTranslations("errorToastText"));
     }
-  }, [error, screenTranslations]);
+  }, [error, progress, screenTranslations]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
