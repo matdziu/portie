@@ -1,0 +1,8 @@
+model ProjectSkillDb {
+    id    String @id @default(uuid())
+    name  String
+    value Int
+
+    project       UserProjectDb @relation(fields: [userProjectId], references: [id])
+    userProjectId String
+}

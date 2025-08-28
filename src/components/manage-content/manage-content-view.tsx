@@ -30,6 +30,7 @@ export default function ManageContentView({
   onPageContentSubmit,
   progress,
   error,
+  errorText,
   success,
   afterSuccessRedirectUrl,
 }: ManageContentViewProps) {
@@ -45,9 +46,11 @@ export default function ManageContentView({
 
   useEffect(() => {
     if (error) {
-      errorToast(screenTranslations("errorToastText"));
+      const errorToastMessage =
+        errorText ?? screenTranslations("genericErrorText");
+      errorToast(errorToastMessage);
     }
-  }, [error, screenTranslations]);
+  }, [error, errorText, screenTranslations]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

@@ -1,0 +1,14 @@
+model UserProjectDb {
+    id           String  @id @default(uuid())
+    name         String
+    description  String?
+    label        String?
+    topLink      String?
+    bottomLink   String?
+    displayOrder Int
+
+    skills ProjectSkillDb[]
+
+    userPage   UserPageDb @relation(fields: [userPageId], references: [id])
+    userPageId String
+}

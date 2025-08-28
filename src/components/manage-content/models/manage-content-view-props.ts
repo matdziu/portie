@@ -5,6 +5,7 @@ export interface ManageContentViewProps {
   onPageContentSubmit: (formData: PageContentFormSchema) => void;
   progress: boolean;
   error: boolean;
+  errorText?: string;
   success: boolean;
   afterSuccessRedirectUrl: string;
 }

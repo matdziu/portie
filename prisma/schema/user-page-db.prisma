@@ -13,6 +13,8 @@ model UserPageDb {
     youtubeLink         String?
     instagramLink       String?
 
+    projects UserProjectDb[]
+
     userId String @unique
-    user   UserDb   @relation(fields: [userId], references: [id])
+    user   UserDb @relation(fields: [userId], references: [id])
 }

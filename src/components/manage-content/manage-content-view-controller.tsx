@@ -1,6 +1,6 @@
 "use client";
 
-import savePageContentAction from "@/server-actions/manage-content/save-page-content-action";
+import createPageContentAction from "@/server-actions/manage-content/create-page-content-action";
 import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
 import z from "zod";
@@ -131,36 +131,51 @@ export default function ManageContentViewController() {
       .optional(),
   });
 
-  const savePageContentInitialState = {
+  const createPageContentInitialState = {
     pageName: "",
     success: false,
-    error: false,
+    error: undefined,
   };
   const [
-    savePageContentResult,
-    savePageContentSubmit,
-    savePageContentIsPending,
-  ] = useActionState(handleSavePageContentAction, savePageContentInitialState);
+    createPageContentResult,
+    createPageContentSubmit,
+    createPageContentIsPending,
+  ] = useActionState(
+    handleCreatePageContentAction,
+    createPageContentInitialState
+  );
+
+  function getCreatePageContentErrorText(error?: CreatePageError): string {
+    switch (error) {
+      case CreatePageError.PageNameAlreadyExists:
+        return screenTranslations("pageNameAlreadyExistText");
+      case CreatePageError.Generic:
+        return screenTranslations("genericErrorText");
+      default:
+        return screenTranslations("genericErrorText");
+    }
+  }
 
   return (
     <ManageContentView
       formSchema={formSchema}
       onPageContentSubmit={(formData) =>
         startTransition(() => {
-          savePageContentSubmit(formData);
+          createPageContentSubmit(formData);
         })
       }
-      progress={savePageContentIsPending}
-      error={savePageContentResult.error}
-      success={savePageContentResult.success}
-      afterSuccessRedirectUrl={`/p/${savePageContentResult.pageName}`}
+      progress={createPageContentIsPending}
+      error={!!createPageContentResult.error}
+      errorText={getCreatePageContentErrorText(createPageContentResult.error)}
+      success={createPageContentResult.success}
+      afterSuccessRedirectUrl={`/p/${createPageContentResult.pageName}`}
     />
   );
 }
 
-async function handleSavePageContentAction(
+async function handleCreatePageContentAction(
   previousState: unknown,
   formData: PageContentFormSchema
 ) {
-  return await savePageContentAction({ pageContentFormSchema: formData });
+  return await createPageContentAction({ pageContentFormSchema: formData });
 }
