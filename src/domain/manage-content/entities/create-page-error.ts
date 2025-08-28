@@ -1,4 +1,4 @@
-enum CreatePageError {
+export enum CreatePageError {
   PageNameAlreadyExists,
   Generic,
 }

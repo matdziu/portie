@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import "server-only";
 import { CreatePageContentInput } from "../entities/create-page-content-input";
 import { CreatePageContentResult } from "../entities/create-page-content-result";
+import { CreatePageError } from "../entities/create-page-error";
 
 export default async function createPageContentUseCase({
   pageContentFormSchema,

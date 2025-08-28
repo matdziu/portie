@@ -1,5 +1,6 @@
 "use client";
 
+import { CreatePageError } from "@/domain/manage-content/entities/create-page-error";
 import createPageContentAction from "@/server-actions/manage-content/create-page-content-action";
 import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
