@@ -8,8 +8,8 @@ import { CreatePageError } from "../entities/create-page-error";
 export default async function createPageContentUseCase({
   pageContentFormSchema,
 }: CreatePageContentInput): Promise<CreatePageContentResult> {
-  const authUser = await requireLoggedInUser();
   try {
+    const authUser = await requireLoggedInUser();
     const existingPage = await prisma.userPageDb.findUnique({
       where: {
         pageName: pageContentFormSchema.pageName,
