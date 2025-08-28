@@ -89,6 +89,15 @@
     "projectBottomLinkPlaceholder": "this is optional",
     "projectSkillNameRequiredError": "Skill name is required",
     "projectSkillNameIsTooLongError": "Skill name can have a maximum of 32 characters",
-    "projectSkillValueMustBeIntegerError": "Skill value must be an integer between 1 and 100"
+    "projectSkillValueMustBeIntegerError": "Skill value must be an integer between 1 and 100",
+    "projectSkillNameLabel": "Skill name",
+    "projectSkillNamePlaceholder": "e.g. NextJS, Java",
+    "projectSkillValueLabel1": "Skill value",
+    "projectSkillValueLabel2": "Between 1-100, where 100 indicates the bar in a chart filling 100% of the available project's card width.",
+    "projectSkillValuePlaceholder": "1-100",
+    "displayOrderMustBeIntegerError": "Display order value must be an integer greater than 0",
+    "displayOrderLabel1": "Display order",
+    "displayOrderLabel2": "Determines ordering of this project on your page compared to other projects. Values closer to 1 are displayed more towards the top.",
+    "displayOrderPlaceholder": "Greater than 0"
   }
 }

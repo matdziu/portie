@@ -31,6 +31,7 @@ type ProjectSchema = {
   label?: string;
   topLink?: string;
   bottomLink?: string;
+  displayOrder: number;
   skills?: ProjectSkillSchema[];
 };
 

@@ -2,10 +2,11 @@
 
 import { errorToast, successToast } from "@/lib/toast-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Trash } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Control, useFieldArray, useForm } from "react-hook-form";
 import z from "zod";
 import DefaultSpinnerView from "../default-spinner/default-spinner-view";
 import { Button } from "../ui/button";
@@ -19,7 +20,10 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { ManageContentViewProps } from "./models/manage-content-view-props";
+import {
+  ManageContentViewProps,
+  PageContentFormSchema,
+} from "./models/manage-content-view-props";
 
 export default function ManageContentView({
   formSchema,
@@ -84,6 +88,7 @@ export default function ManageContentView({
           <h1 className="text-center font-extrabold text-2xl">
             {screenTranslations("title")}
           </h1>
+          <div className="mx-5 h-[4px] bg-primary rounded-full" />
           <FormField
             control={form.control}
             name="pageName"
@@ -173,14 +178,14 @@ export default function ManageContentView({
             )}
           />
           <div className="mx-5 h-[4px] bg-primary rounded-full" />
-          {projectsFields.map((projectField, index) => (
+          {projectsFields.map((projectField, projectIndex) => (
             <div
               key={projectField.id}
               className="flex flex-col gap-8 bg-card text-card-foreground rounded-md border shadow-sm p-6"
             >
               <FormField
                 control={form.control}
-                name={`projects.${index}.projectName`}
+                name={`projects.${projectIndex}.projectName`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -200,7 +205,7 @@ export default function ManageContentView({
               />
               <FormField
                 control={form.control}
-                name={`projects.${index}.projectDescription`}
+                name={`projects.${projectIndex}.projectDescription`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -220,7 +225,7 @@ export default function ManageContentView({
               />
               <FormField
                 control={form.control}
-                name={`projects.${index}.label`}
+                name={`projects.${projectIndex}.label`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -245,7 +250,7 @@ export default function ManageContentView({
               />
               <FormField
                 control={form.control}
-                name={`projects.${index}.topLink`}
+                name={`projects.${projectIndex}.topLink`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -270,7 +275,7 @@ export default function ManageContentView({
               />
               <FormField
                 control={form.control}
-                name={`projects.${index}.bottomLink`}
+                name={`projects.${projectIndex}.bottomLink`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -293,14 +298,41 @@ export default function ManageContentView({
                   </FormItem>
                 )}
               />
-              <div className="flex w-full gap-4">
-                <Button type="button">
-                  {screenTranslations("addSkillButton")}
-                </Button>
+              <FormField
+                control={form.control}
+                name={`projects.${projectIndex}.displayOrder`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <div className="flex flex-col gap-1">
+                        <p>{screenTranslations("displayOrderLabel1")}</p>
+                        <p className="text-xs font-light">
+                          {screenTranslations("displayOrderLabel2")}
+                        </p>
+                      </div>
+                    </FormLabel>
+                    <FormControl className="mt-2">
+                      <Input
+                        placeholder={screenTranslations(
+                          "displayOrderPlaceholder"
+                        )}
+                        type="number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <ProjectsSkillsForm
+                projectIndex={projectIndex}
+                control={form.control}
+              />
+              <div className="flex w-full items-center justify-end gap-4">
                 <Button
                   type="button"
                   variant="destructive"
-                  onClick={() => removeProject(index)}
+                  onClick={() => removeProject(projectIndex)}
                 >
                   {screenTranslations("removeProjectButton")}
                 </Button>
@@ -316,6 +348,8 @@ export default function ManageContentView({
                 label: "",
                 topLink: "",
                 bottomLink: "",
+                displayOrder: 1,
+                skills: [],
               })
             }
           >
@@ -450,6 +484,96 @@ export default function ManageContentView({
           </Button>
         </form>
       </Form>
+    </div>
+  );
+}
+
+function ProjectsSkillsForm({
+  projectIndex,
+  control,
+}: {
+  projectIndex: number;
+  control: Control<PageContentFormSchema>;
+}) {
+  const screenTranslations = useTranslations("ManageContent");
+  const {
+    fields: skillsFields,
+    append: appendSkill,
+    remove: removeSkill,
+  } = useFieldArray({
+    control,
+    name: `projects.${projectIndex}.skills`,
+  });
+  return (
+    <div className="flex flex-col w-full gap-6 items-center justify-center">
+      {skillsFields.map((skillField, skillIndex) => (
+        <div
+          key={skillField.id}
+          className="flex flex-row w-full items-end justify-center gap-4 p-4 rounded-md border"
+        >
+          <FormField
+            control={control}
+            name={`projects.${projectIndex}.skills.${skillIndex}.skillName`}
+            render={({ field }) => (
+              <FormItem className="flex-grow-[5] basis-0">
+                <FormLabel>
+                  {screenTranslations("projectSkillNameLabel")}
+                </FormLabel>
+                <FormControl className="mt-2">
+                  <Input
+                    placeholder={screenTranslations(
+                      "projectSkillNamePlaceholder"
+                    )}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name={`projects.${projectIndex}.skills.${skillIndex}.skillValue`}
+            render={({ field }) => (
+              <FormItem className="flex-grow-[5] basis-0">
+                <FormLabel>
+                  <div className="flex flex-col gap-1">
+                    <p>{screenTranslations("projectSkillValueLabel1")}</p>
+                    <p className="text-xs font-light">
+                      {screenTranslations("projectSkillValueLabel2")}
+                    </p>
+                  </div>
+                </FormLabel>
+                <FormControl className="mt-2">
+                  <Input
+                    placeholder={screenTranslations(
+                      "projectSkillValuePlaceholder"
+                    )}
+                    type="number"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button
+            type="button"
+            className="flex-shrink-0 w-10 h-10 rounded-full"
+            onClick={() => removeSkill(skillIndex)}
+            variant="destructive"
+          >
+            <Trash />
+          </Button>
+        </div>
+      ))}
+      <Button
+        type="button"
+        className="w-fit"
+        onClick={() => appendSkill({ skillName: "", skillValue: 0 })}
+      >
+        {screenTranslations("addSkillButton")}
+      </Button>
     </div>
   );
 }

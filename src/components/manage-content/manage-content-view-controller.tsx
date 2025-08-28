@@ -16,8 +16,8 @@ export default function ManageContentViewController() {
       .trim()
       .min(1, { error: screenTranslations("projectSkillNameRequiredError") })
       .max(32, { error: screenTranslations("projectSkillNameIsTooLongError") }),
-    skillValue: z
-      .number({
+    skillValue: z.coerce
+      .number<number>({
         error: screenTranslations("projectSkillValueMustBeIntegerError"),
       })
       .int({ error: screenTranslations("projectSkillValueMustBeIntegerError") })
@@ -56,6 +56,14 @@ export default function ManageContentViewController() {
       })
       .or(z.literal(""))
       .optional(),
+    displayOrder: z.coerce
+      .number<number>({
+        error: screenTranslations("displayOrderMustBeIntegerError"),
+      })
+      .int({ error: screenTranslations("displayOrderMustBeIntegerError") })
+      .min(1, {
+        error: screenTranslations("displayOrderMustBeIntegerError"),
+      }),
     skills: z.array(projectSkills).optional(),
   });
 
