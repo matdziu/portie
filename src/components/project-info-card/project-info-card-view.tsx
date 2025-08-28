@@ -36,12 +36,14 @@ export default function ProjectInfoCardView({
 
           <div className="flex items-center justify-between w-full gap-1">
             <h1 className="text-lg font-semibold">{name}</h1>
-            <p className="flex-shrink-0 text-xs text-center font-extrabold bg-primary text-primary-foreground rounded-lg px-2">
-              {label}
-            </p>
+            {label && (
+              <p className="flex-shrink-0 text-xs text-center font-extrabold bg-primary text-primary-foreground rounded-lg px-2">
+                {label}
+              </p>
+            )}
           </div>
         </div>
-        <p className="text-sm mt-2">{description}</p>
+        {description && <p className="text-sm mt-2">{description}</p>}
       </a>
       <a
         href={bottomLinkUrl}
@@ -52,7 +54,9 @@ export default function ProjectInfoCardView({
             bottomLinkUrl,
         })}
       >
-        <SkillsChartView data={skillData} clickable={!!bottomLinkUrl} />
+        {skillData.length > 0 && (
+          <SkillsChartView data={skillData} clickable={!!bottomLinkUrl} />
+        )}
       </a>
     </div>
   );

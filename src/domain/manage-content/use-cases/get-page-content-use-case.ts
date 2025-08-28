@@ -1,17 +1,21 @@
-import requireLoggedInUser from "@/domain/auth/use-cases/require-logged-in-user";
 import prisma from "@/lib/prisma";
 import "server-only";
+import { GetPageContentInput } from "../entities/get-page-content-input";
 import { GetPageContentResult } from "../entities/get-page-content-result";
 
-export default async function getPageContentUseCase(): Promise<GetPageContentResult> {
+export default async function getPageContentUseCase({
+  pageName,
+}: GetPageContentInput): Promise<GetPageContentResult> {
   try {
-    const authUser = await requireLoggedInUser();
     const userPageWithRelatedData = await prisma.userPageDb.findUnique({
       where: {
-        userId: authUser.id,
+        pageName: pageName,
       },
       include: {
         projects: {
+          orderBy: {
+            displayOrder: "asc",
+          },
           include: {
             skills: true,
           },

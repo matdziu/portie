@@ -6,37 +6,60 @@ import LinkedInLogoSvg from "../svg/linked-in-logo-svg";
 import MediumLogoSvg from "../svg/medium-logo-svg";
 import XLogoSvg from "../svg/x-logo-svg";
 import YouTubeLogoSvg from "../svg/youtube-logo-svg";
+import { UserLinksViewProps } from "./models/user-links-view-props";
 
-export default function UserLinksView() {
+export default function UserLinksView({
+  personalWebsiteLink,
+  githubLink,
+  linkedInLink,
+  mediumLink,
+  twitterLink,
+  youtubeLink,
+  instagramLink,
+}: UserLinksViewProps) {
   return (
     <div className="flex flex-wrap gap-1">
-      <ExternalLinkView link={"https://x.com/"}>
-        <Link className="h-5 w-5" />
-      </ExternalLinkView>
+      {personalWebsiteLink && (
+        <ExternalLinkView link={personalWebsiteLink}>
+          <Link className="h-5 w-5" />
+        </ExternalLinkView>
+      )}
 
-      <ExternalLinkView link={"https://github.com/"}>
-        <GithubLogoSvg fill="currentColor" className="h-5 w-5" />
-      </ExternalLinkView>
+      {githubLink && (
+        <ExternalLinkView link={githubLink}>
+          <GithubLogoSvg fill="currentColor" className="h-5 w-5" />
+        </ExternalLinkView>
+      )}
 
-      <ExternalLinkView link={"https://linkedin.com/"}>
-        <LinkedInLogoSvg fill="currentColor" className="h-5 w-5" />
-      </ExternalLinkView>
+      {linkedInLink && (
+        <ExternalLinkView link={linkedInLink}>
+          <LinkedInLogoSvg fill="currentColor" className="h-5 w-5" />
+        </ExternalLinkView>
+      )}
 
-      <ExternalLinkView link={"https://x.com/"}>
-        <MediumLogoSvg fill="currentColor" className="h-5 w-5" />
-      </ExternalLinkView>
+      {mediumLink && (
+        <ExternalLinkView link={mediumLink}>
+          <MediumLogoSvg fill="currentColor" className="h-5 w-5" />
+        </ExternalLinkView>
+      )}
 
-      <ExternalLinkView link={"https://x.com/"}>
-        <XLogoSvg fill="currentColor" className="h-5 w-5" />
-      </ExternalLinkView>
+      {twitterLink && (
+        <ExternalLinkView link={twitterLink}>
+          <XLogoSvg fill="currentColor" className="h-5 w-5" />
+        </ExternalLinkView>
+      )}
 
-      <ExternalLinkView link={"https://x.com/"}>
-        <YouTubeLogoSvg fill="currentColor" className="h-5 w-5" />
-      </ExternalLinkView>
+      {youtubeLink && (
+        <ExternalLinkView link={youtubeLink}>
+          <YouTubeLogoSvg fill="currentColor" className="h-5 w-5" />
+        </ExternalLinkView>
+      )}
 
-      <ExternalLinkView link={"https://x.com/"}>
-        <InstagramLogoSvg fill="currentColor" className="h-5 w-5" />
-      </ExternalLinkView>
+      {instagramLink && (
+        <ExternalLinkView link={instagramLink}>
+          <InstagramLogoSvg fill="currentColor" className="h-5 w-5" />
+        </ExternalLinkView>
+      )}
     </div>
   );
 }
