@@ -10,6 +10,55 @@ import { PageContentFormSchema } from "./models/manage-content-view-props";
 export default function ManageContentViewController() {
   const screenTranslations = useTranslations("ManageContent");
 
+  const projectSkills = z.object({
+    skillName: z
+      .string()
+      .trim()
+      .min(1, { error: screenTranslations("projectSkillNameRequiredError") })
+      .max(32, { error: screenTranslations("projectSkillNameIsTooLongError") }),
+    skillValue: z
+      .number({
+        error: screenTranslations("projectSkillValueMustBeIntegerError"),
+      })
+      .int({ error: screenTranslations("projectSkillValueMustBeIntegerError") })
+      .min(1, {
+        error: screenTranslations("projectSkillValueMustBeIntegerError"),
+      })
+      .max(100, {
+        error: screenTranslations("projectSkillValueMustBeIntegerError"),
+      }),
+  });
+
+  const projectSchema = z.object({
+    projectName: z
+      .string()
+      .trim()
+      .min(1, {
+        error: screenTranslations("projectNameRequiredError"),
+      }),
+    projectDescription: z.string().trim().optional(),
+    label: z
+      .string()
+      .max(15, {
+        error: screenTranslations("labelMaxCharsError"),
+      })
+      .trim()
+      .optional(),
+    topLink: z
+      .url({
+        error: screenTranslations("wrongLinkError"),
+      })
+      .or(z.literal(""))
+      .optional(),
+    bottomLink: z
+      .url({
+        error: screenTranslations("wrongLinkError"),
+      })
+      .or(z.literal(""))
+      .optional(),
+    skills: z.array(projectSkills).optional(),
+  });
+
   const formSchema = z.object({
     pageName: z
       .string()
@@ -36,38 +85,39 @@ export default function ManageContentViewController() {
         error: screenTranslations("positionRequiredError"),
       }),
     description: z.string().trim().optional(),
+    projects: z.array(projectSchema).optional(),
     personalWebsiteLink: z
-      .url({ message: screenTranslations("wrongLinkError") })
+      .url({ error: screenTranslations("wrongLinkError") })
       .trim()
       .or(z.literal(""))
       .optional(),
     githubLink: z
-      .url({ message: screenTranslations("wrongLinkError") })
+      .url({ error: screenTranslations("wrongLinkError") })
       .trim()
       .or(z.literal(""))
       .optional(),
     linkedInLink: z
-      .url({ message: screenTranslations("wrongLinkError") })
+      .url({ error: screenTranslations("wrongLinkError") })
       .trim()
       .or(z.literal(""))
       .optional(),
     mediumLink: z
-      .url({ message: screenTranslations("wrongLinkError") })
+      .url({ error: screenTranslations("wrongLinkError") })
       .trim()
       .or(z.literal(""))
       .optional(),
     twitterLink: z
-      .url({ message: screenTranslations("wrongLinkError") })
+      .url({ error: screenTranslations("wrongLinkError") })
       .trim()
       .or(z.literal(""))
       .optional(),
     youtubeLink: z
-      .url({ message: screenTranslations("wrongLinkError") })
+      .url({ error: screenTranslations("wrongLinkError") })
       .trim()
       .or(z.literal(""))
       .optional(),
     instagramLink: z
-      .url({ message: screenTranslations("wrongLinkError") })
+      .url({ error: screenTranslations("wrongLinkError") })
       .trim()
       .or(z.literal(""))
       .optional(),

@@ -15,6 +15,7 @@ export type PageContentFormSchema = {
   location: string;
   position: string;
   description?: string;
+  projects?: ProjectSchema[];
   personalWebsiteLink?: string;
   githubLink?: string;
   linkedInLink?: string;
@@ -22,4 +23,18 @@ export type PageContentFormSchema = {
   twitterLink?: string;
   youtubeLink?: string;
   instagramLink?: string;
+};
+
+type ProjectSchema = {
+  projectName: string;
+  projectDescription?: string;
+  label?: string;
+  topLink?: string;
+  bottomLink?: string;
+  skills?: ProjectSkillSchema[];
+};
+
+type ProjectSkillSchema = {
+  skillName: string;
+  skillValue: number;
 };

@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import z from "zod";
 import DefaultSpinnerView from "../default-spinner/default-spinner-view";
 import { Button } from "../ui/button";
@@ -60,7 +60,17 @@ export default function ManageContentView({
       twitterLink: "",
       youtubeLink: "",
       instagramLink: "",
+      projects: [],
     },
+  });
+
+  const {
+    fields: projectsFields,
+    append: appendProject,
+    remove: removeProject,
+  } = useFieldArray({
+    control: form.control,
+    name: "projects",
   });
 
   return (
@@ -79,7 +89,14 @@ export default function ManageContentView({
             name="pageName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{screenTranslations("pageNameLabel")}</FormLabel>
+                <FormLabel>
+                  <div className="flex flex-col gap-1">
+                    <p>{screenTranslations("pageNameLabel1")}</p>
+                    <p className="text-xs font-light">
+                      {screenTranslations("pageNameLabel2")}
+                    </p>
+                  </div>
+                </FormLabel>
                 <FormControl className="mt-2">
                   <Input
                     placeholder={screenTranslations("pageNamePlaceholder")}
@@ -155,6 +172,155 @@ export default function ManageContentView({
               </FormItem>
             )}
           />
+          <div className="mx-5 h-[4px] bg-primary rounded-full" />
+          {projectsFields.map((projectField, index) => (
+            <div
+              key={projectField.id}
+              className="flex flex-col gap-8 bg-card text-card-foreground rounded-md border shadow-sm p-6"
+            >
+              <FormField
+                control={form.control}
+                name={`projects.${index}.projectName`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {screenTranslations("projectNameLabel")}
+                    </FormLabel>
+                    <FormControl className="mt-2">
+                      <Input
+                        placeholder={screenTranslations(
+                          "projectNamePlaceholder"
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`projects.${index}.projectDescription`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {screenTranslations("projectDescriptionLabel")}
+                    </FormLabel>
+                    <FormControl className="mt-2">
+                      <Textarea
+                        placeholder={screenTranslations(
+                          "projectDescriptionPlaceholder"
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`projects.${index}.label`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <div className="flex flex-col gap-1">
+                        <p>{screenTranslations("projectLabelLabel1")}</p>
+                        <p className="text-xs font-light">
+                          {screenTranslations("projectLabelLabel2")}
+                        </p>
+                      </div>
+                    </FormLabel>
+                    <FormControl className="mt-2">
+                      <Input
+                        placeholder={screenTranslations(
+                          "projectLabelPlaceholder"
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`projects.${index}.topLink`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <div className="flex flex-col gap-1">
+                        <p>{screenTranslations("projectTopLinkLabel1")}</p>
+                        <p className="text-xs font-light">
+                          {screenTranslations("projectTopLinkLabel2")}
+                        </p>
+                      </div>
+                    </FormLabel>
+                    <FormControl className="mt-2">
+                      <Input
+                        placeholder={screenTranslations(
+                          "projectTopLinkPlaceholder"
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`projects.${index}.bottomLink`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <div className="flex flex-col gap-1">
+                        <p>{screenTranslations("projectBottomLinkLabel1")}</p>
+                        <p className="text-xs font-light">
+                          {screenTranslations("projectBottomLinkLabel2")}
+                        </p>
+                      </div>
+                    </FormLabel>
+                    <FormControl className="mt-2">
+                      <Input
+                        placeholder={screenTranslations(
+                          "projectBottomLinkPlaceholder"
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex w-full gap-4">
+                <Button type="button">
+                  {screenTranslations("addSkillButton")}
+                </Button>
+                <Button
+                  type="button"
+                  variant="destructive"
+                  onClick={() => removeProject(index)}
+                >
+                  {screenTranslations("removeProjectButton")}
+                </Button>
+              </div>
+            </div>
+          ))}
+          <Button
+            type="button"
+            onClick={() =>
+              appendProject({
+                projectName: "",
+                projectDescription: "",
+                label: "",
+                topLink: "",
+                bottomLink: "",
+              })
+            }
+          >
+            {screenTranslations("addProjectButton")}
+          </Button>
           <div className="mx-5 h-[4px] bg-primary rounded-full" />
           <FormField
             control={form.control}
