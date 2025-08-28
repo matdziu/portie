@@ -1,7 +1,6 @@
 "use client";
 
 import { typedFetch } from "@/lib/typed-fetch";
-import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 export const useIsLoggedIn = () => {
@@ -11,8 +10,8 @@ export const useIsLoggedIn = () => {
   useEffect(() => {
     async function checkUserSession() {
       try {
-        const session = await typedFetch<Session>("/auth/user-session");
-        setIsLoggedIn(!!session);
+        const isLoggedIn = await typedFetch<boolean>("/auth/is-logged-in");
+        setIsLoggedIn(isLoggedIn);
       } catch (error) {
         console.error("Failed to fetch user session:", error);
         setIsLoggedIn(false);

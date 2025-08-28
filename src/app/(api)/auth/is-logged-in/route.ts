@@ -6,12 +6,10 @@ export async function GET() {
     const { session } = await getUserSessionUseCase();
 
     if (!session) {
-      return NextResponse.json(null);
+      return NextResponse.json(false);
+    } else {
+      return NextResponse.json(true);
     }
-
-    const { refresh_token, ...safeSession } = session;
-
-    return NextResponse.json(safeSession);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
