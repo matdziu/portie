@@ -9,6 +9,6 @@ model UserProjectDb {
 
     skills ProjectSkillDb[]
 
-    userPage   UserPageDb @relation(fields: [userPageId], references: [id])
+    userPage   UserPageDb @relation(fields: [userPageId], references: [id], onDelete: Cascade)
     userPageId String
 }

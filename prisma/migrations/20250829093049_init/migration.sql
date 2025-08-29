@@ -60,10 +60,10 @@ CREATE UNIQUE INDEX "UserPageDb_pageName_key" ON "public"."UserPageDb"("pageName
 CREATE UNIQUE INDEX "UserPageDb_userId_key" ON "public"."UserPageDb"("userId");
 
 -- AddForeignKey
-ALTER TABLE "public"."ProjectSkillDb" ADD CONSTRAINT "ProjectSkillDb_userProjectId_fkey" FOREIGN KEY ("userProjectId") REFERENCES "public"."UserProjectDb"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."ProjectSkillDb" ADD CONSTRAINT "ProjectSkillDb_userProjectId_fkey" FOREIGN KEY ("userProjectId") REFERENCES "public"."UserProjectDb"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."UserPageDb" ADD CONSTRAINT "UserPageDb_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."UserDb"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."UserPageDb" ADD CONSTRAINT "UserPageDb_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."UserDb"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."UserProjectDb" ADD CONSTRAINT "UserProjectDb_userPageId_fkey" FOREIGN KEY ("userPageId") REFERENCES "public"."UserPageDb"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."UserProjectDb" ADD CONSTRAINT "UserProjectDb_userPageId_fkey" FOREIGN KEY ("userPageId") REFERENCES "public"."UserPageDb"("id") ON DELETE CASCADE ON UPDATE CASCADE;

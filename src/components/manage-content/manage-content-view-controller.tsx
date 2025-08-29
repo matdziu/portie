@@ -1,7 +1,9 @@
 "use client";
 
 import { CreatePageError } from "@/domain/manage-content/entities/create-page-error";
+import { EditPageError } from "@/domain/manage-content/entities/edit-page-error";
 import createPageContentAction from "@/server-actions/manage-content/create-page-content-action";
+import editPageContentAction from "@/server-actions/manage-content/edit-page-content-action";
 import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
 import z from "zod";
@@ -160,20 +162,66 @@ export default function ManageContentViewController({
     }
   }
 
+  const editPageContentInitialState = {
+    pageName: "",
+    success: false,
+    error: undefined,
+  };
+  const [
+    editPageContentResult,
+    editPageContentSubmit,
+    editPageContentIsPending,
+  ] = useActionState(handleEditPageContentAction, editPageContentInitialState);
+
+  function getEditPageContentErrorText(error?: EditPageError): string {
+    switch (error) {
+      case EditPageError.PageNameAlreadyExists:
+        return screenTranslations("pageNameAlreadyExistText");
+      case EditPageError.PageDoesNotExists:
+        return screenTranslations("pageDoesNotExistText");
+      case EditPageError.Generic:
+        return screenTranslations("genericErrorText");
+      default:
+        return screenTranslations("genericErrorText");
+    }
+  }
+
+  const onPageContentSubmit = (formData: PageContentFormSchema) =>
+    startTransition(() => {
+      if (pageWithRelatedData) {
+        editPageContentSubmit(formData);
+      } else {
+        createPageContentSubmit(formData);
+      }
+    });
+
+  const progress = createPageContentIsPending || editPageContentIsPending;
+
+  const error =
+    createPageContentResult.error !== undefined ||
+    editPageContentResult.error !== undefined;
+
+  const errorText = pageWithRelatedData
+    ? getEditPageContentErrorText(editPageContentResult.error)
+    : getCreatePageContentErrorText(createPageContentResult.error);
+
+  const success =
+    createPageContentResult.success || editPageContentResult.success;
+
+  const afterSuccessRedirectUrl = pageWithRelatedData
+    ? `/p/${editPageContentResult.pageName}`
+    : `/p/${createPageContentResult.pageName}`;
+
   return (
     <ManageContentView
       pageWithRelatedData={pageWithRelatedData}
       formSchema={formSchema}
-      onPageContentSubmit={(formData) =>
-        startTransition(() => {
-          createPageContentSubmit(formData);
-        })
-      }
-      progress={createPageContentIsPending}
-      error={createPageContentResult.error != undefined}
-      errorText={getCreatePageContentErrorText(createPageContentResult.error)}
-      success={createPageContentResult.success}
-      afterSuccessRedirectUrl={`/p/${createPageContentResult.pageName}`}
+      onPageContentSubmit={onPageContentSubmit}
+      progress={progress}
+      error={error}
+      errorText={errorText}
+      success={success}
+      afterSuccessRedirectUrl={afterSuccessRedirectUrl}
     />
   );
 }
@@ -183,4 +231,11 @@ async function handleCreatePageContentAction(
   formData: PageContentFormSchema
 ) {
   return await createPageContentAction({ pageContentFormSchema: formData });
+}
+
+async function handleEditPageContentAction(
+  previousState: unknown,
+  formData: PageContentFormSchema
+) {
+  return await editPageContentAction({ pageContentFormSchema: formData });
 }

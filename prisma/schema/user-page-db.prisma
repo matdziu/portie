@@ -16,5 +16,5 @@ model UserPageDb {
     projects UserProjectDb[]
 
     userId String @unique
-    user   UserDb @relation(fields: [userId], references: [id])
+    user   UserDb @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

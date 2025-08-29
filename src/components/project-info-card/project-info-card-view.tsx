@@ -57,7 +57,7 @@ export default function ProjectInfoCardView({
         {skillData.length > 0 && (
           <SkillsChartView
             data={skillData}
-            clickable={bottomLinkUrl != undefined}
+            clickable={bottomLinkUrl !== undefined}
           />
         )}
       </a>

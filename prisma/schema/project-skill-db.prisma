@@ -3,6 +3,6 @@ model ProjectSkillDb {
     name  String
     value Int
 
-    project       UserProjectDb @relation(fields: [userProjectId], references: [id])
+    project       UserProjectDb @relation(fields: [userProjectId], references: [id], onDelete: Cascade)
     userProjectId String
 }
