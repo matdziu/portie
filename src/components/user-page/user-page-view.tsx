@@ -40,6 +40,8 @@ export default function UserPageView({
             name={project.name}
             description={project.description ?? undefined}
             label={project.label ?? undefined}
+            topLinkUrl={project.topLink ?? undefined}
+            bottomLinkUrl={project.bottomLink ?? undefined}
             imageUrl="https://play-lh.googleusercontent.com/RLRI2HQ6Gc4ISGPrnoa3WBgVZ6gWxBpBFUcHrTC6QtWZUEIgvYBV0WSdJWtyjMThfaU=w240-h480-rw"
             skillData={project.skills.map((skill) => ({
               skillName: skill.name,
