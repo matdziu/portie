@@ -3,7 +3,7 @@ import { type NextRequest } from "next/server";
 
 import createUserDbUseCase from "@/domain/auth/use-cases/create-user-db-use-case";
 import getAuthUserUseCase from "@/domain/auth/use-cases/get-auth-user-use-case";
-import { createSupabaseClient } from "@/lib/supabase/server";
+import { createSupabaseClientForAuth } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 export async function GET(request: NextRequest) {
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   const next = searchParams.get("next") ?? "/dashboard/manage-content";
 
   if (tokenHash && type) {
-    const supabase = await createSupabaseClient();
+    const supabase = await createSupabaseClientForAuth();
 
     const { error } = await supabase.auth.verifyOtp({
       token_hash: tokenHash,

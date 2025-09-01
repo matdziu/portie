@@ -8,7 +8,7 @@ export async function updateSession(request: NextRequest) {
 
   const supabase = createServerClient(
     process.env.SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!,
+    process.env.SUPABASE_PUBLISHABLE_KEY!,
     {
       cookies: {
         getAll() {
@@ -40,7 +40,13 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   function isPublicRoute(pathname: string): boolean {
-    const exactPublicRoutes = ["/", "/sign-in", "/verify-email", "/privacy-policy", "/terms-of-service"];
+    const exactPublicRoutes = [
+      "/",
+      "/sign-in",
+      "/verify-email",
+      "/privacy-policy",
+      "/terms-of-service",
+    ];
     const startsWithPublicRoutes = ["/p/", "/auth/"];
 
     const isExactMatch = exactPublicRoutes.includes(pathname);
