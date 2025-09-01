@@ -6,7 +6,9 @@ import { EditPageContentResult } from "../entities/edit-page-content-result";
 import { EditPageError } from "../entities/edit-page-error";
 
 export default async function editPageContentUseCase({
+  // this form schema has no files to keep payload under 1 MB
   pageContentFormSchema,
+
   pageImageUploadResult,
   projectImagesUploadResults,
 }: EditPageContentInput): Promise<EditPageContentResult> {
@@ -43,10 +45,13 @@ export default async function editPageContentUseCase({
     const projectsData = pageContentFormSchema.projects?.map((project) => ({
       formId: project.formId,
       name: project.projectName,
-      pictureUrl: projectImagesUploadResults?.find(
-        (singleProjectImageUploadResult) =>
-          singleProjectImageUploadResult.owningEntityId === project.formId
-      )?.imageUrl,
+      pictureUrl:
+        typeof project.projectPicture === "string"
+          ? project.projectPicture
+          : projectImagesUploadResults?.find(
+              (singleProjectImageUploadResult) =>
+                singleProjectImageUploadResult.owningEntityId === project.formId
+            )?.imageUrl,
       description: project.projectDescription || undefined,
       label: project.label || undefined,
       topLink: project.topLink || undefined,

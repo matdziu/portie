@@ -6,7 +6,9 @@ import { CreatePageContentResult } from "../entities/create-page-content-result"
 import { CreatePageError } from "../entities/create-page-error";
 
 export default async function createPageContentUseCase({
+  // this form schema has no files to keep payload under 1 MB
   pageContentFormSchema,
+
   pageImageUploadResult,
   projectImagesUploadResults,
 }: CreatePageContentInput): Promise<CreatePageContentResult> {

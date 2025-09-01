@@ -1,24 +1,25 @@
-import {
-  PageContentFormSchema,
-  PageContentFormSchemaWithoutFiles,
-} from "@/components/manage-content/models/manage-content-view-props";
+import { PageContentFormSchema } from "@/components/manage-content/models/manage-content-view-props";
 
 export function removeFilesFromPageContentForm(
   data: PageContentFormSchema
-): PageContentFormSchemaWithoutFiles {
+): PageContentFormSchema {
   const filteredData = { ...data };
 
-  delete filteredData.pagePicture;
+  if (filteredData.pagePicture instanceof File) {
+    filteredData.pagePicture = undefined;
+  }
 
   if (filteredData.projects) {
     filteredData.projects = filteredData.projects.map((project) => {
       const newProject = { ...project };
-      delete newProject.projectPicture;
+      if (newProject.projectPicture instanceof File) {
+        newProject.projectPicture = undefined;
+      }
       return newProject;
     });
   }
 
-  return filteredData as PageContentFormSchemaWithoutFiles;
+  return filteredData;
 }
 
 export function getImageExtensionFromMime(file: File): string | undefined {
