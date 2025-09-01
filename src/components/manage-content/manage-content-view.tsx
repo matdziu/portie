@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { Control, useFieldArray, useForm } from "react-hook-form";
 import z from "zod";
 import DefaultSpinnerView from "../default-spinner/default-spinner-view";
+import PictureUploadInputView from "../picture-upload-input/picture-upload-input-view";
 import { Button } from "../ui/button";
 import {
   Form,
@@ -61,8 +62,7 @@ export default function ManageContentView({
       location: pageWithRelatedData?.location ?? "",
       position: pageWithRelatedData?.position ?? "",
       description: pageWithRelatedData?.description ?? "",
-      personalWebsiteLink:
-        pageWithRelatedData?.personalWebsiteLink ?? "",
+      personalWebsiteLink: pageWithRelatedData?.personalWebsiteLink ?? "",
       githubLink: pageWithRelatedData?.githubLink ?? "",
       linkedInLink: pageWithRelatedData?.linkedInLink ?? "",
       mediumLink: pageWithRelatedData?.mediumLink ?? "",
@@ -105,29 +105,34 @@ export default function ManageContentView({
             {screenTranslations("title")}
           </h1>
           <div className="mx-5 h-[4px] bg-primary rounded-full" />
-          <FormField
-            control={form.control}
-            name="pageName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  <div className="flex flex-col gap-1">
-                    <p>{screenTranslations("pageNameLabel1")}</p>
-                    <p className="text-xs font-light">
-                      {screenTranslations("pageNameLabel2")}
-                    </p>
-                  </div>
-                </FormLabel>
-                <FormControl className="mt-2">
-                  <Input
-                    placeholder={screenTranslations("pageNamePlaceholder")}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex flex-row w-full items-top gap-4">
+            <PictureUploadInputView
+              onImageChange={(image) => console.log(image)}
+            />
+            <FormField
+              control={form.control}
+              name="pageName"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>
+                    <div className="flex flex-col gap-1">
+                      <p>{screenTranslations("pageNameLabel1")}</p>
+                      <p className="text-xs font-light">
+                        {screenTranslations("pageNameLabel2")}
+                      </p>
+                    </div>
+                  </FormLabel>
+                  <FormControl className="mt-2">
+                    <Input
+                      placeholder={screenTranslations("pageNamePlaceholder")}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <div className="mx-5 h-[4px] bg-primary rounded-full" />
           <FormField
             control={form.control}
@@ -199,26 +204,31 @@ export default function ManageContentView({
               key={projectField.id}
               className="flex flex-col gap-8 bg-card text-card-foreground rounded-md border shadow-sm p-6"
             >
-              <FormField
-                control={form.control}
-                name={`projects.${projectIndex}.projectName`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {screenTranslations("projectNameLabel")}
-                    </FormLabel>
-                    <FormControl className="mt-2">
-                      <Input
-                        placeholder={screenTranslations(
-                          "projectNamePlaceholder"
-                        )}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="flex flex-row w-full gap-4">
+                <PictureUploadInputView
+                  onImageChange={(image) => console.log(image)}
+                />
+                <FormField
+                  control={form.control}
+                  name={`projects.${projectIndex}.projectName`}
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>
+                        {screenTranslations("projectNameLabel")}
+                      </FormLabel>
+                      <FormControl className="mt-2">
+                        <Input
+                          placeholder={screenTranslations(
+                            "projectNamePlaceholder"
+                          )}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 control={form.control}
                 name={`projects.${projectIndex}.projectDescription`}
