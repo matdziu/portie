@@ -29,7 +29,7 @@ export default function ProjectInfoCardView({
               <Image
                 width={200}
                 height={200}
-                className="rounded-full"
+                className="rounded-full w-full h-full"
                 src={imageUrl}
                 alt=""
               />

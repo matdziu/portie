@@ -102,6 +102,9 @@ export default function ManageContentViewController({
       .trim()
       .min(1, {
         error: screenTranslations("pageNameRequiredError"),
+      })
+      .regex(/^\S+$/, {
+        message: screenTranslations("pageNameCannotContainSpacesError"),
       }),
     pagePicture: pictureFileSchema,
     fullName: z

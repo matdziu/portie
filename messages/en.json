@@ -102,6 +102,7 @@
     "displayOrderPlaceholder": "Greater than 0",
     "pageDoesNotExistText": "Page you want to edit does not exist",
     "pictureFileIsTooBig": "Maximum size of picture is 2 MB",
-    "invalidPictureFileTypeError": "This picture type is not supported"
+    "invalidPictureFileTypeError": "This picture type is not supported",
+    "pageNameCannotContainSpacesError": "Page name cannot contain spaces"
   }
 }

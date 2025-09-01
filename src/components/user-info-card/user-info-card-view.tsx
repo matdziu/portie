@@ -1,6 +1,6 @@
 "use client";
 
-import { BriefcaseBusiness, MapPin, UserCircle } from "lucide-react";
+import { BriefcaseBusiness, MapPin, UserCircle2 } from "lucide-react";
 import Image from "next/image";
 import { UserInfoCardViewProps } from "./models/user-info-card-view-props";
 
@@ -19,12 +19,12 @@ export default function UserInfoCardView({
             <Image
               width={200}
               height={200}
-              className="rounded-full"
+              className="rounded-full w-full h-full"
               src={imageUrl}
               alt=""
             />
           ) : (
-            <UserCircle className="rounded-full w-full h-full" />
+            <UserCircle2 className="rounded-full w-full h-full" />
           )}
         </div>
         <div className="flex flex-col px-4 md:px-0">

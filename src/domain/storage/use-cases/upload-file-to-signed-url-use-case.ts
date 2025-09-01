@@ -17,9 +17,8 @@ export default async function uploadFileToSignedUrlUseCase({
 
     if (response.ok) {
       const uploadResult = await response.json();
-      console.log(uploadResult);
       return {
-        imageUrl: "SUKCES",
+        imageUrl: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${uploadResult["Key"]}`,
         error: false,
       };
     } else {
