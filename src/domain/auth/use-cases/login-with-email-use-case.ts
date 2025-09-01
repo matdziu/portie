@@ -1,4 +1,4 @@
-import { createSupabaseClientForAuth } from "@/lib/supabase/server";
+import { createSupabaseAuthClient } from "@/lib/supabase/auth";
 import "server-only";
 import { LoginWithEmailInput } from "../entities/login-with-email-input";
 import { LoginWithEmailResult } from "../entities/login-with-email-result";
@@ -6,7 +6,7 @@ import { LoginWithEmailResult } from "../entities/login-with-email-result";
 export default async function loginWithEmailUseCase({
   email,
 }: LoginWithEmailInput): Promise<LoginWithEmailResult> {
-  const supabase = await createSupabaseClientForAuth();
+  const supabase = await createSupabaseAuthClient();
 
   const { error } = await supabase.auth.signInWithOtp({
     email: email,

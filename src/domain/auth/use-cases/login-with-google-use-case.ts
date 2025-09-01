@@ -1,11 +1,11 @@
-import { createSupabaseClientForAuth } from "@/lib/supabase/server";
+import { createSupabaseAuthClient } from "@/lib/supabase/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import "server-only";
 import { LoginWithGoogleResult } from "../entities/login-with-google-result";
 
 export default async function loginWithGoogleUseCase(): Promise<LoginWithGoogleResult> {
-  const supabase = await createSupabaseClientForAuth();
+  const supabase = await createSupabaseAuthClient();
   const headersList = await headers();
   const origin = headersList.get("origin");
   const { data, error } = await supabase.auth.signInWithOAuth({

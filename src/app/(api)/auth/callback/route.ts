@@ -1,6 +1,6 @@
 import createUserDbUseCase from "@/domain/auth/use-cases/create-user-db-use-case";
 import getAuthUserUseCase from "@/domain/auth/use-cases/get-auth-user-use-case";
-import { createSupabaseClientForAuth } from "@/lib/supabase/server";
+import { createSupabaseAuthClient } from "@/lib/supabase/auth";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   }
 
   if (code) {
-    const supabase = await createSupabaseClientForAuth();
+    const supabase = await createSupabaseAuthClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
       const { authUser } = await getAuthUserUseCase();
