@@ -46,3 +46,12 @@ type ProjectSkillSchema = {
 };
 
 export type PictureFile = File | string | undefined;
+
+type ProjectSchemaWithoutFiles = Omit<ProjectSchema, "projectPicture">;
+
+export type PageContentFormSchemaWithoutFiles = Omit<
+  PageContentFormSchema,
+  "pagePicture" | "projects"
+> & {
+  projects?: ProjectSchemaWithoutFiles[];
+};

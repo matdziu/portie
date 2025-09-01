@@ -2,6 +2,7 @@
 
 import { CreatePageError } from "@/domain/manage-content/entities/create-page-error";
 import { EditPageError } from "@/domain/manage-content/entities/edit-page-error";
+import { removeFilesFromPageContentForm } from "@/lib/manage-content-utils";
 import createPageContentAction from "@/server-actions/manage-content/create-page-content-action";
 import editPageContentAction from "@/server-actions/manage-content/edit-page-content-action";
 import { useTranslations } from "next-intl";
@@ -250,12 +251,16 @@ async function handleCreatePageContentAction(
   previousState: unknown,
   formData: PageContentFormSchema
 ) {
-  return await createPageContentAction({ pageContentFormSchema: formData });
+  return await createPageContentAction({
+    pageContentFormSchema: removeFilesFromPageContentForm(formData),
+  });
 }
 
 async function handleEditPageContentAction(
   previousState: unknown,
   formData: PageContentFormSchema
 ) {
-  return await editPageContentAction({ pageContentFormSchema: formData });
+  return await editPageContentAction({
+    pageContentFormSchema: removeFilesFromPageContentForm(formData),
+  });
 }
