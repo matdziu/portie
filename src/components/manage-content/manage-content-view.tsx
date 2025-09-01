@@ -107,7 +107,7 @@ export default function ManageContentView({
           <div className="mx-5 h-[4px] bg-primary rounded-full" />
           <div className="flex flex-row w-full items-top gap-4">
             <PictureUploadInputView
-              onImageChange={(image) => console.log(image)}
+              onValueChange={(image) => console.log(image)}
             />
             <FormField
               control={form.control}
@@ -206,7 +206,7 @@ export default function ManageContentView({
             >
               <div className="flex flex-row w-full gap-4">
                 <PictureUploadInputView
-                  onImageChange={(image) => console.log(image)}
+                  onValueChange={(image) => console.log(image)}
                 />
                 <FormField
                   control={form.control}

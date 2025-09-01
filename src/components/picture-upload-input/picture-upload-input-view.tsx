@@ -7,26 +7,31 @@ import { useEffect, useRef, useState } from "react";
 import { PictureUploadInputViewProps } from "./models/picture-upload-input-view-props";
 
 export default function PictureUploadInputView({
-  initialImage,
-  onImageChange,
+  value,
+  onValueChange,
 }: PictureUploadInputViewProps) {
-  const [preview, setPreview] = useState<string | undefined>(initialImage);
+  const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const allowedTypes = ["image/jpeg", "image/png"];
 
-  useEffect(() => {
-    setPreview(initialImage);
-  }, [initialImage]);
-
-  const handleFileChange = (file: File) => {
-    if (file) {
+   useEffect(() => {
+    if (value instanceof File) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result as string);
-        onImageChange(file);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(value);
+    } else if (typeof value === "string") {
+      setPreview(value);
+    } else {
+      setPreview(null);
+    }
+  }, [value]);
+
+  const handleFile = (file: File) => {
+    if (file) {
+      onValueChange(file);
     }
   };
 
@@ -49,7 +54,7 @@ export default function PictureUploadInputView({
     setIsDragging(false);
     const file = e.dataTransfer.files[0];
     if (file && allowedTypes.includes(file.type)) {
-      handleFileChange(file);
+      handleFile(file);
     }
   };
 
@@ -70,7 +75,7 @@ export default function PictureUploadInputView({
          accept={allowedTypes.join(", ")}
         onChange={(e) => {
           const file = e.target.files?.[0];
-          if (file) handleFileChange(file);
+          if (file) handleFile(file);
         }}
         className="hidden"
         ref={fileInputRef}

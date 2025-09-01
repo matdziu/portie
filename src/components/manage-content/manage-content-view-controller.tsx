@@ -16,7 +16,13 @@ export default function ManageContentViewController({
 }: ManageContentViewControllerProps) {
   const screenTranslations = useTranslations("ManageContent");
 
-  const projectSkills = z.object({
+  const pictureFileSchema = z
+    .file()
+    .max(5 * 1024, { error: screenTranslations("pictureFileIsTooBig") })
+    .mime("image/png", "image/jpeg")
+    .optional();
+
+  const projectSkillsSchema = z.object({
     skillName: z
       .string()
       .trim()
@@ -70,7 +76,7 @@ export default function ManageContentViewController({
       .min(1, {
         error: screenTranslations("displayOrderMustBeIntegerError"),
       }),
-    skills: z.array(projectSkills).optional(),
+    skills: z.array(projectSkillsSchema).optional(),
   });
 
   const formSchema = z.object({

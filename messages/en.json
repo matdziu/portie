@@ -100,6 +100,7 @@
     "displayOrderLabel1": "Display order",
     "displayOrderLabel2": "Determines ordering of this project on your page compared to other projects. Values closer to 1 are displayed more towards the top.",
     "displayOrderPlaceholder": "Greater than 0",
-    "pageDoesNotExistText": "Page you want to edit does not exist"
+    "pageDoesNotExistText": "Page you want to edit does not exist",
+    "pictureFileIsTooBig": "Maximum size of picture is 5MB"
   }
 }
