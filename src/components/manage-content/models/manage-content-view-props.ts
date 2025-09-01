@@ -30,6 +30,7 @@ export type PageContentFormSchema = {
 };
 
 type ProjectSchema = {
+  formId: string;
   projectName: string;
   projectPicture?: PictureFile;
   projectDescription?: string;

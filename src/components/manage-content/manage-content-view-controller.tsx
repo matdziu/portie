@@ -2,6 +2,8 @@
 
 import { CreatePageError } from "@/domain/manage-content/entities/create-page-error";
 import { EditPageError } from "@/domain/manage-content/entities/edit-page-error";
+import { UploadFileResult } from "@/domain/storage/entities/upload-file-result";
+import uploadFileUseCase from "@/domain/storage/use-cases/upload-file-use-case";
 import { removeFilesFromPageContentForm } from "@/lib/manage-content-utils";
 import createPageContentAction from "@/server-actions/manage-content/create-page-content-action";
 import editPageContentAction from "@/server-actions/manage-content/edit-page-content-action";
@@ -55,6 +57,7 @@ export default function ManageContentViewController({
   });
 
   const projectSchema = z.object({
+    formId: z.string(),
     projectName: z
       .string()
       .trim()
@@ -251,8 +254,13 @@ async function handleCreatePageContentAction(
   previousState: unknown,
   formData: PageContentFormSchema
 ) {
+  const { pageImageUploadResult, projectsImageUploadResults } =
+    await uploadFormImages(formData);
+
   return await createPageContentAction({
     pageContentFormSchema: removeFilesFromPageContentForm(formData),
+    pageImageUploadResult: pageImageUploadResult,
+    projectImagesUploadResults: projectsImageUploadResults,
   });
 }
 
@@ -260,7 +268,51 @@ async function handleEditPageContentAction(
   previousState: unknown,
   formData: PageContentFormSchema
 ) {
+  const { pageImageUploadResult, projectsImageUploadResults } =
+    await uploadFormImages(formData);
   return await editPageContentAction({
     pageContentFormSchema: removeFilesFromPageContentForm(formData),
+    pageImageUploadResult: pageImageUploadResult,
+    projectImagesUploadResults: projectsImageUploadResults,
   });
+}
+
+async function uploadFormImages(formData: PageContentFormSchema): Promise<{
+  pageImageUploadResult: UploadFileResult | undefined;
+  projectsImageUploadResults: UploadFileResult[];
+}> {
+  let pageImageUploadPromise: Promise<UploadFileResult> | undefined = undefined;
+  const pageImageFile = formData.pagePicture;
+  if (pageImageFile instanceof File) {
+    pageImageUploadPromise = uploadFileUseCase({
+      owningEntityId: formData.pageName,
+      file: pageImageFile,
+      bucket: "page-pictures",
+    });
+  }
+
+  const projectsImageUploadPromises: Promise<UploadFileResult>[] = [];
+  if (formData.projects) {
+    for (const project of formData.projects) {
+      const projectImageFile = project.projectPicture;
+      if (projectImageFile instanceof File) {
+        const projectImageUploadPromise = uploadFileUseCase({
+          owningEntityId: project.formId,
+          file: projectImageFile,
+          bucket: "project-pictures",
+        });
+        projectsImageUploadPromises.push(projectImageUploadPromise);
+      }
+    }
+  }
+
+  const pageImageUploadResult = await pageImageUploadPromise;
+  const projectsImageUploadResults = await Promise.all(
+    projectsImageUploadPromises
+  );
+
+  return {
+    pageImageUploadResult,
+    projectsImageUploadResults,
+  };
 }

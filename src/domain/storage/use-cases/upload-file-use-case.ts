@@ -1,41 +1,37 @@
+import { getImageExtensionFromMime } from "@/lib/manage-content-utils";
+import createSignedUploadUrlAction from "@/server-actions/storage/create-signed-upload-url-action";
 import "client-only";
-import { error } from "console";
 import { UploadFileInput } from "../entities/upload-file-input";
 import { UploadFileResult } from "../entities/upload-file-result";
+import uploadFileToSignedUrlUseCase from "./upload-file-to-signed-url-use-case";
 
 export default async function uploadFileUseCase({
   file,
-  signedUrl,
+  owningEntityId,
+  bucket,
 }: UploadFileInput): Promise<UploadFileResult> {
   try {
-    const response = await fetch(signedUrl, {
-      method: "PUT",
-      body: file,
-      headers: {
-        "Content-Type": file.type,
-      },
+    const { signedUrl } = await createSignedUploadUrlAction({
+      bucket: bucket,
+      fileExtension: getImageExtensionFromMime(file) ?? "",
     });
 
-    if (response.ok) {
-      const uploadResult = await response.json();
-      console.log(uploadResult);
-      return {
-        name: "NAME SUKCES",
-        imageUrl: "SUKCES",
-        error: false,
-      };
-    } else {
-      console.log(error);
-      return {
-        name: "",
-        imageUrl: "",
-        error: true,
-      };
-    }
+    const { imageUrl, error } = await uploadFileToSignedUrlUseCase({
+      file: file,
+      owningEntityId: owningEntityId,
+      signedUrl: signedUrl,
+    });
+
+    console.log(error);
+    return {
+      owningEntityId: owningEntityId,
+      imageUrl: imageUrl,
+      error: error,
+    };
   } catch (error) {
     console.log(error);
     return {
-      name: "",
+      owningEntityId: "",
       imageUrl: "",
       error: true,
     };

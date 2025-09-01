@@ -24,15 +24,17 @@ export default function ProjectInfoCardView({
         })}
       >
         <div className="flex items-center gap-3">
-          <div className="flex justify-center items-center w-10 h-10 flex-shrink-0">
-            <Image
-              width={200}
-              height={200}
-              className="rounded-full"
-              src={imageUrl}
-              alt=""
-            />
-          </div>
+          {imageUrl && (
+            <div className="flex justify-center items-center w-10 h-10 flex-shrink-0">
+              <Image
+                width={200}
+                height={200}
+                className="rounded-full"
+                src={imageUrl}
+                alt=""
+              />
+            </div>
+          )}
 
           <div className="flex items-center justify-between w-full gap-1">
             <h1 className="text-lg font-semibold">{name}</h1>

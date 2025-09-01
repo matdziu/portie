@@ -40,6 +40,7 @@ CREATE TABLE "public"."UserPageDb" (
 -- CreateTable
 CREATE TABLE "public"."UserProjectDb" (
     "id" TEXT NOT NULL,
+    "formId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "pictureUrl" TEXT,
     "description" TEXT,

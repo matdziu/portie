@@ -14,6 +14,7 @@ export default function UserPageView({
       <div className="w-full md:w-1/4 md:overflow-y-scroll no-scrollbar px-4 md:px-8 pt-11 pb-10">
         <UserInfoCardView
           fullName={pageWithRelatedData.fullName}
+          imageUrl={pageWithRelatedData.pictureUrl ?? undefined}
           location={pageWithRelatedData.location}
           position={pageWithRelatedData.position}
           description={pageWithRelatedData.description ?? undefined}
@@ -42,7 +43,7 @@ export default function UserPageView({
             label={project.label ?? undefined}
             topLinkUrl={project.topLink ?? undefined}
             bottomLinkUrl={project.bottomLink ?? undefined}
-            imageUrl="https://play-lh.googleusercontent.com/RLRI2HQ6Gc4ISGPrnoa3WBgVZ6gWxBpBFUcHrTC6QtWZUEIgvYBV0WSdJWtyjMThfaU=w240-h480-rw"
+            imageUrl={project.pictureUrl ?? undefined}
             skillData={project.skills.map((skill) => ({
               skillName: skill.name,
               value: skill.value,

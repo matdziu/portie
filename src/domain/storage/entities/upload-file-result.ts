@@ -1,5 +1,5 @@
 export type UploadFileResult = {
-  name: string;
+  owningEntityId: string;
   imageUrl: string;
   error: boolean;
 };

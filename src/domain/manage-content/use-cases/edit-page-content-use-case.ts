@@ -7,6 +7,8 @@ import { EditPageError } from "../entities/edit-page-error";
 
 export default async function editPageContentUseCase({
   pageContentFormSchema,
+  pageImageUploadResult,
+  projectImagesUploadResults,
 }: EditPageContentInput): Promise<EditPageContentResult> {
   try {
     const authUser = await requireLoggedInUser();
@@ -39,7 +41,12 @@ export default async function editPageContentUseCase({
     }
 
     const projectsData = pageContentFormSchema.projects?.map((project) => ({
+      formId: project.formId,
       name: project.projectName,
+      pictureUrl: projectImagesUploadResults?.find(
+        (singleProjectImageUploadResult) =>
+          singleProjectImageUploadResult.owningEntityId === project.formId
+      )?.imageUrl,
       description: project.projectDescription || undefined,
       label: project.label || undefined,
       topLink: project.topLink || undefined,
@@ -62,6 +69,7 @@ export default async function editPageContentUseCase({
       },
       data: {
         pageName: pageContentFormSchema.pageName,
+        pictureUrl: pageImageUploadResult?.imageUrl,
         fullName: pageContentFormSchema.fullName,
         location: pageContentFormSchema.location,
         position: pageContentFormSchema.position,

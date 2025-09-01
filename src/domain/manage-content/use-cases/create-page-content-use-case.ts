@@ -7,6 +7,8 @@ import { CreatePageError } from "../entities/create-page-error";
 
 export default async function createPageContentUseCase({
   pageContentFormSchema,
+  pageImageUploadResult,
+  projectImagesUploadResults,
 }: CreatePageContentInput): Promise<CreatePageContentResult> {
   try {
     const authUser = await requireLoggedInUser();
@@ -25,7 +27,12 @@ export default async function createPageContentUseCase({
     }
 
     const projectsData = pageContentFormSchema.projects?.map((project) => ({
+      formId: project.formId,
       name: project.projectName,
+      pictureUrl: projectImagesUploadResults?.find(
+        (singleProjectImageUploadResult) =>
+          singleProjectImageUploadResult.owningEntityId === project.formId
+      )?.imageUrl,
       description: project.projectDescription || undefined,
       label: project.label || undefined,
       topLink: project.topLink || undefined,
@@ -45,6 +52,7 @@ export default async function createPageContentUseCase({
     await prisma.userPageDb.create({
       data: {
         pageName: pageContentFormSchema.pageName,
+        pictureUrl: pageImageUploadResult?.imageUrl,
         fullName: pageContentFormSchema.fullName,
         location: pageContentFormSchema.location,
         position: pageContentFormSchema.position,

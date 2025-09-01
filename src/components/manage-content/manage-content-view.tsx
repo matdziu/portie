@@ -25,6 +25,7 @@ import {
   ManageContentViewProps,
   PageContentFormSchema,
 } from "./models/manage-content-view-props";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ManageContentView({
   pageWithRelatedData,
@@ -71,6 +72,7 @@ export default function ManageContentView({
       youtubeLink: pageWithRelatedData?.youtubeLink ?? "",
       instagramLink: pageWithRelatedData?.instagramLink ?? "",
       projects: pageWithRelatedData?.projects.map((project) => ({
+        formId: project.formId,
         projectName: project.name,
         projectPicture: project.pictureUrl ?? "",
         projectDescription: project.description ?? "",
@@ -395,6 +397,7 @@ export default function ManageContentView({
             type="button"
             onClick={() =>
               appendProject({
+                formId: uuidv4(),
                 projectName: "",
                 projectDescription: "",
                 label: "",

@@ -1,4 +1,5 @@
 export type UploadFileInput = {
   file: File;
-  signedUrl: string;
+  owningEntityId: string;
+  bucket: string;
 };

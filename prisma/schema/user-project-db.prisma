@@ -1,5 +1,6 @@
 model UserProjectDb {
     id           String  @id @default(uuid())
+    formId       String
     name         String
     pictureUrl   String?
     description  String?
