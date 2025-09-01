@@ -16,10 +16,22 @@ export default function ManageContentViewController({
 }: ManageContentViewControllerProps) {
   const screenTranslations = useTranslations("ManageContent");
 
+  const MAX_FILE_SIZE = 2 * 1024 * 1024;
+  const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png"];
   const pictureFileSchema = z
-    .file()
-    .max(5 * 1024, { error: screenTranslations("pictureFileIsTooBig") })
-    .mime("image/png", "image/jpeg")
+    .any()
+    .refine(
+      (file) => file instanceof File || typeof file === "string" || !file,
+      {
+        message: screenTranslations("invalidPictureFileTypeError"),
+      }
+    )
+    .refine((file) => !file || file.size <= MAX_FILE_SIZE, {
+      message: screenTranslations("pictureFileIsTooBig"),
+    })
+    .refine((file) => !file || ACCEPTED_IMAGE_TYPES.includes(file.type), {
+      message: screenTranslations("invalidPictureFileTypeError"),
+    })
     .optional();
 
   const projectSkillsSchema = z.object({
@@ -48,6 +60,7 @@ export default function ManageContentViewController({
       .min(1, {
         error: screenTranslations("projectNameRequiredError"),
       }),
+    projectPicture: pictureFileSchema,
     projectDescription: z.string().trim().optional(),
     label: z
       .string()
@@ -86,6 +99,7 @@ export default function ManageContentViewController({
       .min(1, {
         error: screenTranslations("pageNameRequiredError"),
       }),
+    pagePicture: pictureFileSchema,
     fullName: z
       .string()
       .trim()

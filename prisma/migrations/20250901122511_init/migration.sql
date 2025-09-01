@@ -20,6 +20,7 @@ CREATE TABLE "public"."UserDb" (
 CREATE TABLE "public"."UserPageDb" (
     "id" TEXT NOT NULL,
     "pageName" TEXT NOT NULL,
+    "pictureUrl" TEXT,
     "fullName" TEXT NOT NULL,
     "location" TEXT NOT NULL,
     "position" TEXT NOT NULL,
@@ -40,6 +41,7 @@ CREATE TABLE "public"."UserPageDb" (
 CREATE TABLE "public"."UserProjectDb" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "pictureUrl" TEXT,
     "description" TEXT,
     "label" TEXT,
     "topLink" TEXT,

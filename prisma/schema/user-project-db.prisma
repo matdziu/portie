@@ -1,6 +1,7 @@
 model UserProjectDb {
     id           String  @id @default(uuid())
     name         String
+    pictureUrl   String?
     description  String?
     label        String?
     topLink      String?

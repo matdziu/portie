@@ -15,14 +15,14 @@ export default function PictureUploadInputView({
   const [isDragging, setIsDragging] = useState(false);
   const allowedTypes = ["image/jpeg", "image/png"];
 
-   useEffect(() => {
+  useEffect(() => {
     if (value instanceof File) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result as string);
       };
       reader.readAsDataURL(value);
-    } else if (typeof value === "string") {
+    } else if (typeof value === "string" && value) {
       setPreview(value);
     } else {
       setPreview(null);
@@ -72,7 +72,7 @@ export default function PictureUploadInputView({
     >
       <input
         type="file"
-         accept={allowedTypes.join(", ")}
+        accept={allowedTypes.join(", ")}
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (file) handleFile(file);

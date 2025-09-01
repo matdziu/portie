@@ -1,6 +1,7 @@
 model UserPageDb {
     id                  String  @id @default(uuid())
     pageName            String  @unique
+    pictureUrl          String?
     fullName            String
     location            String
     position            String

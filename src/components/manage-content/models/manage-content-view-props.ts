@@ -14,6 +14,7 @@ export interface ManageContentViewProps {
 
 export type PageContentFormSchema = {
   pageName: string;
+  pagePicture?: PictureFile;
   fullName: string;
   location: string;
   position: string;
@@ -30,6 +31,7 @@ export type PageContentFormSchema = {
 
 type ProjectSchema = {
   projectName: string;
+  projectPicture?: PictureFile;
   projectDescription?: string;
   label?: string;
   topLink?: string;
@@ -42,3 +44,5 @@ type ProjectSkillSchema = {
   skillName: string;
   skillValue: number;
 };
+
+export type PictureFile = File | string | undefined;

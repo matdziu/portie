@@ -58,6 +58,7 @@ export default function ManageContentView({
     resolver: zodResolver(formSchema),
     defaultValues: {
       pageName: pageWithRelatedData?.pageName ?? "",
+      pagePicture: pageWithRelatedData?.pictureUrl ?? "",
       fullName: pageWithRelatedData?.fullName ?? "",
       location: pageWithRelatedData?.location ?? "",
       position: pageWithRelatedData?.position ?? "",
@@ -71,6 +72,7 @@ export default function ManageContentView({
       instagramLink: pageWithRelatedData?.instagramLink ?? "",
       projects: pageWithRelatedData?.projects.map((project) => ({
         projectName: project.name,
+        projectPicture: project.pictureUrl ?? "",
         projectDescription: project.description ?? "",
         label: project.label ?? "",
         topLink: project.topLink ?? "",
@@ -106,8 +108,20 @@ export default function ManageContentView({
           </h1>
           <div className="mx-5 h-[4px] bg-primary rounded-full" />
           <div className="flex flex-row w-full items-top gap-4">
-            <PictureUploadInputView
-              onValueChange={(image) => console.log(image)}
+            <FormField
+              control={form.control}
+              name="pagePicture"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <PictureUploadInputView
+                      value={field.value}
+                      onValueChange={(file) => field.onChange(file)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
             <FormField
               control={form.control}
@@ -205,8 +219,20 @@ export default function ManageContentView({
               className="flex flex-col gap-8 bg-card text-card-foreground rounded-md border shadow-sm p-6"
             >
               <div className="flex flex-row w-full gap-4">
-                <PictureUploadInputView
-                  onValueChange={(image) => console.log(image)}
+                <FormField
+                  control={form.control}
+                  name={`projects.${projectIndex}.projectPicture`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <PictureUploadInputView
+                          value={field.value}
+                          onValueChange={(file) => field.onChange(file)}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
                 <FormField
                   control={form.control}
