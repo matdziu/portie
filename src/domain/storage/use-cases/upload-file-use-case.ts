@@ -22,7 +22,14 @@ export default async function uploadFileUseCase({
       signedUrl: signedUrl,
     });
 
-    console.log(error);
+    if (error) {
+      return {
+        owningEntityId: "",
+        imageUrl: "",
+        error: true,
+      };
+    }
+
     return {
       owningEntityId: owningEntityId,
       imageUrl: imageUrl,
