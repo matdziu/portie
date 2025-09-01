@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Control, useFieldArray, useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 import z from "zod";
 import DefaultSpinnerView from "../default-spinner/default-spinner-view";
 import PictureUploadInputView from "../picture-upload-input/picture-upload-input-view";
@@ -25,7 +26,6 @@ import {
   ManageContentViewProps,
   PageContentFormSchema,
 } from "./models/manage-content-view-props";
-import { v4 as uuidv4 } from "uuid";
 
 export default function ManageContentView({
   pageWithRelatedData,
@@ -399,6 +399,7 @@ export default function ManageContentView({
               appendProject({
                 formId: uuidv4(),
                 projectName: "",
+                projectPicture: "",
                 projectDescription: "",
                 label: "",
                 topLink: "",
