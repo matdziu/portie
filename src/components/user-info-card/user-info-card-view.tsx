@@ -19,7 +19,7 @@ export default function UserInfoCardView({
             <Image
               width={200}
               height={200}
-              className="rounded-full w-full h-full"
+              className="rounded-full w-full h-full object-cover"
               src={imageUrl}
               alt=""
             />
