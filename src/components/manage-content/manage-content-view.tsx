@@ -1,6 +1,6 @@
 "use client";
 
-import { errorToast, successToast } from "@/lib/toast-utils";
+import { errorToast, infoToast, successToast } from "@/lib/toast-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -386,7 +386,10 @@ export default function ManageContentView({
                 <Button
                   type="button"
                   variant="destructive"
-                  onClick={() => removeProject(projectIndex)}
+                  onClick={() => {
+                    removeProject(projectIndex);
+                    infoToast(screenTranslations("projectRemovedInfo"));
+                  }}
                 >
                   {screenTranslations("removeProjectButton")}
                 </Button>
@@ -616,7 +619,10 @@ function ProjectsSkillsForm({
           <Button
             type="button"
             className="flex-shrink-0 w-10 h-10 rounded-full"
-            onClick={() => removeSkill(skillIndex)}
+            onClick={() => {
+              removeSkill(skillIndex);
+              infoToast(screenTranslations("skillRemovedInfo"));
+            }}
             variant="destructive"
           >
             <Trash />

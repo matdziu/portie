@@ -103,6 +103,8 @@
     "pageDoesNotExistText": "Page you want to edit does not exist",
     "pictureFileIsTooBig": "Maximum size of picture is 2 MB",
     "invalidPictureFileTypeError": "This picture type is not supported",
-    "pageNameCannotContainSpacesError": "Page name cannot contain spaces"
+    "pageNameCannotContainSpacesError": "Page name cannot contain spaces",
+    "projectRemovedInfo": "Project removed. For changes to persist click the save button.",
+    "skillRemovedInfo": "Skill removed. For changes to persist click the save button."
   }
 }
