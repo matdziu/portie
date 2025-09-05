@@ -1,4 +1,5 @@
 import requireLoggedInUser from "@/domain/auth/use-cases/require-logged-in-user";
+import currentUserHasAnnualPassUseCase from "@/domain/payments/use-cases/current-user-has-annual-pass-use-case";
 import prisma from "@/lib/prisma";
 import "server-only";
 import { CreatePageContentInput } from "../entities/create-page-content-input";
@@ -76,10 +77,12 @@ export default async function createPageContentUseCase({
       },
     });
 
+    const { hasAnnualPass } = await currentUserHasAnnualPassUseCase();
+
     return {
       pageName: pageContentFormSchema.pageName,
-      success: true,
-      error: undefined,
+      success: hasAnnualPass,
+      error: hasAnnualPass ? undefined : CreatePageError.NoAnnualPass,
     };
   } catch (error) {
     console.log(error);

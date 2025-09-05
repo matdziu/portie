@@ -1,6 +1,8 @@
 model UserDb {
-    id    String @id
-    email String @unique
+    id               String    @id
+    email            String    @unique
+    annualPassExpiry DateTime?
+    stripeCustomerId String?
 
     userPage UserPageDb?
 }

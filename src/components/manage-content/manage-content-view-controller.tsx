@@ -7,8 +7,9 @@ import uploadFileUseCase from "@/domain/storage/use-cases/upload-file-use-case";
 import { removeFilesFromPageContentForm } from "@/lib/manage-content-utils";
 import createPageContentAction from "@/server-actions/manage-content/create-page-content-action";
 import editPageContentAction from "@/server-actions/manage-content/edit-page-content-action";
+import { createCheckoutSessionAction } from "@/server-actions/payments/create-checkout-session-action";
 import { useTranslations } from "next-intl";
-import { startTransition, useActionState } from "react";
+import { startTransition, useActionState, useEffect } from "react";
 import z from "zod";
 import ManageContentView from "./manage-content-view";
 import { ManageContentViewControllerProps } from "./models/manage-content-view-controller-props";
@@ -194,6 +195,8 @@ export default function ManageContentViewController({
         return screenTranslations("pageNameAlreadyExistText");
       case CreatePageError.Generic:
         return screenTranslations("genericErrorText");
+      case CreatePageError.NoAnnualPass:
+        return screenTranslations("noAnnualPassError");
       default:
         return screenTranslations("genericErrorText");
     }
@@ -216,6 +219,8 @@ export default function ManageContentViewController({
         return screenTranslations("pageNameAlreadyExistText");
       case EditPageError.PageDoesNotExists:
         return screenTranslations("pageDoesNotExistText");
+      case EditPageError.NoAnnualPass:
+        return screenTranslations("noAnnualPassError");
       case EditPageError.Generic:
         return screenTranslations("genericErrorText");
       default:
@@ -248,6 +253,22 @@ export default function ManageContentViewController({
   const afterSuccessRedirectUrl = pageWithRelatedData
     ? `/p/${editPageContentResult.pageName}`
     : `/p/${createPageContentResult.pageName}`;
+
+  useEffect(() => {
+    const createCheckouSession = async () => {
+      if (
+        createPageContentResult.error === CreatePageError.NoAnnualPass ||
+        editPageContentResult.error === EditPageError.NoAnnualPass
+      ) {
+        await createCheckoutSessionAction({
+          priceId: process.env.NEXT_PUBLIC_ONE_YEAR_PASS_PRICE_ID!,
+          successUrl: afterSuccessRedirectUrl,
+          cancelUrl: "/dashboard/manage-content",
+        });
+      }
+    };
+    createCheckouSession();
+  }, [createPageContentResult, editPageContentResult, afterSuccessRedirectUrl]);
 
   return (
     <ManageContentView

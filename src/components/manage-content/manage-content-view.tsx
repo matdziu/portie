@@ -51,7 +51,11 @@ export default function ManageContentView({
     if (error && !progress) {
       const errorToastMessage =
         errorText ?? screenTranslations("genericErrorText");
-      errorToast(errorToastMessage);
+      if (errorToastMessage === screenTranslations("noAnnualPassError")) {
+        infoToast(errorToastMessage);
+      } else {
+        errorToast(errorToastMessage);
+      }
     }
   }, [error, progress, errorText, screenTranslations]);
 

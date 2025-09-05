@@ -105,6 +105,7 @@
     "invalidPictureFileTypeError": "This picture type is not supported",
     "pageNameCannotContainSpacesError": "Page name cannot contain spaces",
     "projectRemovedInfo": "Project removed. For changes to persist click the save button.",
-    "skillRemovedInfo": "Skill removed. For changes to persist click the save button."
+    "skillRemovedInfo": "Skill removed. For changes to persist click the save button.",
+    "noAnnualPassError": "Redirecting to payments page..."
   }
 }

@@ -12,6 +12,8 @@ CREATE TABLE "public"."ProjectSkillDb" (
 CREATE TABLE "public"."UserDb" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "annualPassExpiry" TIMESTAMP(3),
+    "stripeCustomerId" TEXT,
 
     CONSTRAINT "UserDb_pkey" PRIMARY KEY ("id")
 );
