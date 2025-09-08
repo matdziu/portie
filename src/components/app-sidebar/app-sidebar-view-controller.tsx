@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserHasAnnualPass } from "@/hooks/use-user-has-annual-pass";
+import { useUserAnnualPassInfo } from "@/hooks/use-user-annual-pass-info";
 import { useDateLocale } from "@/lib/date-utils/client";
 import logOutUserAction from "@/server-actions/auth/log-out-user-action";
 import { format } from "date-fns";
@@ -14,13 +14,16 @@ export default function AppSidebarViewController() {
 
   const dateLocale = useDateLocale();
 
-  const { hasAnnualPass, annualPassExpirationDate } = useUserHasAnnualPass();
+  const { userAnnualPassInfo } = useUserAnnualPassInfo();
 
   let formattedAnnualPassExpirationDate: string | undefined = undefined;
 
-  if (hasAnnualPass && annualPassExpirationDate) {
+  if (
+    userAnnualPassInfo.hasAnnualPass &&
+    userAnnualPassInfo.annualPassExpirationDate
+  ) {
     formattedAnnualPassExpirationDate = format(
-      annualPassExpirationDate,
+      userAnnualPassInfo.annualPassExpirationDate,
       "do MMMM yyyy",
       {
         locale: dateLocale,

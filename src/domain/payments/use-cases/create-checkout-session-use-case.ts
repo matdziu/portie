@@ -4,7 +4,7 @@ import stripe from "@/lib/stripe";
 import { redirect } from "next/navigation";
 import "server-only";
 import { CreateCheckoutSessionInput } from "../entities/create-checkout-session-input";
-import currentUserHasAnnualPassUseCase from "./current-user-has-annual-pass-use-case";
+import currentUserAnnualPassInfoUseCase from "./current-user-annual-pass-info-use-case";
 
 export default async function createCheckoutSessionUseCase({
   priceId,
@@ -17,7 +17,7 @@ export default async function createCheckoutSessionUseCase({
     redirect("/sign-in");
   }
 
-  const { hasAnnualPass } = await currentUserHasAnnualPassUseCase();
+  const { hasAnnualPass } = await currentUserAnnualPassInfoUseCase();
 
   if (hasAnnualPass) {
     throw new Error("User already has 1-year pass active");

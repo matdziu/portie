@@ -1,9 +1,9 @@
 import requireLoggedInUser from "@/domain/auth/use-cases/require-logged-in-user";
 import prisma from "@/lib/prisma";
 import "server-only";
-import { CurrentUserHasAnnualPassResult } from "../entities/current-user-has-annual-pass-result";
+import { CurrentUserAnnualPassInfoResult } from "../entities/current-user-annual-pass-info-result";
 
-export default async function currentUserHasAnnualPassUseCase(): Promise<CurrentUserHasAnnualPassResult> {
+export default async function currentUserAnnualPassInfoUseCase(): Promise<CurrentUserAnnualPassInfoResult> {
   try {
     const authUser = await requireLoggedInUser();
     const user = await prisma.userDb.findUnique({

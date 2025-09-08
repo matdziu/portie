@@ -1,5 +1,5 @@
 import requireLoggedInUser from "@/domain/auth/use-cases/require-logged-in-user";
-import currentUserHasAnnualPassUseCase from "@/domain/payments/use-cases/current-user-has-annual-pass-use-case";
+import currentUserAnnualPassInfoUseCase from "@/domain/payments/use-cases/current-user-annual-pass-info-use-case";
 import prisma from "@/lib/prisma";
 import "server-only";
 import { EditPageContentInput } from "../entities/edit-page-content-input";
@@ -95,7 +95,7 @@ export default async function editPageContentUseCase({
       },
     });
 
-    const { hasAnnualPass } = await currentUserHasAnnualPassUseCase();
+    const { hasAnnualPass } = await currentUserAnnualPassInfoUseCase();
 
     return {
       pageName: pageContentFormSchema.pageName,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserHasAnnualPass } from "@/hooks/use-user-has-annual-pass";
+import { useUserAnnualPassInfo } from "@/hooks/use-user-annual-pass-info";
 import { createCheckoutSessionAction } from "@/server-actions/payments/create-checkout-session-action";
 import { useRouter } from "next/navigation";
 import { startTransition, useActionState } from "react";
@@ -13,10 +13,12 @@ export default function UpgradeButtonViewController({
   alreadyUpgradedUrl,
 }: UpgradeButtonViewControllerProps) {
   const router = useRouter();
-  const { hasAnnualPass, isLoading: isAnnualPassInfoLoading } =
-    useUserHasAnnualPass();
+  const { userAnnualPassInfo, isLoading: isAnnualPassInfoLoading } =
+    useUserAnnualPassInfo();
 
-  const buttonText = hasAnnualPass ? alreadyUpgradedText : upgradeText;
+  const buttonText = userAnnualPassInfo.hasAnnualPass
+    ? alreadyUpgradedText
+    : upgradeText;
 
   const initialCheckoutSessionState = {
     message: "",
@@ -36,7 +38,7 @@ export default function UpgradeButtonViewController({
       isAnnualPassInfoLoading={isAnnualPassInfoLoading}
       isCheckoutSessionLoading={createCheckoutSessionIsPending}
       onButtonClicked={() => {
-        if (hasAnnualPass) {
+        if (userAnnualPassInfo.hasAnnualPass) {
           router.push(alreadyUpgradedUrl);
         } else {
           startTransition(() => {

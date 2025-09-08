@@ -1,4 +1,4 @@
-export type CurrentUserHasAnnualPassResult = {
+export type CurrentUserAnnualPassInfoResult = {
   hasAnnualPass: boolean;
   annualPassExpirationDate?: Date;
 };
