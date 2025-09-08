@@ -47,7 +47,7 @@ export async function updateSession(request: NextRequest) {
       "/privacy-policy",
       "/terms-of-service",
     ];
-    const startsWithPublicRoutes = ["/p/", "/auth/"];
+    const startsWithPublicRoutes = ["/p/", "/auth/", "/payments/"];
 
     const isExactMatch = exactPublicRoutes.includes(pathname);
 
