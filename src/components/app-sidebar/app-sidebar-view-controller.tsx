@@ -1,6 +1,9 @@
 "use client";
 
+import { useUserHasAnnualPass } from "@/hooks/use-user-has-annual-pass";
+import { useDateLocale } from "@/lib/date-utils/client";
 import logOutUserAction from "@/server-actions/auth/log-out-user-action";
+import { format } from "date-fns";
 import { ExternalLink, LogOut, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { startTransition, useActionState } from "react";
@@ -8,6 +11,22 @@ import { AppSidebarView } from "./app-sidebar-view";
 
 export default function AppSidebarViewController() {
   const componentTranslations = useTranslations("AppSidebar");
+
+  const dateLocale = useDateLocale();
+
+  const { hasAnnualPass, annualPassExpirationDate } = useUserHasAnnualPass();
+
+  let formattedAnnualPassExpirationDate: string | undefined = undefined;
+
+  if (hasAnnualPass && annualPassExpirationDate) {
+    formattedAnnualPassExpirationDate = format(
+      annualPassExpirationDate,
+      "do MMMM yyyy",
+      {
+        locale: dateLocale,
+      }
+    );
+  }
 
   const initialState = { message: "" };
   const [
@@ -53,7 +72,7 @@ export default function AppSidebarViewController() {
       sidebarMenuItems={sidebarMenuItems}
       accountRegularMenuItems={accountRegularMenuItems}
       accountDestructiveMenuItems={accountDestructiveMenuItems}
-      formattedAnnualPassExpirationDate="1st June 2025"
+      formattedAnnualPassExpirationDate={formattedAnnualPassExpirationDate}
       progress={logoutIsPending}
     />
   );

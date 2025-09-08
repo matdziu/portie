@@ -23,6 +23,7 @@ export default async function currentUserHasAnnualPassUseCase(): Promise<Current
 
     return {
       hasAnnualPass: user.annualPassExpiry > new Date(),
+      annualPassExpirationDate: user.annualPassExpiry,
     };
   } catch (error) {
     console.log(error);

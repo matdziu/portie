@@ -1,20 +1,23 @@
 "use client";
 
+import { CurrentUserHasAnnualPassResult } from "@/domain/payments/entities/current-user-has-annual-pass-result";
 import { typedFetch } from "@/lib/typed-fetch";
 import { useEffect, useState } from "react";
 
 export const useUserHasAnnualPass = () => {
-  const [hasAnnualPass, setHasAnnualPass] = useState(false);
+  const [hasAnnualPassResult, setHasAnnualPassResult] =
+    useState<CurrentUserHasAnnualPassResult>({ hasAnnualPass: false });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchAnnualPassStatus = async () => {
       try {
-        const hasAnnualPass = await typedFetch<boolean>(
-          "/payments/user-has-annual-pass"
-        );
-        setHasAnnualPass(hasAnnualPass);
+        const hasAnnualPassResult =
+          await typedFetch<CurrentUserHasAnnualPassResult>(
+            "/payments/user-has-annual-pass"
+          );
+        setHasAnnualPassResult(hasAnnualPassResult);
       } catch (error) {
         console.error(error);
         setError(true);
@@ -26,5 +29,10 @@ export const useUserHasAnnualPass = () => {
     fetchAnnualPassStatus();
   }, []);
 
-  return { hasAnnualPass, isLoading, error };
+  return {
+    hasAnnualPass: hasAnnualPassResult.hasAnnualPass,
+    annualPassExpirationDate: hasAnnualPassResult.annualPassExpirationDate,
+    isLoading,
+    error,
+  };
 };

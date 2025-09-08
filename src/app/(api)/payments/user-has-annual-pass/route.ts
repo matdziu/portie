@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const { hasAnnualPass } = await currentUserHasAnnualPassUseCase();
-    return NextResponse.json(hasAnnualPass);
+    const hasAnnualPassResult = await currentUserHasAnnualPassUseCase();
+    return NextResponse.json(hasAnnualPassResult);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
