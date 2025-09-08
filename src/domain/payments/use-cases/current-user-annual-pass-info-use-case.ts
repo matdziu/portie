@@ -12,6 +12,9 @@ export default async function currentUserAnnualPassInfoUseCase(): Promise<Curren
       },
       select: {
         annualPassExpiry: true,
+        userPage: {
+          select: { pageName: true },
+        },
       },
     });
 
@@ -21,9 +24,12 @@ export default async function currentUserAnnualPassInfoUseCase(): Promise<Curren
       };
     }
 
+    const hasAnnualPass = user.annualPassExpiry > new Date();
+
     return {
-      hasAnnualPass: user.annualPassExpiry > new Date(),
+      hasAnnualPass: hasAnnualPass,
       annualPassExpirationDate: user.annualPassExpiry,
+      publishedPageName: hasAnnualPass ? user.userPage?.pageName : undefined,
     };
   } catch (error) {
     console.log(error);

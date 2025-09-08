@@ -31,6 +31,13 @@ export default function AppSidebarViewController() {
     );
   }
 
+  if (
+    userAnnualPassInfo.hasAnnualPass &&
+    userAnnualPassInfo.publishedPageName
+  ) {
+    // external url must be eqyals to published page name
+  }
+
   const initialState = { message: "" };
   const [
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -40,12 +47,16 @@ export default function AppSidebarViewController() {
   ] = useActionState(handleLogOutAction, initialState);
 
   const sidebarMenuItems = [
-    {
-      id: "your-page-item",
-      title: componentTranslations("yourPageItem"),
-      icon: ExternalLink,
-      externalUrl: "oinionion",
-    },
+    ...(userAnnualPassInfo.hasAnnualPass && userAnnualPassInfo.publishedPageName
+      ? [
+          {
+            id: "your-page-item",
+            title: componentTranslations("yourPageItem"),
+            icon: ExternalLink,
+            externalUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/p/${userAnnualPassInfo.publishedPageName}`,
+          },
+        ]
+      : []),
   ];
 
   const accountRegularMenuItems = [
