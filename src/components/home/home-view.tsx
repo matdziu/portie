@@ -3,8 +3,8 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { HomeViewProps } from "./models/home-view-props";
 import UpgradeButtonViewController from "../upgrade-button/upgrade-button-view-controller";
+import { HomeViewProps } from "./models/home-view-props";
 
 export default function HomeView({ isLoggedIn }: HomeViewProps) {
   const screenTranslations = useTranslations("Home");
@@ -13,7 +13,6 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
       <span className="mb-2">{screenTranslations("title")}</span>
 
       <UpgradeButtonViewController
-        pageName={""}
         upgradeText={"Upgrade now"}
         alreadyUpgradedText={"Your 1-Year Pass is active!"}
         alreadyUpgradedUrl="/dashboard/manage-content"
