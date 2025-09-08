@@ -7,8 +7,8 @@ import logOutUserAction from "@/server-actions/auth/log-out-user-action";
 import { format } from "date-fns";
 import { ExternalLink, LogOut, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { startTransition, useActionState, useEffect } from "react";
+import { startTransition, useActionState, useState } from "react";
+import DeleteAlertView from "../delete-alert/delete-alert-view";
 import { AppSidebarView } from "./app-sidebar-view";
 
 export default function AppSidebarViewController() {
@@ -16,9 +16,12 @@ export default function AppSidebarViewController() {
 
   const dateLocale = useDateLocale();
 
-  const router = useRouter();
-
   const { userAnnualPassInfo } = useUserAnnualPassInfo();
+
+  const [
+    isDeleteAccountConfirmationDialogOpen,
+    setIsDeleteAccountConfirmationDialogOpen,
+  ] = useState(false);
 
   let formattedAnnualPassExpirationDate: string | undefined = undefined;
 
@@ -46,12 +49,6 @@ export default function AppSidebarViewController() {
   const initialDeleteAccountState = { success: false, error: false };
   const [deleteAccountResult, deleteAccount, deleteAccountIsPending] =
     useActionState(handleDeleteAccountAction, initialDeleteAccountState);
-
-  useEffect(() => {
-    if (deleteAccountResult.success) {
-      router.refresh();
-    }
-  }, [deleteAccountResult, router]);
 
   const sidebarMenuItems = [
     ...(userAnnualPassInfo.hasAnnualPass && userAnnualPassInfo.publishedPageName
@@ -85,21 +82,52 @@ export default function AppSidebarViewController() {
       title: componentTranslations("deleteAccountItem"),
       icon: Trash2,
       action: () => {
-        startTransition(() => {
-          deleteAccount();
-        });
+        setIsDeleteAccountConfirmationDialogOpen(true);
       },
     },
   ];
 
   return (
-    <AppSidebarView
-      sidebarMenuItems={sidebarMenuItems}
-      accountRegularMenuItems={accountRegularMenuItems}
-      accountDestructiveMenuItems={accountDestructiveMenuItems}
-      formattedAnnualPassExpirationDate={formattedAnnualPassExpirationDate}
-      progress={logoutIsPending || deleteAccountIsPending}
-    />
+    <>
+      <AppSidebarView
+        sidebarMenuItems={sidebarMenuItems}
+        accountRegularMenuItems={accountRegularMenuItems}
+        accountDestructiveMenuItems={accountDestructiveMenuItems}
+        formattedAnnualPassExpirationDate={formattedAnnualPassExpirationDate}
+        progress={logoutIsPending || deleteAccountIsPending}
+      />
+      <DeleteAlertView
+        isOpen={isDeleteAccountConfirmationDialogOpen}
+        setIsOpen={setIsDeleteAccountConfirmationDialogOpen}
+        onDeletionConfirmed={() => {
+          startTransition(() => {
+            deleteAccount();
+          });
+        }}
+        isPending={deleteAccountIsPending}
+        showSuccessToast={deleteAccountResult.success}
+        showErrorToast={deleteAccountResult.error}
+        successfulDeletionToastText={componentTranslations(
+          "accountDeletionSuccessToast"
+        )}
+        deletionErrorToastText={componentTranslations(
+          "accountDeletionErrorToast"
+        )}
+        titleText={componentTranslations(
+          "accountDeletionConfirmationDialogTitle"
+        )}
+        descriptionText={componentTranslations(
+          "accountDeletionConfirmationDialogDescription"
+        )}
+        negativeButtonText={componentTranslations(
+          "accountDeletionConfirmationNegativeButton"
+        )}
+        positiveButtonText={componentTranslations(
+          "accountDeletionConfirmationPositiveButton"
+        )}
+        afterSuccessRoute={"/sign-in"}
+      />
+    </>
   );
 }
 

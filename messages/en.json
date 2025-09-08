@@ -118,6 +118,12 @@
     "yourAccountButton": "Your account",
     "yourPageItem": "Your page",
     "logoutItem": "Log out",
-    "deleteAccountItem": "Delete account"
+    "deleteAccountItem": "Delete account",
+    "accountDeletionSuccessToast": "Account deleted successfully",
+    "accountDeletionErrorToast": "Something went wrong",
+    "accountDeletionConfirmationDialogTitle": "Are you sure?",
+    "accountDeletionConfirmationDialogDescription": "This action will PERMANENTLY delete your account, along with the page you created. If you have purchased the 1-Year Pass, it will NOT be refunded. This action is irreversible.",
+    "accountDeletionConfirmationPositiveButton": "Delete",
+    "accountDeletionConfirmationNegativeButton": "Cancel"
   }
 }
