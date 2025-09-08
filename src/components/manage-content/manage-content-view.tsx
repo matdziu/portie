@@ -21,6 +21,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import { SidebarTrigger } from "../ui/sidebar";
 import { Textarea } from "../ui/textarea";
 import {
   ManageContentViewProps,
@@ -121,9 +122,16 @@ export default function ManageContentView({
           onSubmit={form.handleSubmit(onPageContentSubmit)}
           className="flex flex-col gap-8 p-6 my-4 w-full md:w-2xl"
         >
-          <h1 className="text-center font-extrabold text-2xl">
-            {screenTranslations("title")}
-          </h1>
+          <div className="flex flex-row items-center justify-between">
+            <div className="flex-none">
+              <SidebarTrigger type="button" />
+            </div>
+            <div className="flex-grow text-center">
+              <h1 className="font-extrabold text-2xl">
+                {screenTranslations("title")}
+              </h1>
+            </div>
+          </div>
           <div className="mx-5 h-[4px] bg-primary rounded-full" />
           <div className="flex flex-row w-full items-top gap-4">
             <FormField
