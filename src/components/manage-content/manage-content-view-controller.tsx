@@ -262,9 +262,7 @@ export default function ManageContentViewController({
       createPageContentResult.error === CreatePageError.NoAnnualPass ||
       editPageContentResult.error === EditPageError.NoAnnualPass
     ) {
-      const params = new URLSearchParams();
-      params.set("pageName", pageName);
-      router.push(`/dashboard/upgrade?${params.toString()}`);
+      router.push("/dashboard/upgrade");
     }
   }, [
     createPageContentResult,

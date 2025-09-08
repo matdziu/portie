@@ -4,7 +4,7 @@ import { errorToast, infoToast, successToast } from "@/lib/toast-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { Control, useFieldArray, useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
@@ -39,6 +39,18 @@ export default function ManageContentView({
 }: ManageContentViewProps) {
   const screenTranslations = useTranslations("ManageContent");
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const paymentSuccessfulParam = searchParams.get("paymentSuccessful");
+
+    if (paymentSuccessfulParam === "true") {
+      infoToast(screenTranslations("paymentSuccessfulToast"));
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete("paymentSuccessful");
+      router.replace(newUrl.pathname + newUrl.search);
+    }
+  }, [searchParams, router, screenTranslations]);
 
   useEffect(() => {
     if (success && !progress) {

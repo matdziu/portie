@@ -8,7 +8,6 @@ import { UpgradeButtonViewControllerProps } from "./models/upgrade-button-view-c
 import UpgradeButtonView from "./upgrade-button-view";
 
 export default function UpgradeButtonViewController({
-  pageName,
   upgradeText,
   alreadyUpgradedText,
   alreadyUpgradedUrl,
@@ -23,6 +22,7 @@ export default function UpgradeButtonViewController({
     message: "",
   };
   const [
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     createCheckoutSessionResult,
     createCheckoutSession,
     createCheckoutSessionIsPending,
@@ -40,7 +40,7 @@ export default function UpgradeButtonViewController({
           router.push(alreadyUpgradedUrl);
         } else {
           startTransition(() => {
-            createCheckoutSession({ pageName: pageName });
+            createCheckoutSession();
           });
         }
       }}
@@ -49,18 +49,11 @@ export default function UpgradeButtonViewController({
   );
 }
 
-async function handleCreateCheckoutSessionAction(
-  previousState: unknown,
-  {
-    pageName,
-  }: {
-    pageName: string;
-  }
-) {
+async function handleCreateCheckoutSessionAction() {
   try {
     await createCheckoutSessionAction({
       priceId: process.env.NEXT_PUBLIC_ONE_YEAR_PASS_PRICE_ID!,
-      successUrl: `/p/${pageName}`,
+      successUrl: "/dashboard/manage-content?paymentSuccessful=true",
       cancelUrl: "/dashboard/manage-content",
     });
   } catch (error) {
