@@ -21,6 +21,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import DefaultSpinnerView from "../default-spinner/default-spinner-view";
 import { AppSidebarViewProps } from "./models/app-sidebar-view-props";
 
 export function AppSidebarView({
@@ -28,10 +29,12 @@ export function AppSidebarView({
   accountRegularMenuItems,
   accountDestructiveMenuItems,
   formattedAnnualPassExpirationDate,
+  progress,
 }: AppSidebarViewProps) {
   const componentTranslations = useTranslations("AppSidebar");
   return (
     <Sidebar>
+      {progress && <DefaultSpinnerView />}
       <SidebarContent className="pt-8">
         <SidebarGroup>
           {formattedAnnualPassExpirationDate && (

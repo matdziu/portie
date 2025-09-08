@@ -1,11 +1,21 @@
 "use client";
 
+import logOutUserAction from "@/server-actions/auth/log-out-user-action";
 import { ExternalLink, LogOut, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { startTransition, useActionState } from "react";
 import { AppSidebarView } from "./app-sidebar-view";
 
 export default function AppSidebarViewController() {
   const componentTranslations = useTranslations("AppSidebar");
+
+  const initialState = { message: "" };
+  const [
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    logoutResult,
+    logout,
+    logoutIsPending,
+  ] = useActionState(handleLogOutAction, initialState);
 
   const sidebarMenuItems = [
     {
@@ -21,7 +31,11 @@ export default function AppSidebarViewController() {
       id: "log-out-item",
       title: componentTranslations("logoutItem"),
       icon: LogOut,
-      action: () => console.log("sad"),
+      action: () => {
+        startTransition(() => {
+          logout();
+        });
+      },
     },
   ];
 
@@ -40,6 +54,12 @@ export default function AppSidebarViewController() {
       accountRegularMenuItems={accountRegularMenuItems}
       accountDestructiveMenuItems={accountDestructiveMenuItems}
       formattedAnnualPassExpirationDate="1st June 2025"
+      progress={logoutIsPending}
     />
   );
+}
+
+async function handleLogOutAction() {
+  await logOutUserAction({ afterLogoutRedirect: "/" });
+  return { message: "Log out completed" };
 }
