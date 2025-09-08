@@ -14,6 +14,7 @@ CREATE TABLE "public"."UserDb" (
     "email" TEXT NOT NULL,
     "annualPassExpiry" TIMESTAMP(3),
     "stripeCustomerId" TEXT,
+    "lastCheckoutSessionId" TEXT,
 
     CONSTRAINT "UserDb_pkey" PRIMARY KEY ("id")
 );
@@ -57,6 +58,9 @@ CREATE TABLE "public"."UserProjectDb" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "UserDb_email_key" ON "public"."UserDb"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "UserDb_lastCheckoutSessionId_key" ON "public"."UserDb"("lastCheckoutSessionId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "UserPageDb_pageName_key" ON "public"."UserPageDb"("pageName");
