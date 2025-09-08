@@ -31,13 +31,6 @@ export default function AppSidebarViewController() {
     );
   }
 
-  if (
-    userAnnualPassInfo.hasAnnualPass &&
-    userAnnualPassInfo.publishedPageName
-  ) {
-    // external url must be eqyals to published page name
-  }
-
   const initialState = { message: "" };
   const [
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
