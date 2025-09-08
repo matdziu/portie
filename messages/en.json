@@ -107,5 +107,9 @@
     "projectRemovedInfo": "Project removed. For changes to persist click the save button.",
     "skillRemovedInfo": "Skill removed. For changes to persist click the save button.",
     "noAnnualPassError": "Redirecting to payments page..."
+  },
+  "Upgrade": {
+    "upgradeText": "Upgrade now",
+    "alreadyUpgradedText": "Your 1-Year Pass is active!"
   }
 }

@@ -7,8 +7,8 @@ import uploadFileUseCase from "@/domain/storage/use-cases/upload-file-use-case";
 import { removeFilesFromPageContentForm } from "@/lib/manage-content-utils";
 import createPageContentAction from "@/server-actions/manage-content/create-page-content-action";
 import editPageContentAction from "@/server-actions/manage-content/edit-page-content-action";
-import { createCheckoutSessionAction } from "@/server-actions/payments/create-checkout-session-action";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { startTransition, useActionState, useEffect } from "react";
 import z from "zod";
 import ManageContentView from "./manage-content-view";
@@ -19,6 +19,7 @@ export default function ManageContentViewController({
   pageWithRelatedData,
 }: ManageContentViewControllerProps) {
   const screenTranslations = useTranslations("ManageContent");
+  const router = useRouter();
 
   const MAX_FILE_SIZE = 2 * 1024 * 1024;
   const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png"];
@@ -250,25 +251,28 @@ export default function ManageContentViewController({
   const success =
     createPageContentResult.success || editPageContentResult.success;
 
-  const afterSuccessRedirectUrl = pageWithRelatedData
-    ? `/p/${editPageContentResult.pageName}`
-    : `/p/${createPageContentResult.pageName}`;
+  const pageName = pageWithRelatedData
+    ? `${editPageContentResult.pageName}`
+    : `${createPageContentResult.pageName}`;
+
+  const afterSuccessRedirectUrl = `/p/${pageName}`;
 
   useEffect(() => {
-    const createCheckouSession = async () => {
-      if (
-        createPageContentResult.error === CreatePageError.NoAnnualPass ||
-        editPageContentResult.error === EditPageError.NoAnnualPass
-      ) {
-        await createCheckoutSessionAction({
-          priceId: process.env.NEXT_PUBLIC_ONE_YEAR_PASS_PRICE_ID!,
-          successUrl: afterSuccessRedirectUrl,
-          cancelUrl: "/dashboard/manage-content",
-        });
-      }
-    };
-    createCheckouSession();
-  }, [createPageContentResult, editPageContentResult, afterSuccessRedirectUrl]);
+    if (
+      createPageContentResult.error === CreatePageError.NoAnnualPass ||
+      editPageContentResult.error === EditPageError.NoAnnualPass
+    ) {
+      const params = new URLSearchParams();
+      params.set("pageName", pageName);
+      router.push(`/dashboard/upgrade?${params.toString()}`);
+    }
+  }, [
+    createPageContentResult,
+    editPageContentResult,
+    afterSuccessRedirectUrl,
+    router,
+    pageName,
+  ]);
 
   return (
     <ManageContentView
