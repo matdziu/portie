@@ -112,5 +112,12 @@
   "Upgrade": {
     "upgradeText": "Upgrade now",
     "alreadyUpgradedText": "Your 1-Year Pass is active!"
+  },
+  "AppSidebar": {
+    "annualPassExpirationInfo": "Your 1-Year Pass expires on the {formattedDate}",
+    "yourAccountButton": "Your account",
+    "yourPageItem": "Your page",
+    "logoutItem": "Log out",
+    "deleteAccountItem": "Delete account"
   }
 }

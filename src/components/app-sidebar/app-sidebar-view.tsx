@@ -19,6 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { AppSidebarViewProps } from "./models/app-sidebar-view-props";
 
@@ -26,48 +27,67 @@ export function AppSidebarView({
   sidebarMenuItems,
   accountRegularMenuItems,
   accountDestructiveMenuItems,
+  formattedAnnualPassExpirationDate,
 }: AppSidebarViewProps) {
+  const componentTranslations = useTranslations("AppSidebar");
   return (
     <Sidebar>
       <SidebarContent className="pt-8">
         <SidebarGroup>
-          <SidebarGroupLabel className="mb-2 text-center font-bold text-primary">
-            <div>Your 1-Year Pass expires on the 1st June 2026</div>
-          </SidebarGroupLabel>
+          {formattedAnnualPassExpirationDate && (
+            <SidebarGroupLabel className="mb-3 text-center font-bold text-primary">
+              <div>
+                {componentTranslations("annualPassExpirationInfo", {
+                  formattedDate: formattedAnnualPassExpirationDate,
+                })}
+              </div>
+            </SidebarGroupLabel>
+          )}
           <SidebarGroupContent>
             <SidebarMenu>
               {sidebarMenuItems.map((item) => {
                 const sidebarMenuItemComponent = (
-                  <div>
-                    {item.icon && <item.icon />}
-                    <span>{item.title}</span>
+                  <div className="flex items-center gap-2 cursor-pointer text-start justify-start">
+                    {item.icon && <item.icon className="w-4 h-4" />}
+                    <span className="select-none">{item.title}</span>
                   </div>
                 );
                 return (
                   <SidebarMenuItem
                     key={item.id}
-                    onSelect={() => {
+                    onClick={() => {
                       if (item.action) {
                         item.action();
                       }
                     }}
                   >
                     <SidebarMenuButton asChild>
-                      {item.internalUrl && (
-                        <Link href={item.internalUrl}>
-                          {sidebarMenuItemComponent}
-                        </Link>
-                      )}
-                      {item.externalUrl && (
-                        <a
-                          href={item.externalUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {sidebarMenuItemComponent}
-                        </a>
-                      )}
-                      {item.action && sidebarMenuItemComponent}
+                      {(() => {
+                        if (item.internalUrl) {
+                          return (
+                            <Link
+                              className="focus:outline-none"
+                              href={item.internalUrl}
+                            >
+                              {sidebarMenuItemComponent}
+                            </Link>
+                          );
+                        } else if (item.externalUrl) {
+                          return (
+                            <a
+                              className="focus:outline-none"
+                              href={item.externalUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {sidebarMenuItemComponent}
+                            </a>
+                          );
+                        } else if (item.action) {
+                          return sidebarMenuItemComponent;
+                        }
+                        return null;
+                      })()}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
@@ -81,8 +101,9 @@ export function AppSidebarView({
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton className="shadow-[0_0_0_1px_hsl(var(--sidebar-border))] cursor-pointer data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-                  <User2 /> Your account
+                <SidebarMenuButton className="select-none shadow-[0_0_0_1px_hsl(var(--sidebar-border))] cursor-pointer data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+                  <User2 className="w-4 h-4" />{" "}
+                  {componentTranslations("yourAccountButton")}
                   <ChevronUp className="ml-auto" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
@@ -97,18 +118,18 @@ export function AppSidebarView({
                   data-[state=closed]:animate-out
                   data-[state=closed]:fade-out-0
                   data-[state=closed]:zoom-out-95
+                  overflow-y-auto max-h-60
                 "
               >
                 {accountRegularMenuItems.map((item) => {
                   const regularMenuItemComponent = (
                     <div
-                      className="w-full rounded-sm p-2 text-left transition-colors
+                      className="flex items-center gap-2 w-full rounded-sm p-2 text-left transition-colors
                       focus:bg-accent focus:text-accent-foreground focus:outline-none
                       hover:bg-accent hover:text-accent-foreground
-                      cursor-pointer
-                      block"
+                      cursor-pointer select-none"
                     >
-                      {item.icon && <item.icon />}
+                      {item.icon && <item.icon className="w-4 h-4" />}
                       <span>{item.title}</span>
                     </div>
                   );
@@ -116,27 +137,38 @@ export function AppSidebarView({
                     <DropdownMenuItem
                       key={item.id}
                       asChild
-                      onSelect={() => {
+                      onClick={() => {
                         if (item.action) {
                           item.action();
                         }
                       }}
                     >
-                      {item.internalUrl && (
-                        <Link href={item.internalUrl}>
-                          {regularMenuItemComponent}
-                        </Link>
-                      )}
-                      {item.externalUrl && (
-                        <a
-                          href={item.externalUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {regularMenuItemComponent}
-                        </a>
-                      )}
-                      {item.action && regularMenuItemComponent}
+                      {(() => {
+                        if (item.internalUrl) {
+                          return (
+                            <Link
+                              className="focus:outline-none"
+                              href={item.internalUrl}
+                            >
+                              {regularMenuItemComponent}
+                            </Link>
+                          );
+                        } else if (item.externalUrl) {
+                          return (
+                            <a
+                              className="focus:outline-none"
+                              href={item.externalUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {regularMenuItemComponent}
+                            </a>
+                          );
+                        } else if (item.action) {
+                          return regularMenuItemComponent;
+                        }
+                        return null;
+                      })()}
                     </DropdownMenuItem>
                   );
                 })}
@@ -144,12 +176,12 @@ export function AppSidebarView({
                 {accountDestructiveMenuItems.map((item) => {
                   const destructiveMenuItemComponent = (
                     <div
-                      className="w-full rounded-sm p-2 text-left transition-colors
+                      className="flex items-center gap-2 w-full rounded-sm p-2 text-left transition-colors
                       focus:bg-destructive focus:text-destructive-foreground focus:outline-none
-                      hover:bg-destructive hover:text-destructive-foreground
+                      hover:bg-destructive hover:text-destructive-foreground select-none
                       cursor-pointer"
                     >
-                      {item.icon && <item.icon />}
+                      {item.icon && <item.icon className="w-4 h-4" />}
                       <span>{item.title}</span>
                     </div>
                   );
@@ -157,27 +189,38 @@ export function AppSidebarView({
                     <DropdownMenuItem
                       key={item.id}
                       asChild
-                      onSelect={() => {
+                      onClick={() => {
                         if (item.action) {
                           item.action();
                         }
                       }}
                     >
-                      {item.internalUrl && (
-                        <Link href={item.internalUrl}>
-                          {destructiveMenuItemComponent}
-                        </Link>
-                      )}
-                      {item.externalUrl && (
-                        <a
-                          href={item.externalUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {destructiveMenuItemComponent}
-                        </a>
-                      )}
-                      {item.action && destructiveMenuItemComponent}
+                      {(() => {
+                        if (item.internalUrl) {
+                          return (
+                            <Link
+                              className="focus:outline-none"
+                              href={item.internalUrl}
+                            >
+                              {destructiveMenuItemComponent}
+                            </Link>
+                          );
+                        } else if (item.externalUrl) {
+                          return (
+                            <a
+                              className="focus:outline-none"
+                              href={item.externalUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {destructiveMenuItemComponent}
+                            </a>
+                          );
+                        } else if (item.action) {
+                          return destructiveMenuItemComponent;
+                        }
+                        return null;
+                      })()}
                     </DropdownMenuItem>
                   );
                 })}

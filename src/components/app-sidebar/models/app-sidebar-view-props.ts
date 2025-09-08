@@ -4,6 +4,7 @@ export interface AppSidebarViewProps {
   sidebarMenuItems: MenuItem[];
   accountRegularMenuItems: MenuItem[];
   accountDestructiveMenuItems: MenuItem[];
+  formattedAnnualPassExpirationDate?: string;
 }
 
 export type MenuItem = {
