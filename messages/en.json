@@ -106,7 +106,7 @@
     "pageNameCannotContainSpacesError": "Page name cannot contain spaces",
     "projectRemovedInfo": "Project removed. For changes to persist click the save button.",
     "skillRemovedInfo": "Skill removed. For changes to persist click the save button.",
-    "noAnnualPassError": "Redirecting to payments page..."
+    "noAnnualPassError": "Saved, but not published yet. Redirecting to payments page..."
   },
   "Upgrade": {
     "upgradeText": "Upgrade now",

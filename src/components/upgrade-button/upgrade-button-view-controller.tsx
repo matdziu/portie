@@ -20,7 +20,7 @@ export default function UpgradeButtonViewController({
   const buttonText = hasAnnualPass ? alreadyUpgradedText : upgradeText;
 
   const initialCheckoutSessionState = {
-    message: "Checkout session creation initialized",
+    message: "",
   };
   const [
     createCheckoutSessionResult,
@@ -30,8 +30,6 @@ export default function UpgradeButtonViewController({
     handleCreateCheckoutSessionAction,
     initialCheckoutSessionState
   );
-
-  console.log(createCheckoutSessionResult);
 
   return (
     <UpgradeButtonView

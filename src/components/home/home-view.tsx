@@ -4,12 +4,20 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { HomeViewProps } from "./models/home-view-props";
+import UpgradeButtonViewController from "../upgrade-button/upgrade-button-view-controller";
 
 export default function HomeView({ isLoggedIn }: HomeViewProps) {
   const screenTranslations = useTranslations("Home");
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen gap-2">
       <span className="mb-2">{screenTranslations("title")}</span>
+
+      <UpgradeButtonViewController
+        pageName={""}
+        upgradeText={"Upgrade now"}
+        alreadyUpgradedText={"Your 1-Year Pass is active!"}
+        alreadyUpgradedUrl="/dashboard/manage-content"
+      />
 
       <Button onClick={() => console.log("bardzoo bardzzooo")}>
         {screenTranslations("buttonTitle")}
