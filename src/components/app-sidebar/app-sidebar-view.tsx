@@ -27,10 +27,6 @@ export function AppSidebarView({
   accountRegularMenuItems,
   accountDestructiveMenuItems,
 }: AppSidebarViewProps) {
-  const handleItemClick = (item: string) => {
-    console.log(`Clicked on ${item}`);
-  };
-
   return (
     <Sidebar>
       <SidebarContent className="pt-8">
@@ -42,14 +38,14 @@ export function AppSidebarView({
             <SidebarMenu>
               {sidebarMenuItems.map((item) => {
                 const sidebarMenuItemComponent = (
-                  <>
+                  <div>
                     {item.icon && <item.icon />}
                     <span>{item.title}</span>
-                  </>
+                  </div>
                 );
                 return (
                   <SidebarMenuItem
-                    key={item.title}
+                    key={item.id}
                     onSelect={() => {
                       if (item.action) {
                         item.action();
@@ -71,15 +67,7 @@ export function AppSidebarView({
                           {sidebarMenuItemComponent}
                         </a>
                       )}
-                      {item.action && (
-                        <a
-                          href={item.externalUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {sidebarMenuItemComponent}
-                        </a>
-                      )}
+                      {item.action && sidebarMenuItemComponent}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
@@ -111,60 +99,88 @@ export function AppSidebarView({
                   data-[state=closed]:zoom-out-95
                 "
               >
-                <DropdownMenuItem
-                  asChild
-                  onSelect={() => {
-                    handleItemClick("Account");
-                  }}
-                >
-                  <Link
-                    href="/account"
-                    className="
-                      w-full rounded-sm p-2 text-left transition-colors
+                {accountRegularMenuItems.map((item) => {
+                  const regularMenuItemComponent = (
+                    <div
+                      className="w-full rounded-sm p-2 text-left transition-colors
                       focus:bg-accent focus:text-accent-foreground focus:outline-none
                       hover:bg-accent hover:text-accent-foreground
                       cursor-pointer
-                      block
-                    "
-                  >
-                    <span>Account</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  asChild
-                  onSelect={() => {
-                    handleItemClick("Billing");
-                  }}
-                >
-                  <button
-                    className="
-                      w-full rounded-sm p-2 text-left transition-colors
-                      focus:bg-accent focus:text-accent-foreground focus:outline-none
-                      hover:bg-accent hover:text-accent-foreground
-                      cursor-pointer
-                    "
-                  >
-                    <span>Billing</span>
-                  </button>
-                </DropdownMenuItem>
-                <div className="my-1 h-px bg-border" />
-                <DropdownMenuItem
-                  asChild
-                  onSelect={() => {
-                    handleItemClick("Sign out");
-                  }}
-                >
-                  <button
-                    className="
-                      w-full rounded-sm p-2 text-left transition-colors
+                      block"
+                    >
+                      {item.icon && <item.icon />}
+                      <span>{item.title}</span>
+                    </div>
+                  );
+                  return (
+                    <DropdownMenuItem
+                      key={item.id}
+                      asChild
+                      onSelect={() => {
+                        if (item.action) {
+                          item.action();
+                        }
+                      }}
+                    >
+                      {item.internalUrl && (
+                        <Link href={item.internalUrl}>
+                          {regularMenuItemComponent}
+                        </Link>
+                      )}
+                      {item.externalUrl && (
+                        <a
+                          href={item.externalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {regularMenuItemComponent}
+                        </a>
+                      )}
+                      {item.action && regularMenuItemComponent}
+                    </DropdownMenuItem>
+                  );
+                })}
+                <div className="my-2 mx-2 h-px bg-border" />
+                {accountDestructiveMenuItems.map((item) => {
+                  const destructiveMenuItemComponent = (
+                    <div
+                      className="w-full rounded-sm p-2 text-left transition-colors
                       focus:bg-destructive focus:text-destructive-foreground focus:outline-none
                       hover:bg-destructive hover:text-destructive-foreground
-                      cursor-pointer
-                    "
-                  >
-                    <span>Sign out</span>
-                  </button>
-                </DropdownMenuItem>
+                      cursor-pointer"
+                    >
+                      {item.icon && <item.icon />}
+                      <span>{item.title}</span>
+                    </div>
+                  );
+                  return (
+                    <DropdownMenuItem
+                      key={item.id}
+                      asChild
+                      onSelect={() => {
+                        if (item.action) {
+                          item.action();
+                        }
+                      }}
+                    >
+                      {item.internalUrl && (
+                        <Link href={item.internalUrl}>
+                          {destructiveMenuItemComponent}
+                        </Link>
+                      )}
+                      {item.externalUrl && (
+                        <a
+                          href={item.externalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {destructiveMenuItemComponent}
+                        </a>
+                      )}
+                      {item.action && destructiveMenuItemComponent}
+                    </DropdownMenuItem>
+                  );
+                })}
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>

@@ -1,10 +1,10 @@
-import { AppSidebarView } from "@/components/app-sidebar/app-sidebar-view";
+import AppSidebarViewController from "@/components/app-sidebar/app-sidebar-view-controller";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <AppSidebarView />
+      <AppSidebarViewController />
       <main className="flex w-full h-full items-start justify-center">
         {children}
       </main>
