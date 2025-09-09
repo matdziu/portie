@@ -16,5 +16,5 @@ Sentry.init({
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
 
-  enabled: process.env.VERCEL_ENV === "production",
+  enabled: process.env.NEXT_PUBLIC_SENTRY_ENABLED === "true",
 });
