@@ -53,19 +53,20 @@ export default async function editPageContentUseCase({
     const projectPictureUrlsToDelete: string[] = [];
 
     function updatedProjectImageUrl(
-      project: ProjectSchema
+      projectSchema: ProjectSchema
     ): string | undefined {
       let projectImageUrl: string | undefined;
 
-      if (typeof project.projectPicture === "string") {
-        projectImageUrl = project.projectPicture;
+      if (typeof projectSchema.projectPicture === "string") {
+        projectImageUrl = projectSchema.projectPicture;
       } else {
         const oldProjectImage = userPage?.projects.find(
-          (oldProject) => oldProject.formId === project.formId
+          (oldProject) => oldProject.formId === projectSchema.formId
         )?.pictureUrl;
         projectImageUrl = projectImagesUploadResults?.find(
           (singleProjectImageUploadResult) =>
-            singleProjectImageUploadResult.owningEntityId === project.formId
+            singleProjectImageUploadResult.owningEntityId ===
+            projectSchema.formId
         )?.imageUrl;
 
         if (projectImageUrl && oldProjectImage) {
@@ -78,7 +79,7 @@ export default async function editPageContentUseCase({
 
     for (const project of userPage.projects) {
       const correspondingProjectSchema = pageContentFormSchema.projects?.find(
-        (projectSchema) => project.formId === projectSchema.formId
+        (projectSchema) => projectSchema.formId === project.formId
       );
 
       if (!correspondingProjectSchema && project.pictureUrl) {
@@ -86,25 +87,27 @@ export default async function editPageContentUseCase({
       }
     }
 
-    const projectsData = pageContentFormSchema.projects?.map((project) => ({
-      formId: project.formId,
-      name: project.projectName,
-      pictureUrl: updatedProjectImageUrl(project),
-      description: project.projectDescription || undefined,
-      label: project.label || undefined,
-      topLink: project.topLink || undefined,
-      bottomLink: project.bottomLink || undefined,
-      displayOrder: project.displayOrder,
-      skills: {
-        createMany: {
-          data:
-            project.skills?.map((skill) => ({
-              name: skill.skillName,
-              value: skill.skillValue,
-            })) || [],
+    const projectsData = pageContentFormSchema.projects?.map(
+      (projectSchema) => ({
+        formId: projectSchema.formId,
+        name: projectSchema.projectName,
+        pictureUrl: updatedProjectImageUrl(projectSchema),
+        description: projectSchema.projectDescription || undefined,
+        label: projectSchema.label || undefined,
+        topLink: projectSchema.topLink || undefined,
+        bottomLink: projectSchema.bottomLink || undefined,
+        displayOrder: projectSchema.displayOrder,
+        skills: {
+          createMany: {
+            data:
+              projectSchema.skills?.map((skill) => ({
+                name: skill.skillName,
+                value: skill.skillValue,
+              })) || [],
+          },
         },
-      },
-    }));
+      })
+    );
 
     function updatedPageImageUrl(): string | undefined {
       const newPageImageUrl = pageImageUploadResult?.imageUrl;
