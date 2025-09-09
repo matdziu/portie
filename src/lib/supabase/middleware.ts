@@ -46,6 +46,7 @@ export async function updateSession(request: NextRequest) {
       "/verify-email",
       "/privacy-policy",
       "/terms-of-service",
+      "/sentry-test"
     ];
     const startsWithPublicRoutes = ["/p/", "/auth/", "/payments/"];
 
@@ -54,6 +55,10 @@ export async function updateSession(request: NextRequest) {
     const isStartsWithMatch = startsWithPublicRoutes.some((route) =>
       pathname.startsWith(route)
     );
+    
+    if (pathname === "/sentry-test") {
+      throw Error("edge errorrrr 22222o iafo sinfsdois nsdoifs nosdifns oi")
+    }
 
     return isExactMatch || isStartsWithMatch;
   }
