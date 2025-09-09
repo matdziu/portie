@@ -1,4 +1,6 @@
+import deleteFilesUseCase from "@/domain/storage/use-cases/delete-files-use-case";
 import prisma from "@/lib/prisma";
+import { extractPath } from "@/lib/storage-utils";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import "server-only";
 import { DeleteAccountResult } from "../entities/delete-account-result";
@@ -42,12 +44,12 @@ export default async function deleteAccountUseCase(): Promise<DeleteAccountResul
       .filter(Boolean) as string[];
 
     if (pageFilePaths.length > 0) {
-      const { error } = await supabase.storage
-        .from("page-pictures")
-        .remove(pageFilePaths);
+      const { error } = await deleteFilesUseCase({
+        bucketName: "page-pictures",
+        filePaths: pageFilePaths,
+      });
 
       if (error) {
-        console.error(error);
         return {
           success: false,
           error: true,
@@ -56,12 +58,12 @@ export default async function deleteAccountUseCase(): Promise<DeleteAccountResul
     }
 
     if (projectFilePaths.length > 0) {
-      const { error } = await supabase.storage
-        .from("project-pictures")
-        .remove(projectFilePaths);
+      const { error } = await deleteFilesUseCase({
+        bucketName: "project-pictures",
+        filePaths: projectFilePaths,
+      });
 
       if (error) {
-        console.error(error);
         return {
           success: false,
           error: true,
@@ -95,8 +97,3 @@ export default async function deleteAccountUseCase(): Promise<DeleteAccountResul
     };
   }
 }
-
-const extractPath = (url: string, bucketName: string): string | null => {
-  const parts = url.split(`/${bucketName}/`);
-  return parts.length > 1 ? parts[1] : null;
-};

@@ -29,7 +29,7 @@ export type PageContentFormSchema = {
   instagramLink?: string;
 };
 
-type ProjectSchema = {
+export type ProjectSchema = {
   formId: string;
   projectName: string;
   projectPicture?: PictureFile;
@@ -41,7 +41,7 @@ type ProjectSchema = {
   skills?: ProjectSkillSchema[];
 };
 
-type ProjectSkillSchema = {
+export type ProjectSkillSchema = {
   skillName: string;
   skillValue: number;
 };
