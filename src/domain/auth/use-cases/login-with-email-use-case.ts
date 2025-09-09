@@ -6,7 +6,6 @@ import { LoginWithEmailResult } from "../entities/login-with-email-result";
 export default async function loginWithEmailUseCase({
   email,
 }: LoginWithEmailInput): Promise<LoginWithEmailResult> {
-  throw Error("this is server error")
   const supabase = await createSupabaseAuthClient();
 
   const { error } = await supabase.auth.signInWithOtp({

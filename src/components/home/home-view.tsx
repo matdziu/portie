@@ -18,7 +18,7 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
         alreadyUpgradedUrl="/dashboard/manage-content"
       />
 
-      <Button onClick={() => {throw Error("client error")}}>
+      <Button onClick={() => console.log("bardzoo bardzzooo")}>
         {screenTranslations("buttonTitle")}
       </Button>
 
