@@ -18,7 +18,11 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
         alreadyUpgradedUrl="/dashboard/manage-content"
       />
 
-      <Button onClick={() => console.log("bardzoo bardzzooo")}>
+      <Button
+        onClick={() => {
+          throw Error("are you working on clieint?");
+        }}
+      >
         {screenTranslations("buttonTitle")}
       </Button>
 
