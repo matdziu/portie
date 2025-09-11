@@ -101,10 +101,6 @@
     "noAnnualPassError": "Saved, but not published yet. Redirecting to payments page...",
     "paymentSuccessfulToast": "Payment successful. Now you are live!"
   },
-  "Upgrade": {
-    "upgradeText": "Upgrade now",
-    "alreadyUpgradedText": "Your 1-Year Pass is active!"
-  },
   "AppSidebar": {
     "annualPassExpirationInfo": "Your 1-Year Pass expires on the {formattedDate}",
     "yourAccountButton": "Your account",

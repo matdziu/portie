@@ -1,14 +1,14 @@
 export default function PrivacyPolicyPage() {
   return (
-    <div className="max-w-3xl mx-auto px-4 py-12 prose prose-indigo dark:prose-invert">
-      <h1>Privacy Policy</h1>
+    <div className="w-full mx-auto p-10 prose prose-indigo dark:prose-invert">
+      <h1 className="text-2xl text-center">Privacy Policy</h1>
       <p>
         <strong>Last updated:</strong> August 13, 2025
       </p>
 
       <p>
-        This Privacy Policy describes how Portie (“we,” “us,” or “our”)
-        collects, uses, and discloses your information when you use our website,{" "}
+        This Privacy Policy explains how Portie (“we,” “us,” or “our”) handles
+        your information when you use our website,{" "}
         <a
           href="https://www.portie.me"
           className="text-indigo-600 hover:underline"
@@ -18,173 +18,192 @@ export default function PrivacyPolicyPage() {
         (the “Service”).
       </p>
       <p>
-        By accessing or using the Service, you agree to the collection and use
-        of information in accordance with this policy. If you do not agree with
-        the terms of this policy, please do not use the Service.
+        By using the Service, you agree to this policy. If you don&apos;t agree,
+        please don&apos;t use our Service.
       </p>
 
       <h2>1. Information We Collect</h2>
-      <h3>a. Personal Information</h3>
       <p>
-        When you create an account or use our Service, we may collect the
-        following personally identifiable information (“Personal Information”):
+        We collect personal information to provide you with the best possible
+        experience.
+      </p>
+      <h3>a. Information You Provide</h3>
+      <p>
+        When you create an account, we collect the following information from
+        you:
       </p>
       <ul>
         <li>
-          <strong>Name:</strong> Your first and last name.
+          <strong>Email Address:</strong> If you sign up using a &quot;magic
+          link,&quot; we collect your email to create and manage your account
+          securely.
         </li>
         <li>
-          <strong>Email Address:</strong> Your email address.
+          <strong>Name and Email Address:</strong> If you sign up using a
+          third-party provider like Google or GitHub, they provide us with your
+          name and email address to set up your account.
         </li>
       </ul>
-      <p>We collect this information when you:</p>
-      <ul>
-        <li>Sign up for an account using your email address.</li>
-        <li>
-          Log in using your Google or GitHub account, which provides us with
-          your name and email address.
-        </li>
-      </ul>
+      <p>
+        The data you provide, such as your portfolio projects, profile
+        information, and links, is stored to build and display your public
+        portfolio.
+      </p>
 
       <h3>b. Usage Data</h3>
       <p>
-        We also automatically collect information about how the Service is
-        accessed and used (“Usage Data”). This Usage Data may include
-        information such as:
+        When you use our Service, we automatically collect information about
+        your activity. This helps us understand how the Service is being used,
+        find bugs, and make improvements. This data may include:
       </p>
       <ul>
-        <li>Your computer’s Internet Protocol (IP) address.</li>
+        <li>Your computer&apos;s IP address.</li>
         <li>Browser type and version.</li>
-        <li>The pages of our Service that you visit.</li>
-        <li>The time and date of your visit.</li>
-        <li>The time spent on those pages.</li>
+        <li>
+          The pages you visit, the time and date of your visit, and the time
+          spent on those pages.
+        </li>
         <li>Unique device identifiers and other diagnostic data.</li>
       </ul>
 
-      <h3>c. Third-Party Analytics and Monitoring</h3>
-      <p>
-        We use the following third-party services to help us analyze and improve
-        our Service:
-      </p>
-      <ul>
-        <li>
-          <strong>Google Analytics:</strong> tracks and reports website traffic
-          using cookies. You can opt out by installing the Google Analytics
-          opt-out browser add-on.
-        </li>
-        <li>
-          <strong>PostHog:</strong> product analytics; anonymized usage insight.
-        </li>
-        <li>
-          <strong>Sentry:</strong> error and crash monitoring; does not collect
-          personal data unless tied to an error.
-        </li>
-      </ul>
-
       <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
       <ul>
-        <li>To provide and maintain our Service.</li>
-        <li>To notify you about changes to our Service.</li>
+        <li>Provide and maintain the Service.</li>
         <li>
-          To allow you to participate in interactive features of our Service
-          when you choose to do so.
+          Manage your account and provide you with a personalized experience.
         </li>
-        <li>To provide customer support.</li>
         <li>
-          To gather analysis or valuable information so that we can improve our
-          Service.
+          Communicate with you, respond to your inquiries, and provide customer
+          support.
         </li>
-        <li>To monitor the usage of our Service.</li>
-        <li>To detect, prevent, and address technical issues.</li>
         <li>
-          To manage your account and provide you with a personalized experience.
+          Monitor and analyze usage to improve the Service and develop new
+          features.
+        </li>
+        <li>
+          Detect, prevent, and address technical issues or security concerns.
         </li>
       </ul>
 
-      <h2>3. Disclosure of Your Information</h2>
+      <h2>3. Third-Party Services We Use</h2>
       <p>
-        We do not sell, trade, or otherwise transfer your Personal Information
-        to outside parties. We may disclose your information in the following
-        situations:
+        We use the following third-party services to help us operate our
+        Service. These services have their own privacy policies.
       </p>
       <ul>
         <li>
-          <strong>With your consent:</strong> We may disclose your Personal
-          Information for any other purpose with your consent.
+          <strong>Supabase:</strong> Our backend provider for authentication and
+          database services. Your data is stored securely on their platform.
         </li>
         <li>
-          <strong>For business transfers:</strong> If we are involved in a
-          merger, acquisition, or asset sale, your Personal Information may be
-          transferred. We will provide notice before your Personal Information
-          is transferred and becomes subject to a different Privacy Policy.
+          <strong>PostHog:</strong> An open-source product analytics tool that
+          helps us understand how users interact with our Service. We use it to
+          collect anonymized usage data.
         </li>
         <li>
-          <strong>For legal reasons:</strong> We may disclose your Personal
-          Information if required to do so by law or in response to valid
-          requests by public authorities (e.g., a court or a government agency).
+          <strong>Sentry:</strong> An error monitoring tool that helps us
+          identify and fix bugs. It collects data about software errors and
+          crashes but does not intentionally collect personal information unless
+          it&apos;s directly related to an error.
         </li>
       </ul>
 
-      <h2>4. Security of Your Information</h2>
+      <h2>4. Your Data Protection Rights</h2>
       <p>
-        The security of your data is important to us, but remember that no
-        method of transmission over the Internet or method of electronic storage
-        is 100% secure. While we strive to use commercially acceptable means to
-        protect your Personal Information, we cannot guarantee its absolute
-        security.
+        You have specific rights regarding your personal information. If you
+        wish to exercise any of these rights, please contact us.
+      </p>
+      <h3>a. For Users in the European Economic Area (GDPR)</h3>
+      <p>If you are in the EEA, you have the right to:</p>
+      <ul>
+        <li>
+          <strong>The Right to Access:</strong> You can request a copy of the
+          personal information we hold about you.
+        </li>
+        <li>
+          <strong>The Right to Rectification:</strong> You can ask us to correct
+          any information you believe is inaccurate or incomplete.
+        </li>
+        <li>
+          <strong>The Right to Erasure:</strong> You can request that we delete
+          your personal data.
+        </li>
+        <li>
+          <strong>The Right to Object:</strong> You can object to our processing
+          of your personal data in certain circumstances.
+        </li>
+        <li>
+          <strong>The Right to Data Portability:</strong> You can request that
+          we transfer the data we have collected to another organization, or
+          directly to you, in a structured, commonly used, machine-readable
+          format.
+        </li>
+      </ul>
+
+      <h3>b. For Users in California (CCPA)</h3>
+      <p>If you are a California resident, you have the right to:</p>
+      <ul>
+        <li>
+          <strong>The Right to Know:</strong> You can request that we disclose
+          the categories and specific pieces of personal information we have
+          collected about you.
+        </li>
+        <li>
+          <strong>The Right to Delete:</strong> You can request that we delete
+          any personal information about you that we have collected.
+        </li>
+        <li>
+          <strong>The Right to Opt-Out:</strong> We do not sell your personal
+          information.
+        </li>
+      </ul>
+
+      <h2>5. Security of Your Information</h2>
+      <p>
+        We take the security of your data seriously. We use commercially
+        acceptable security measures to protect your Personal Information from
+        unauthorized access, use, or disclosure. However, no method of
+        transmission over the Internet or electronic storage is 100% secure.
       </p>
 
-      <h2>5. Links to Other Sites</h2>
+      <h2>6. Links to Other Sites</h2>
       <p>
-        Our Service may contain links to other sites that are not operated by
-        us. If you click on a third-party link, you will be directed to that
-        third party’s site. We strongly advise you to review the Privacy Policy
-        of every site you visit. We have no control over and assume no
-        responsibility for the content, privacy policies, or practices of any
-        third-party sites or services.
+        Our Service may contain links to other websites not operated by us. We
+        strongly advise you to review the Privacy Policy of every site you
+        visit. We have no control over and assume no responsibility for the
+        content or privacy practices of any third-party sites or services.
       </p>
 
-      <h2>6. Children’s Privacy</h2>
+      <h2>7. Children’s Privacy</h2>
       <p>
-        Our Service is not intended for use by children under the age of 13
-        (“Children”). We do not knowingly collect personally identifiable
-        information from Children. If you are a parent or guardian and you are
-        aware that your Child has provided us with Personal Information, please
-        contact us. If we become aware that we have collected Personal
-        Information from Children without verification of parental consent, we
-        take steps to remove that information from our servers.
+        Our Service is not intended for use by children under the age of 13. We
+        do not knowingly collect personally identifiable information from
+        children. If you are a parent or guardian and you believe your child has
+        provided us with Personal Information, please contact us. If we discover
+        that we have collected data from a child without parental consent, we
+        will take steps to remove that information.
       </p>
 
-      <h2>7. Changes to This Privacy Policy</h2>
+      <h2>8. Changes to This Privacy Policy</h2>
       <p>
         We may update our Privacy Policy from time to time. We will notify you
         of any changes by posting the new Privacy Policy on this page. You are
-        advised to review this Privacy Policy periodically for any changes.
-        Changes to this Privacy Policy are effective when they are posted on
-        this page.
+        advised to review this policy periodically for any changes.
       </p>
 
-      <h2>8. Contact Us</h2>
+      <h2>9. Contact Us</h2>
       <p>
-        If you have any questions about this Privacy Policy, you can contact us:
+        If you have any questions about this Privacy Policy, please contact us:
       </p>
       <ul>
         <li>
-          By visiting this page on our website:{" "}
+          By email:{" "}
           <a
-            href="https://www.portie.me/contact"
+            href="mailto:portie.organization@gmail.com"
             className="text-indigo-600 hover:underline"
           >
-            https://www.portie.me/contact
-          </a>
-        </li>
-        <li>
-          By sending us an email at:{" "}
-          <a
-            href="mailto:contact@portie.me"
-            className="text-indigo-600 hover:underline"
-          >
-            contact@portie.me
+            portie.organization@gmail.com
           </a>
         </li>
       </ul>
