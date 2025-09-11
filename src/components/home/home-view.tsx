@@ -25,7 +25,7 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
           </Button>
         ) : (
           <Button asChild>
-            <Link href="/sign-in">Create account</Link>
+            <Link href="/sign-in">Log in</Link>
           </Button>
         )}
       </div>
