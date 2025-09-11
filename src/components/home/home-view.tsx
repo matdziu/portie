@@ -8,7 +8,6 @@ import { Button } from "../ui/button";
 import { HomeViewProps } from "./models/home-view-props";
 
 export default function HomeView({ isLoggedIn }: HomeViewProps) {
-  const screenTranslations = useTranslations("Home");
   return (
     <div className="flex flex-col items-center justify-top w-screen p-8">
       <h1 className="font-bold text-6xl text-center w-full lg:w-1/2">
@@ -43,34 +42,32 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
       <div className="flex flex-col mt-10 items-center justify-center">
         <h2 className="text-2xl font-bold text-center">THE PROBLEM:</h2>
         <div className="text-xl text-start w-full lg:w-3/4 mt-5">
-          You've built amazing things...but:
+          You&apos;ve built amazing things...but:
           <ul className="flex flex-col gap-2 mt-5 text-start list-disc pl-5">
             <li>your GitHub is designed for engineers, not recruiters,</li>
             <li>
               your repos are filled with technical details, not a clear,
-              compelling story about what you've accomplished,
+              compelling story about what you&apos;ve accomplished,
             </li>
             <li>
-              Linktree is great for links, but it doesn't do your projects
+              Linktree is great for links, but it doesn&apos;t do your projects
               justice,
             </li>
             <li>LinkedIn projects section just sucks,</li>
             <li>
-              you need a way to go beyond code and show the world what you're
-              truly capable of.
+              you need a way to go beyond code and show the world what
+              you&apos;re truly capable of.
             </li>
           </ul>
         </div>
         <div className="mt-10">
           {isLoggedIn ? (
             <Button asChild>
-              <Link href="/dashboard/manage-content">
-                {screenTranslations("goToDashboardButton")}
-              </Link>
+              <Link href="/dashboard/manage-content">Go to dashboard</Link>
             </Button>
           ) : (
             <Button asChild>
-              <Link href="/sign-in">{screenTranslations("loginButton")}</Link>
+              <Link href="/sign-in">Create account</Link>
             </Button>
           )}
         </div>
@@ -100,19 +97,19 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
             stack in a way that’s easy for anyone to read.
             <ul className="flex flex-col gap-2 mt-5 text-start list-disc pl-5">
               <li>
-                <span className="font-extrabold">Go Beyond Links:</span>{" "}
-                Showcase your projects, not just their links.
+                <span className="font-extrabold">Go beyond links</span> -
+                showcase your projects, not just their links.
               </li>
               <li>
-                <span className="font-extrabold">Visually Impressive:</span>{" "}
-                Represent your skills with clean, readable charts.
+                <span className="font-extrabold">Visually impressive</span> -
+                represent your skills with clean, readable charts.
               </li>
               <li>
-                <span className="font-extrabold">Built for Recruiters:</span>{" "}
-                Make it effortless for hiring managers to see your value.
+                <span className="font-extrabold">Built for recruiters</span> -
+                make it effortless for hiring managers to see your value.
               </li>
               <li>
-                <span className="font-extrabold">Launch in Minutes:</span> Our
+                <span className="font-extrabold">Launch in minutes</span> - our
                 simple creator gets you a live portfolio in no time.
               </li>
             </ul>
