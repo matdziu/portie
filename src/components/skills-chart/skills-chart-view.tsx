@@ -110,7 +110,7 @@ export default function SkillsChartView({
           />
           <Bar
             dataKey="value"
-            fill="#5f9a8f"
+            fill="var(--muted-foreground)"
             className={cn({
               "cursor-pointer": clickable,
             })}
