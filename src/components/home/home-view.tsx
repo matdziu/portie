@@ -34,17 +34,18 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
         <br />
         that gets you a <span className="underline-primary">job</span>
       </h1>
-      <Button className="mt-12">
-        <a
-          href="https://www.portie.me/p/matt"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2"
-        >
+      <a
+        href="https://www.portie.me/p/matt"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 mt-12"
+      >
+        <Button>
           <ExternalLink />
           <p className="text-">Check out a sample portfolio</p>
-        </a>
-      </Button>
+        </Button>
+      </a>
+
       <p className="mt-10 text-center text-xl font-semibold w-full lg:w-1/2">
         Showcase your projects and skills in a clear, compelling way that
         recruiters, clients, and even non-technical people can instantly
@@ -135,17 +136,17 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
           </div>
         </div>
       </div>
-      <Button className="mt-12">
-        <a
-          href="https://www.portie.me/p/matt"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2"
-        >
+      <a
+        href="https://www.portie.me/p/matt"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 mt-12"
+      >
+        <Button>
           <ExternalLink />
           <p className="text-">Check out a sample portfolio</p>
-        </a>
-      </Button>
+        </Button>
+      </a>
       <div className="mt-15">
         <UpgradeCardView
           crossedOverPrice={"$20"}

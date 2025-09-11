@@ -20,17 +20,17 @@ export default function UpgradePage() {
           }}
         >
           <div className="flex flex-col items-center justify-center">
-            <Button>
-              <a
-                href="https://www.portie.me/p/matt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2"
-              >
+            <a
+              href="https://www.portie.me/p/matt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2"
+            >
+              <Button>
                 <ExternalLink />
                 <p className="text-">Check out a sample portfolio</p>
-              </a>
-            </Button>
+              </Button>
+            </a>
             <ul className="flex flex-col gap-2 text-start list-disc pl-4 mt-4">
               <li>
                 <span className="font-extrabold">
