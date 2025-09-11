@@ -26,6 +26,7 @@ export default function VerifyEmailView() {
               width={250}
               height={75}
               className="mb-4"
+              priority={true}
               alt=""
             />
             {screenTranslations("title")}
