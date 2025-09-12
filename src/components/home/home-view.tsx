@@ -147,7 +147,7 @@ export default function HomeView({ isLoggedIn }: HomeViewProps) {
           <p className="text-">Check out a sample portfolio</p>
         </Button>
       </a>
-      <div className="mt-15">
+      <div className="w-full flex items-center justify-center mt-15">
         <UpgradeCardView
           crossedOverPrice={"$20"}
           priceTitle="1-Year Pass"

@@ -13,7 +13,7 @@ export default function UpgradeCardView({
   upgradeButtonProps,
 }: UpgradeCardViewProps) {
   return (
-    <div className="bg-card flex flex-col items-center justify-center rounded-2xl p-8 w-md shadow-lg gap-7">
+    <div className="bg-card flex flex-col w-full md:w-md items-center justify-center rounded-2xl p-8 shadow-lg gap-7">
       {children}
       <div className="bg-card flex flex-col items-center justify-center rounded-2xl p-8 w-full border-2 border-primary">
         <div className="text-center">
